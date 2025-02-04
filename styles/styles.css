@@ -1,0 +1,37 @@
+body {
+    font-family: 'Arial', sans-serif;
+  }
+  .navbar {
+    background: linear-gradient(to right, #4e73df, #1cc88a); /* Gradient background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for a modern look */
+  }
+  .navbar-brand {
+    font-weight: bold;
+    color: white !important;
+    font-size: 1rem; /* Larger font for the logo */
+  }
+  .navbar-nav .nav-link {
+    color: white !important;
+    padding: 12px 20px; /* Increase padding for better spacing */
+    font-size: 1rem; /* Larger font size for nav links */
+  }
+  .navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
+    border-radius: 5px;
+  }
+  .dropdown-menu {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  .dropdown-item {
+    padding: 12px 20px; /* Adjust padding for consistency */
+    font-size: 1rem; /* Slightly larger font size for dropdown items */
+  }
+  .dropdown-item:hover {
+    background-color: #ddd;
+    border-radius: 5px;
+  }
+  .navbar-toggler-icon {
+    background-color: white;
+  }
