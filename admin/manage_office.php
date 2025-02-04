@@ -17,7 +17,7 @@ include '../components/config.php';
 
     <?php include '../components/header_admin.php'; ?>
 
-    <div class="container mt-10">
+    <div class="container" style="margin-top: 30px;">
         <h3 class="card-title text-center">All Offices and Department</h3>
         <table class="table table-bordered" style="margin-top: 5px">
             <thead>

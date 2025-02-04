@@ -8,7 +8,7 @@ include '../components/config.php';
         $query = mysqli_query($con, "INSERT INTO `office_name` (office_name) VALUES ('$office')") or die (mysqli_connect());
         if($query){
             echo "<script type='text/javascript'>alert('Office Added Successfully!');
-				document.location='dashboard.php'</script>";
+				document.location='office_name.php'</script>";
         }else{
             echo "<script type='text/javascript'>alert('Something went wrong!');
 				document.location='office_name.php'</script>";
@@ -26,8 +26,6 @@ include '../components/config.php';
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../styles/styles.css">
-   
-
 </head>
 <body>
 
