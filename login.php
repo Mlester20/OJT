@@ -2,6 +2,10 @@
 session_start();
 include 'components/config.php';
 
+if(!isset($_POST['login'])){
+    header('location: index.php');
+}
+
 if (isset($_POST['login'])) {
     $user_unsafe = $_POST['username'];
     $pass_unsafe = $_POST['password'];

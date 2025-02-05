@@ -20,11 +20,12 @@ if (mysqli_num_rows($query) > 0) {
 // Handle the form submission to update profile details
 if (isset($_POST['update'])) {
     // Get form data and escape it to prevent SQL injection
+    $name = mysqli_real_escape_string($con, $_POST['name']);
     $username = mysqli_real_escape_string($con, $_POST['username']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
 
     // Update query to update the user's details
-    $update_query = "UPDATE admin SET username = '$username', password = '$password' WHERE user_id = '$id'";
+    $update_query = "UPDATE admin SET name = '$name', username = '$username', password = '$password' WHERE user_id = '$id'";
 
     // Check if update is successful
     if (mysqli_query($con, $update_query)) {
@@ -54,8 +55,14 @@ if (isset($_POST['update'])) {
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
-                        <h4>Profile Details</h4>
+                        <h4 class="text-center" style="margin-top: 20px;">Profile Details</h4>
                         <form action="" method="post">
+                        <div class="form-group">
+                                <label for="username">Full Name</label>
+                                <input type="text" class="form-control" 
+                                       value="<?php echo isset($row['name']) ? $row['name'] : ''; ?>" 
+                                       name="name" placeholder="Username" required>
+                            </div>
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input type="text" class="form-control" 
