@@ -21,7 +21,8 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
              <li><a class="dropdown-item" href="./add_users.php" style="">Users</a></li>
-             <li><a class="dropdown-item" href="./manage_office.php" style="">Offices</a></li> 
+             <li><a class="dropdown-item" href="./manage_office.php" style="">Manage Offices</a></li>
+             <li><a class="dropdown-item" href="./salut.php" style="">Salut</a></li> 
             </ul>
           </li>
 

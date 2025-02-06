@@ -4,7 +4,8 @@ include '../components/config.php';
 
 if(isset($_POST['save'])){
     $office = mysqli_real_escape_string($con, $_POST['office_name']);
-    $query = mysqli_query($con, "INSERT INTO `office_name` (office_name) VALUES ('$office')") or die(mysqli_error($con));
+    $office_address = mysqli_real_escape_string($con, $_POST['office_address']);
+    $query = mysqli_query($con, "INSERT INTO `office_name` (office_name, office_address) VALUES ('$office', '$office_address')") or die(mysqli_error($con));
     if($query){
         echo "<script>alert('Office Added Successfully!');document.location='manage_office.php'</script>";
     }
@@ -37,7 +38,7 @@ if(isset($_POST['delete'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Office - <?php include '../components/title.php'; ?> </title>
+    <title>Manage Office - <?php include '../components/title.php'; ?> </title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
@@ -84,6 +85,7 @@ if(isset($_POST['delete'])){
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Department Names</th>
+                    <th class="col">Office Address</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -95,6 +97,7 @@ if(isset($_POST['delete'])){
                             <tr>
                                 <th scope="row">'.$row['office_id'].'</th>
                                 <td>'.$row['office_name'].'</td>
+                                <td> '.$row['office_address'].' </td>
                                 <td>
                                     <button class="btn btn-primary btn-sm edit-btn" 
                                         data-bs-toggle="modal" 
@@ -128,10 +131,14 @@ if(isset($_POST['delete'])){
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form action="" method="POST" enctype='multipart/form-data'>
                         <div class="mb-3">
                             <label for="officeName" class="form-label">Office Name</label>
                             <input type="text" class="form-control" id="officeName" name="office_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="officeAdd" class="form-label">Office Address</label>
+                            <input type="text" class="form-control" id="officeAdd" name="office_address" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -166,6 +173,8 @@ if(isset($_POST['delete'])){
                         <div class="mb-3">
                             <label for="editOfficeName" class="form-label">Office Name</label>
                             <input type="text" class="form-control" id="editOfficeName" name="office_name" value="<?php echo isset($office['office_name']) ? $office['office_name'] : ''; ?>" required>
+                        </div>
+                        <div class="mb-3">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
