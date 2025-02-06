@@ -1,7 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-      <!-- Logo on the left -->
-      <a class="navbar-brand" href="./dashboard.php">PMISGAD</a>
+      <!-- Logo on the left with image before the text -->
+      <a class="navbar-brand text-sm d-flex align-items-center" href="./dashboard.php">
+        <!-- Image placed before the text -->
+        <img src="../images/logo.png" alt="User Image" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
+        Planning, Management of Information and Services, Gender and Development
+      </a>
       
       <!-- Toggler for mobile -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,9 +24,9 @@
               Entries
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-             <li><a class="dropdown-item" href="./add_users.php" style="">Users</a></li>
-             <li><a class="dropdown-item" href="./manage_office.php" style="">Manage Offices</a></li>
-             <li><a class="dropdown-item" href="./salut.php" style="">Salut</a></li> 
+              <li><a class="dropdown-item" href="./add_users.php">Users</a></li>
+              <li><a class="dropdown-item" href="./manage_office.php">Manage Offices</a></li>
+              <li><a class="dropdown-item" href="./salut.php">Salut</a></li> 
             </ul>
           </li>
 
@@ -34,9 +38,8 @@
                 <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
                 <li><a class="dropdown-item" href="logout.php" onclick="return confirm('Are you sure you want to logout?')">Logout</a></li>
             </ul>
-        </li>
-
+          </li>
         </ul>
       </div>
     </div>
-  </nav>
+</nav>

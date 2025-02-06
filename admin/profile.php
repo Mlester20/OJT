@@ -17,21 +17,41 @@ if (mysqli_num_rows($query) > 0) {
     exit();
 }
 
-// Handle the form submission to update profile details
+// Handle form submission
 if (isset($_POST['update'])) {
-    // Get form data and escape it to prevent SQL injection
+    // Get input values
     $name = mysqli_real_escape_string($con, $_POST['name']);
     $username = mysqli_real_escape_string($con, $_POST['username']);
-    $password = mysqli_real_escape_string($con, $_POST['password']);
+    $new_password = mysqli_real_escape_string($con, $_POST['password']);
+    $confirm_password = mysqli_real_escape_string($con, $_POST['confirm_password']);
 
-    // Update query to update the user's details
-    $update_query = "UPDATE admin SET name = '$name', username = '$username', password = '$password' WHERE user_id = '$id'";
+    // Fetch current password from database
+    $result = mysqli_query($con, "SELECT password FROM admin WHERE user_id = '$id'");
+    $user = mysqli_fetch_assoc($result);
 
-    // Check if update is successful
-    if (mysqli_query($con, $update_query)) {
-        echo "<script>alert('Profile updated successfully.'); window.location.href='profile.php';</script>";
+    if (!$user) {
+        echo "<script>alert('User not found. Please try logging in again.'); window.location.href='../index.php';</script>";
+        exit();
+    }
+
+    // Check if entered password matches the stored password (plain text comparison)
+    if ($confirm_password !== $user['password']) {
+        echo "<script>alert('Incorrect password! Please enter your correct current password.');</script>";
     } else {
-        echo "<script>alert('Error updating profile: " . mysqli_error($con) . "');</script>";
+        // If a new password is provided, update it
+        $password_query = "";
+        if (!empty($new_password)) {
+            $password_query = ", password = '$new_password'";
+        }
+
+        // Update user details
+        $update_query = "UPDATE admin SET name = '$name', username = '$username' $password_query WHERE user_id = '$id'";
+
+        if (mysqli_query($con, $update_query)) {
+            echo "<script>alert('Profile updated successfully.'); window.location.href='profile.php';</script>";
+        } else {
+            echo "<script>alert('Error updating profile: " . mysqli_error($con) . "');</script>";
+        }
     }
 }
 ?>
@@ -45,38 +65,48 @@ if (isset($_POST['update'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../styles/styles.css">
+
+    
+
 </head>
 <body>
 
     <?php include '../components/header_admin.php'; ?>
 
     <div class="content-wrapper">
-        <div class="container">
+        <div class="container py-5">
             <section class="content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 class="text-center" style="margin-top: 20px;">Profile Details</h4>
-                        <form action="" method="post">
-                        <div class="form-group">
-                                <label for="username">Full Name</label>
-                                <input type="text" class="form-control" 
-                                       value="<?php echo isset($row['name']) ? $row['name'] : ''; ?>" 
-                                       name="name" placeholder="Username" required>
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h4 class="text-center mb-4">Profile Details</h4>
+                                <form action="" method="post">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" 
+                                            value="<?php echo isset($row['name']) ? $row['name'] : ''; ?>" 
+                                            name="name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" 
+                                            value="<?php echo isset($row['username']) ? $row['username'] : ''; ?>" 
+                                            name="username" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">New Password (Optional)</label>
+                                        <input type="password" class="form-control" 
+                                            name="password" placeholder="Enter new password (leave blank to keep current)">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="confirm_password" class="form-label">Enter Current Password</label>
+                                        <input type="password" class="form-control" name="confirm_password" placeholder="Enter your current password" required>
+                                    </div>
+                                    <button type="submit" name="update" class="btn btn-primary w-100 mt-3">Update Profile</button>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" 
-                                       value="<?php echo isset($row['username']) ? $row['username'] : ''; ?>" 
-                                       name="username" placeholder="Username" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" 
-                                       value="<?php echo isset($row['password']) ? $row['password'] : ''; ?>" 
-                                       name="password" placeholder="Password" required>
-                            </div>
-                            <button type="submit" name="update" class="btn btn-primary mt-3">Update Profile</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -21,7 +21,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-image: url('images/isu-bg.png');
+        background-image: url('images/1.png');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -72,9 +72,9 @@
 <body>
     <div class="header">
         <div class="logo">
-            <img src="images/isu-logo.png" alt="ISU-R Logo" class="img-responsive img-circle"
+            <img src="images/logo.png" alt="ISU-R Logo" class="img-responsive img-circle"
                 style="max-height: 50px; display: inline-block; vertical-align: middle;">
-            <p class="h4" style="display: inline-block; vertical-align: middle; margin-left: 10px;">Pmisgad</p>
+            <p class="h4" style="display: inline-block; vertical-align: middle; margin-left: 10px;">Planning, Management of Information and Services, Gender and Development</p>
         </div>
         <div class="date hidden-xs hidden-sm">
             <!-- Hide date/time on small screens -->
@@ -83,8 +83,11 @@
     </div>
 
     <div class="login-box">
-        <div class="login-logo">
-            <h3 class="card-title text-muted">Archiving System</h3>
+        <div class="login-logo d-flex justify-content-center mb-3">
+            <img src="images/isu-logo.png" alt="Image 1" class="rounded-circle" style="width: 70px; height: 70px; margin-right: 10px;">
+            <img src="images/pilipinas.png" alt="Image 2" class="rounded-circle" style="width: 70px; height: 70px; margin-right: 10px;">
+            <img src="images/logo.png" alt="Image 3" class="rounded-circle" style="width: 70px; height: 70px;">
+            <h3 class="card-title text-muted ms-3 text-center">PMISGAD System</h3>
         </div>
         <div class="login-box-body">
             <p class="login-box-msg card-title">Sign in to start your session</p>
@@ -98,16 +101,14 @@
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
-                    <!-- <div class="col-xs-6 pull-right">
-                        <button type="reset" class="btn btn-block btn-flat">Clear</button>
-                    </div> -->
                     <div class="col-xs-6 pull-right">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat" name="login" default>Sign
-                            In</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" name="login">Sign In</button>
                     </div>
                 </div>
             </form>
         </div>
+    </div>
+
 
         <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>

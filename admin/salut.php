@@ -2,13 +2,13 @@
 session_start();
 include '../components/config.php';
 
-    if(isset($_POST['save'])){
-        $salut = mysqli_real_escape_string($con, $_POST['salut']){
-            $query = mysqli_query($con, "INSERT INTO `salut` (salut) VALUES ('$salut')"){
-                
-            }
-        }
+if(isset($_POST['save'])){
+    $salut = mysqli_real_escape_string($con, $_POST['salut']);
+    $query = mysqli_query($con, "INSERT INTO `salut` (salut) VALUES ('$salut')") or die(mysqli_error($con));
+    if($query){
+        echo "<script>alert('Salut Added Successfully!');document.location='salut.php'</script>";
     }
+}
 
 ?>
 
@@ -71,7 +71,7 @@ include '../components/config.php';
     <div class="container">
         <form action="" method="post" class="office-form">
             <input type="text" name="salut" class="input-field" placeholder="Enter Salut">
-            <input type="submit" value="Save Office" name="save" class="submit-button">
+            <input type="submit" value="Save" name="save" class="submit-button">
         </form>
     </div>
     
