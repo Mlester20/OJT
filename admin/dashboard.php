@@ -164,7 +164,7 @@ endif;
 
     <div class="container-fluid py-3">
         <h3 class="card-title text-center text-muted"  style="margin-top: 20px;">Dashboard</h3>
-        <div class="row g-3"  style="margin-top: 30px;">
+        <div class="row g-3"  style="margin-top: 10px;">
             <!-- Top Paying Clients -->
             <div class="col-md-8">
                 <div class="card">
@@ -240,7 +240,7 @@ endif;
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" style="margin-top: 10px;">
         <h4 class="card-title text-center text-muted">Accomplishment</h4>
     </div>
 
@@ -277,5 +277,8 @@ endif;
             }
         });
     </script>
+
+    <script src="../js/script.js"></script>
+
 </body>
 </html>

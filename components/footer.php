@@ -3,15 +3,15 @@
         <div class="footer-content">
             <div class="footer-info">
                 <h4>Isabela State University</h4>
-                <p class="tagline">A premier national university that develops leaders in the global knowledge economy</p>
-                <p class="contact-link"><a href="#">Contact Us</a></p>
-                <p class="copyright">Copyright © <?= date('Y'); ?></p>
+                <p class="tagline">A leading research University in the ASEAN region</p>
+                <p class="copyright">Copyright © <?= date('Y'); ?> Mark Lester Raguindin || Benedict Hernando </p>
                 
-                <div class="visitor-stats">
+                <!-- <div class="visitor-stats">
                     <p>Online Visitors: 286,997</p>
                     <p>Today's Visitors: 511</p>
                     <p>Total Page Views: 200,627</p>
-                </div>
+                </div> -->
+
             </div>
             
             <div class="footer-logo">
@@ -85,7 +85,7 @@
 }
 
 .footer-logo img {
-    max-width: 150px;
+    max-width: 100px;
     height: auto;
 }
 

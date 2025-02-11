@@ -2,8 +2,9 @@
 session_start();
 include 'components/config.php';
 
-if(!isset($_POST['login'])){
+if (!isset($_POST['login'])) {
     header('location: index.php');
+    exit();
 }
 
 if (isset($_POST['login'])) {
@@ -13,22 +14,25 @@ if (isset($_POST['login'])) {
     $username = mysqli_real_escape_string($con, $user_unsafe);
     $pass = mysqli_real_escape_string($con, $pass_unsafe);
 
+    // Hanapin ang admin
     $sql = "SELECT * FROM admin WHERE username='$username' AND password='$pass'";
     $res = mysqli_query($con, $sql);
 
-    // If user is found, set session variables and redirect
     if (mysqli_num_rows($res) > 0) {
         $row = mysqli_fetch_assoc($res);
 
-        // Store user data in session variables
+        // Store user data in session
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['name'] = $row['name'];
 
-        // Redirect to dashboard
+        // **Log activity** (Admin Logged in)
+        $user_id = $row['user_id'];
+        $log_query = "INSERT INTO activity_log (user_id, action) VALUES ('$user_id', 'Admin Logged in')";
+        mysqli_query($con, $log_query);
+
         header('location: ./admin/dashboard.php');
-        exit(); // Always call exit after a header redirect to stop further execution
+        exit();
     } else {
-        // Invalid credentials, show error message
         echo "<script type='text/javascript'>alert('Invalid Username or Password!');
               document.location='index.php'</script>";
     }
