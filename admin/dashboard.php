@@ -16,6 +16,7 @@ endif;
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <style>
         .card {
             border-radius: 12px;

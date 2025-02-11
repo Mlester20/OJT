@@ -27,7 +27,7 @@
               <li><a class="dropdown-item" href="./add_users.php">Users</a></li>
               <li><a class="dropdown-item" href="./manage_office.php">Manage Offices</a></li>
               <li><a class="dropdown-item" href="./salut.php">Salut</a></li> 
-            </ul>
+            </ul> 
           </li>
 
           <li class="nav-item dropdown">

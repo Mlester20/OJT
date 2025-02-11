@@ -42,84 +42,85 @@ if(isset($_POST['delete'])){
     <link rel="stylesheet" href="../styles/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
 </head>
 
 <style>
-.header-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
+    .header-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
 
-.add-office-btn {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
+    .add-office-btn {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
 
-.add-office-btn:hover {
-    background-color: #218838;
-}
+    .add-office-btn:hover {
+        background-color: #218838;
+    }
 
-.pagination .page-link {
-    color: #333;
-    border-radius: 0;
-    margin: 0 2px;
-}
+    .pagination .page-link {
+        color: #333;
+        border-radius: 0;
+        margin: 0 2px;
+    }
 
-.pagination .page-item.active .page-link {
-    background-color: #198754;
-    border-color: #198754;
-    color: white;
-}
+    .pagination .page-item.active .page-link {
+        background-color: #198754;
+        border-color: #198754;
+        color: white;
+    }
 
-.pagination .page-link:hover {
-    background-color: #e9ecef;
-    color: #198754;
-}
+    .pagination .page-link:hover {
+        background-color: #e9ecef;
+        color: #198754;
+    }
 
-.pagination .page-item.disabled .page-link {
-    color: #6c757d;
-}
+    .pagination .page-item.disabled .page-link {
+        color: #6c757d;
+    }
 
-.table {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
+    .table {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
 
-.table thead {
-    background-color: #f8f9fa;
-}
+    .table thead {
+        background-color: #f8f9fa;
+    }
 
-.table-hover tbody tr:hover {
-    background-color: #f8f9fa;
-}
+    .table-hover tbody tr:hover {
+        background-color: #f8f9fa;
+    }
 
-.btn {
-    transition: all 0.3s ease;
-}
+    .btn {
+        transition: all 0.3s ease;
+    }
 
-.btn:hover {
-    transform: translateY(-1px);
+    .btn:hover {
+        transform: translateY(-1px);
 
-    .site-footer {
-    background-color: #333;
-    color: white;
-    padding: 40px 0;
-}
+        .site-footer {
+        background-color: #333;
+        color: white;
+        padding: 40px 0;
+    }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-}
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    }
 
 </style>
 
@@ -301,7 +302,7 @@ if(isset($_POST['delete'])){
         </div>
     </div>
 
-    <?php include('../components/footer.php'); ?>
+    <!-- <?php include('../components/footer.php'); ?> -->
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
