@@ -12,60 +12,61 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
     <style>
-    body {
-        background: #eee;
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-image: url('images/1.png');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-
-    .header {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        background: #02C39A;
-        /* Teal color for the header */
-        color: white;
-        font-size: 18px;
-        position: fixed;
-        top: 0;
-        box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2);
-        /* Add shadow to the bottom of the header */
-        z-index: 1000;
-    }
-
-    .login-box {
-        background: rgba(255, 255, 255, 0.9);
-        /* Slightly transparent white background */
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-        margin-top: 80px;
-        /* Add margin to ensure it doesn't overlap with the header */
-    }
-
-    /* Additional styles for responsiveness */
-    @media (max-width: 767px) {
-        .header .date {
-            display: none;
-            /* Hide date/time on small screens */
-        }
-
-        .header .logo {
+        body {
+            background: #eee;
+            margin: 0;
+            height: 100vh;
             display: flex;
-            /* Keep logo and title visible on mobile */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('images/1.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
-    }
+
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: #02C39A;
+            /* Teal color for the header */
+            color: white;
+            font-size: 18px;
+            position: fixed;
+            top: 0;
+            box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2);
+            /* Add shadow to the bottom of the header */
+            z-index: 1000;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.9);
+            /* Slightly transparent white background */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-top: 80px;
+            /* Add margin to ensure it doesn't overlap with the header */
+        }
+
+        /* Additional styles for responsiveness */
+        @media (max-width: 767px) {
+            .header .date {
+                display: none;
+                /* Hide date/time on small screens */
+            }
+
+            .header .logo {
+                display: flex;
+                /* Keep logo and title visible on mobile */
+            }
+        }
     </style>
 </head>
 

@@ -24,10 +24,11 @@
              <i class="fas fa-folder-open me-1"></i>Entries
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="./add_users.php"><i class="fas fa-users me-2"></i> Users</a></li>
+              <li><a class="dropdown-item" href="./manage_users.php"><i class="fas fa-users me-2"></i> Users</a></li>
               <li><a class="dropdown-item" href="./manage_office.php"><i class="fas fa-building me-2"></i> Manage Offices</a></li>
               <li><a class="dropdown-item" href="./salut.php"><i class="fas fa-user-tie me-2"></i> Salutation</a></li> 
-              <li><a class="dropdown-item" href="./designation.php"><i class="fas fa-id-badge me-2"></i> Designation</a></li> 
+              <li><a class="dropdown-item" href="./designation.php"><i class="fas fa-id-badge me-2"></i> Designation</a></li>
+              <li><a class="dropdown-item" href="./rank.php"><i class="fas fa-id-badge me-2"></i> Rank</a></li> 
             </ul> 
           </li>
 

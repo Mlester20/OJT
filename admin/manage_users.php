@@ -21,6 +21,19 @@ if(isset($_POST['submit'])) {
         echo "<script>alert('Member Added Successfully!');document.location='manage_users.php'</script>";
     }
 }
+
+if(isset($_POST['delete'])){
+    $delete_id = $_POST['delete_id'];
+    $stmt = $con->prepare("DELETE FROM member WHERE member_id = ?");
+    $stmt->bind_param("i", $delete_id); // "i" means integer
+    if($stmt->execute()){
+        echo "<script>alert('Member Deleted Successfully!');document.location='manage_users.php'</script>";
+    } else {
+        echo "<script>alert('Error deleting member.');</script>";
+    }
+    $stmt->close();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -53,12 +66,12 @@ if(isset($_POST['submit'])) {
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Gender</th>
+                    <!-- <th>Gender</th> -->
                     <th>Office</th>
                     <th>Salutation</th>
                     <th>Rank</th>
                     <th>Designation</th>
-                    <th>Username</th>
+                    <!-- <th>Username</th> -->
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -83,25 +96,31 @@ if(isset($_POST['submit'])) {
 
                                 if (mysqli_num_rows($result) > 0) {
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<tr>";
-                                         "<td>".$row['member_id']."</td>";
-                                         "<td>".$row['member_first']." ".$row['member_last']."</td>";
-                                         "<td>".$row['member_gender']."</td>";
-                                         "<td>".$row['office_name']."</td>";
-                                         "<td>".$row['salut']."</td>";
-                                         "<td>".$row['rank']."</td>";
-                                         "<td>".$row['designation_name']."</td>";
-                                         "<td>".$row['username']."</td>";
-                                        echo "<td>
-                                                <a href='edit_user.php?id=".$row['member_id']."' class='btn btn-sm btn-warning'>
-                                                    <i class='fas fa-edit'></i>
-                                                </a>
-                                                <a href='users.php?delete=".$row['member_id']."' class='btn btn-sm btn-danger' 
-                                                onclick='return confirm(\"Are you sure you want to delete this user?\")'>
-                                                    <i class='fas fa-trash'></i>
-                                                </a>
-                                               </td>";
-                                        echo "</tr>";
+                                        echo '
+                                            <tr>
+                                                <th scope="row"> '.$row['member_id'].' </th>
+                                                <td>'.$row['member_first'].' '.$row['member_last'].'</td>
+                                                <td>'.$row['office_name'].'</td>
+                                                <td>'.$row['salut'].'</td>
+                                                <td>'.$row['rank'].'</td>
+                                                <td>'.$row['designation_name'].'</td>
+                                                <td>
+                                                <button class="btn btn-primary btn-sm edit-btn" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#editMemberModal"
+                                                    data-id="'.$row['member_id'].'"
+                                                    data-name="'.$row['member'].'">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </button>
+                                                    <form action="" method="POST" class="d-inline">
+                                                        <input type="hidden" name="delete_id" value="'.$row['member_id'].'">
+                                                        <button type="submit" name="delete" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure you want to delete this User?\')">
+                                                            <i class="fas fa-trash"></i> Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        ';
                                     }
                                 }
                             ?>
@@ -158,7 +177,7 @@ if(isset($_POST['submit'])) {
                             <div class="col-md-4">
                                 <label class="form-label">Salutation</label>
                                 <select name="salut_id" class="form-select" required>
-                                    <option value="">Select Salutation</option>
+                                    <option value="">Salutation</option>
                                     <?php
                                     $query = "SELECT * FROM salut ORDER BY salut_id";
                                     $result = mysqli_query($con, $query);
@@ -171,7 +190,7 @@ if(isset($_POST['submit'])) {
                             <div class="col-md-4">
                                 <label class="form-label">Rank</label>
                                 <select name="rank_id" class="form-select" required>
-                                    <option value="">Select Rank</option>
+                                    <option value="">Rank</option>
                                     <?php
                                     $query = "SELECT * FROM `rank` ORDER BY rank_id";
                                     $result = mysqli_query($con, $query);
@@ -184,7 +203,7 @@ if(isset($_POST['submit'])) {
                             <div class="col-md-4">
                                 <label class="form-label">Designation</label>
                                 <select name="designation_id" class="form-select" required>
-                                    <option value="">Select Designation</option>
+                                    <option value="">Designation</option>
                                     <?php
                                     $query = "SELECT * FROM designation ORDER BY designation_id";
                                     $result = mysqli_query($con, $query);

@@ -38,7 +38,7 @@ $result = mysqli_query($con, $query);
                 <tr>
                     <th>Admin Username</th>
                     <th>Action</th>
-                    <th>Timestamp</th>
+                    <th>Login Date & Time </th>
                 </tr>
             </thead>
             <tbody>
