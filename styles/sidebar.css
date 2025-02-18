@@ -1,0 +1,67 @@
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 70px; /* Adjust based on your header height */
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    overflow-y: auto;
+    background-color: rgba(32, 11, 22, 0.74);
+    color: white;
+    overflow: hidden;
+}
+
+.nav-link {
+    color: #ddd;
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+}
+
+.nav-link:hover {
+    background-color: rgba(13, 110, 253, 0.2);
+}
+
+.nav-link.active:hover {
+    color: white;
+}
+
+/* Dropdown styles */
+.nav-link.dropdown-toggle::after {
+    float: right;
+    margin-top: 8px;
+}
+
+/* Submenu styles */
+.collapse .nav-link {
+    padding-left: 1rem;
+    font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: -280px;
+        transition: left 0.3s ease;
+    }
+    
+    .sidebar.show {
+        left: 0;
+    }
+    
+    /* Add overlay when sidebar is shown on mobile */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+    }
+    
+    .sidebar-overlay.show {
+        display: block;
+    }
+}

@@ -1,0 +1,37 @@
+.navbar {
+    background-color: #2C3E50; /* Dark navy */
+    padding: 10px 10px; /* Adjust padding for better alignment */
+}
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.navbar-brand img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+.navbar-nav {
+    margin-left: auto; /* Push navbar items to the right */
+}
+.nav-link {
+    color: #fff !important;
+    transition: 0.3s;
+    padding-right: 15px; /* Adjust spacing */
+}
+.nav-link:hover {
+    color: green !important; /* Orange hover */
+}
+.dropdown-menu {
+    background-color: #34495E;
+}
+.dropdown-item {
+    color: white;
+}
+.dropdown-item:hover {
+    background-color: #F39C12;
+    color: white;
+}

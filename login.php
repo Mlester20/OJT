@@ -7,34 +7,57 @@ if (!isset($_POST['login'])) {
     exit();
 }
 
-if (isset($_POST['login'])) {
-    $user_unsafe = $_POST['username'];
-    $pass_unsafe = $_POST['password'];
+$user_unsafe = $_POST['username'];
+$pass_unsafe = $_POST['password'];
 
-    $username = mysqli_real_escape_string($con, $user_unsafe);
-    $pass = mysqli_real_escape_string($con, $pass_unsafe);
+$username = mysqli_real_escape_string($con, $user_unsafe);
+$pass = mysqli_real_escape_string($con, $pass_unsafe);
 
-    // Hanapin ang admin
-    $sql = "SELECT * FROM admin WHERE username='$username' AND password='$pass'";
-    $res = mysqli_query($con, $sql);
+$sql = "SELECT m.*, o.office_name, o.office_address, s.salut 
+        FROM member m
+        LEFT JOIN office_name o ON m.office_id = o.office_id
+        LEFT JOIN salut s ON m.salut_id = s.salut_id
+        WHERE m.username='$username' AND m.password='$pass'";
 
-    if (mysqli_num_rows($res) > 0) {
-        $row = mysqli_fetch_assoc($res);
+$res = mysqli_query($con, $sql);
 
-        // Store user data in session
-        $_SESSION['user_id'] = $row['user_id'];
-        $_SESSION['name'] = $row['name'];
+if (!$res) {
+    die("Query failed: " . mysqli_error($con));
+}
 
-        // **Log activity** (Admin Logged in)
-        $user_id = $row['user_id'];
-        $log_query = "INSERT INTO activity_log (user_id, action) VALUES ('$user_id', 'Admin Logged in')";
-        mysqli_query($con, $log_query);
+if (mysqli_num_rows($res) > 0) {
+    $row = mysqli_fetch_assoc($res);
 
-        header('location: ./admin/dashboard.php');
-        exit();
+    $_SESSION['member_id'] = $row['member_id'];
+    $_SESSION['member_first'] = $row['member_first'];
+    $_SESSION['member_last'] = $row['member_last'];
+    $_SESSION['salut'] = $row['salut']; 
+    $_SESSION['office_id'] = $row['office_id'];
+    $_SESSION['office_name'] = $row['office_name'];
+    $_SESSION['office_address'] = $row['office_address']; // Store office address in session
+
+    $name = $_SESSION['salut'] . ' ' . $_SESSION['member_first'] . ' ' . $_SESSION['member_last'];
+    $_SESSION['full_name'] = $name; 
+
+    // Log activity with office address
+    $member_id = $row['member_id'];
+    $office_id = $row['office_id'];
+    $office_address = $row['office_address'];
+
+    $log_query = "INSERT INTO member_activityLog (member_id, office_id, office_address) 
+                  VALUES ('$member_id', '$office_id', '$office_address')";
+    mysqli_query($con, $log_query);
+
+    if ($row['office_name'] && strtolower($row['office_name']) === 'ccje') {
+        header('location: ./ccje/home.php');
+    } else if ($row['office_name'] && strtolower($row['office_name']) === 'iict') {
+        header('location: ./iict/home.php');
     } else {
-        echo "<script type='text/javascript'>alert('Invalid Username or Password!');
-              document.location='index.php'</script>";
+        header('location: ./admin/dashboard.php');
     }
+    exit();
+} else {
+    echo "<script type='text/javascript'>alert('Invalid Username or Password!');
+          document.location='index.php'</script>";
 }
 ?>

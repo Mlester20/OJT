@@ -1,9 +1,22 @@
 <?php
 session_start();
+include '../components/config.php';
+    if (empty($_SESSION['user_id'])):
+        header('Location: index.php');
+        exit();
+    endif;
 
-if (empty($_SESSION['user_id'])):
-    header('Location:../index.php');
-endif;
+    $query = "SELECT COUNT(*) as total_members FROM member";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+    $total_members = $row['total_members'];
+
+    //count from office table
+
+    $query = mysqli_query($con, "SELECT COUNT(*) as total_office FROM office_name ") or die(mysqli_error($con));
+    $row = mysqli_fetch_assoc($query);
+    $total_office = $row['total_office'];
+
 ?>
 
 <!DOCTYPE html>
@@ -163,21 +176,22 @@ endif;
     <?php include('../components/header_admin.php'); ?>
 
     <div class="container-fluid py-3">
-        <h3 class="card-title text-center text-muted"  style="margin-top: 20px;">Dashboard</h3>
-        <div class="row g-3"  style="margin-top: 10px;">
-            <!-- Top Paying Clients -->
+        <h3 class="text-center text-muted my-3">Dashboard</h3>
+        
+        <div class="row g-3">
+            <!-- Left Panel (Top Office/Department) -->
             <div class="col-md-8">
-                <div class="card">
+                <div class="card shadow-sm">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="card-title mb-0">Top Office/Department/Unit to Complied</h6>
-                            <button class="btn btn-link p-0">⋮</button>
+                            <button class="btn btn-link p-0"><i class="fas fa-ellipsis-v"></i></button>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-sm">
-                                <thead>
+                            <table class="table table-sm table-bordered">
+                                <thead class="table-light">
                                     <tr>
-                                        <th>Id</th>
+                                        <th>ID</th>
                                         <th>Assigned</th>
                                         <th>Name</th>
                                         <th>Status</th>
@@ -189,11 +203,11 @@ endif;
                                         <td>1</td>
                                         <td>
                                             <div>Sunil Joshi</div>
-                                            <small class="text-muted">Qa</small>
+                                            <small class="text-muted">QA</small>
                                         </td>
                                         <td>Elite Admin</td>
-                                        <td><span class="priority-badge priority-low">Low</span></td>
-                                        <td>Not complied</td>
+                                        <td><span class="badge bg-success">Low</span></td>
+                                        <td class="text-danger">Not complied</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -201,9 +215,9 @@ endif;
                                             <div>Andrew McDownland</div>
                                             <small class="text-muted">Project Manager</small>
                                         </td>
-                                        <td>Real Homes WP Theme</td>
-                                        <td><span class="priority-badge priority-medium">Medium</span></td>
-                                        <td>Complied</td>
+                                        <td>Real Homes WP</td>
+                                        <td><span class="badge bg-warning text-dark">Medium</span></td>
+                                        <td class="text-success">Complied</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
@@ -211,9 +225,9 @@ endif;
                                             <div>Christopher Jamil</div>
                                             <small class="text-muted">Project Manager</small>
                                         </td>
-                                        <td>MedicalPro WP Theme</td>
-                                        <td><span class="priority-badge priority-high">High</span></td>
-                                        <td>Complied</td>
+                                        <td>MedicalPro WP</td>
+                                        <td><span class="badge bg-danger">High</span></td>
+                                        <td class="text-success">Complied</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -222,16 +236,15 @@ endif;
                 </div>
             </div>
 
-            <!-- Traffic Distribution -->
+            <!-- Right Panel (Accomplishment) -->
             <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
                         <h6 class="card-title">Accomplishment</h6>
-                        <div class="text-center mb-2">
-                            <h4></h4>
-                            <small class="text-success">+9% last year</small>
-                        </div>
-                        <div class="chart-container">
+                        <i class="fas fa-chart-line fa-3x text-primary mb-2"></i>
+                        <h4>Progress</h4>
+                        <small class="text-success">+9% last year</small>
+                        <div class="chart-container mt-3">
                             <canvas id="trafficChart"></canvas>
                         </div>
                     </div>
@@ -240,45 +253,43 @@ endif;
         </div>
     </div>
 
-    <div class="container" style="margin-top: 10px;">
-        <h4 class="card-title text-center text-muted">Accomplishment</h4>
+    <div class="container">
+        <div class="row">
+            <div class="d-flex gap-3">
+                <!-- Total Members -->
+                <div class="card text-white bg-primary shadow-sm" style="width: 15rem;">
+                    <div class="card-body text-center">
+                        <i class="fas fa-users fa-3x mb-2"></i>
+                        <h3>Total Members</h3>
+                        <h2><?php echo $total_members; ?></h2>
+                    </div>
+                </div>
+
+                <!-- Total Offices -->
+                <div class="card text-white bg-success shadow-sm" style="width: 15rem;">
+                    <div class="card-body text-center">
+                        <i class="fas fa-building fa-3x mb-2"></i>
+                        <h3>Total Offices</h3>
+                        <h2><?php echo $total_office; ?></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
+    <div class="container d-flex justify-content-center">
+        <div class="p-4 rounded shadow" style="background-color: #f8f9fa; max-width: 800px; width: 100%; margin-top: 30px;">
+            <h3 class="card-title text-center text-muted">List of Offices/Department Complied</h3>
+        </div>
+    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script src='../js/modal.js'></script>
-    
-    <script>
-        // Traffic Distribution Chart
-        const trafficCtx = document.getElementById('trafficChart').getContext('2d');
-        new Chart(trafficCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Organic', 'Referral'],
-                datasets: [{
-                    data: [60, 40],
-                    backgroundColor: ['#0d6efd', '#ffc0cb']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '70%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            font: {
-                                size: 11
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    </script>
-
-    <script src="../js/script.js"></script>
+    <script src="../js/data.js"></script>
 
 </body>
 </html>

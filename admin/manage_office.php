@@ -2,6 +2,12 @@
 session_start();
 include '../components/config.php';
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
+
 if(isset($_POST['save'])){
     $office = mysqli_real_escape_string($con, $_POST['office_name']);
     $office_address = mysqli_real_escape_string($con, $_POST['office_address']);

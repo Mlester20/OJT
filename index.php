@@ -106,6 +106,11 @@
                         <button type="submit" class="btn btn-primary btn-block btn-flat" name="login">Sign In</button>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xs-8 pull-left">
+                        <a href="register.php" class="nav-link" style="margin-top: 2rem;">Click here to register an Account</a>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
