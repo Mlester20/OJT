@@ -1,23 +1,35 @@
 <?php
 session_start();
 include '../components/config.php';
-    if (empty($_SESSION['user_id'])):
-        header('Location: index.php');
-        exit();
-    endif;
+if (empty($_SESSION['user_id'])):
+    header('Location: index.php');
+    exit();
+endif;
 
-    $query = "SELECT COUNT(*) as total_members FROM member";
-    $result = mysqli_query($con, $query);
-    $row = mysqli_fetch_assoc($result);
-    $total_members = $row['total_members'];
+// Existing queries
+$query = "SELECT COUNT(*) as total_members FROM member";
+$result = mysqli_query($con, $query);
+$row = mysqli_fetch_assoc($result);
+$total_members = $row['total_members'];
 
-    //count from office table
+$query = mysqli_query($con, "SELECT COUNT(*) as total_office FROM office_name") or die(mysqli_error($con));
+$row = mysqli_fetch_assoc($query);
+$total_office = $row['total_office'];
 
-    $query = mysqli_query($con, "SELECT COUNT(*) as total_office FROM office_name ") or die(mysqli_error($con));
-    $row = mysqli_fetch_assoc($query);
-    $total_office = $row['total_office'];
+// New query for office compliance statistics
+$office_compliance_query = "SELECT 
+    o.office_name,
+    COUNT(a.id) as compliance_count
+    FROM office_name o
+    LEFT JOIN member m ON o.office_id = m.office_id
+    LEFT JOIN awards a ON m.member_id = a.member_id
+    GROUP BY o.office_id, o.office_name
+    ORDER BY compliance_count DESC
+    LIMIT 5";
+$office_compliance_result = mysqli_query($con, $office_compliance_query);
 
-    $awards_query = "SELECT 
+// Original awards query
+$awards_query = "SELECT 
     a.*,
     m.member_first,
     m.member_last,
@@ -26,8 +38,7 @@ include '../components/config.php';
     LEFT JOIN member m ON a.member_id = m.member_id
     LEFT JOIN office_name o ON m.office_id = o.office_id
     ORDER BY a.date DESC";
-    $awards_result = mysqli_query($con, $awards_query) or die(mysqli_error($con));
-
+$awards_result = mysqli_query($con, $awards_query) or die(mysqli_error($con));
 ?>
 
 <!DOCTYPE html>
@@ -42,232 +53,75 @@ include '../components/config.php';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <style>
-        .card {
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        /* Keep existing styles and add: */
+        .compliance-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
             margin-bottom: 20px;
         }
-        .priority-badge {
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 11px;
+        .compliance-bar {
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin-top: 5px;
         }
-        .priority-low {
-            background-color: #0dcaf0;
-            color: white;
-        }
-        .priority-medium {
-            background-color: #6c757d;
-            color: white;
-        }
-        .priority-high {
-            background-color: #ffc0cb;
-            color: #333;
-        }
-        .chart-container {
-            height: 200px;
-        }
-        .table td, .table th {
-            padding: 0.5rem;
-            font-size: 0.9rem;
-        }
-        .site-footer {
-            background-color: #333;
-            color: white;
-            padding: 40px 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-info {
-            flex: 2;
-        }
-
-        .footer-info h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .tagline {
-            font-style: italic;
-            color: #ccc;
-            margin-bottom: 20px;
-        }
-
-        .contact-link a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .contact-link a:hover {
-            text-decoration: underline;
-        }
-
-        .copyright {
-            color: #ccc;
-            margin: 10px 0;
-        }
-
-        .visitor-stats {
-            margin-top: 20px;
-            color: #ccc;
-        }
-
-        .visitor-stats p {
-            margin: 5px 0;
-        }
-
-        .footer-logo {
-            flex: 1;
-            text-align: right;
-        }
-
-        .footer-logo img {
-            max-width: 150px;
-            height: auto;
-        }
-
-        .social-links {
-            position: absolute;
-            right: 20px;
-            margin-top: 200px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .social-icon {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-        }
-
-        .social-icon:hover {
-            transform: translateY(-3px);
-        }
-
-        .social-icon img {
-            width: 100%;
+        .compliance-fill {
             height: 100%;
-            object-fit: cover;
-        }
-
-        @media (max-width: 768px) {
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .footer-logo {
-                margin-top: 20px;
-                text-align: center;
-            }
-            
-            .social-links {
-                position: static;
-                margin-top: 20px;
-                justify-content: center;
-            }
+            background: #0d6efd;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
         }
     </style>
+
 </head>
 <body>
     <?php include('../components/header_admin.php'); ?>
 
-
     <div class="container-fluid py-3">
         <h3 class="text-center text-muted my-3">Dashboard</h3>
-        
-        <div class="row g-3">
-            <!-- Left Panel (Top Office/Department) -->
-            <div class="col-md-8">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h6 class="card-title mb-0">Top Office/Department/Unit to Complied</h6>
-                            <button class="btn btn-link p-0"><i class="fas fa-ellipsis-v"></i></button>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-sm table-bordered">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Assigned</th>
-                                        <th>Name</th>
-                                        <th>Status</th>
-                                        <th>Remarks</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <div>Sunil Joshi</div>
-                                            <small class="text-muted">QA</small>
-                                        </td>
-                                        <td>Elite Admin</td>
-                                        <td><span class="badge bg-success">Low</span></td>
-                                        <td class="text-danger">Not complied</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>
-                                            <div>Andrew McDownland</div>
-                                            <small class="text-muted">Project Manager</small>
-                                        </td>
-                                        <td>Real Homes WP</td>
-                                        <td><span class="badge bg-warning text-dark">Medium</span></td>
-                                        <td class="text-success">Complied</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>
-                                            <div>Christopher Jamil</div>
-                                            <small class="text-muted">Project Manager</small>
-                                        </td>
-                                        <td>MedicalPro WP</td>
-                                        <td><span class="badge bg-danger">High</span></td>
-                                        <td class="text-success">Complied</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Right Panel (Accomplishment) -->
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body text-center">
-                        <h6 class="card-title">Accomplishment</h6>
-                        <i class="fas fa-chart-line fa-3x text-primary mb-2"></i>
-                        <h4>Progress</h4>
-                        <small class="text-success">+9% last year</small>
-                        <div class="chart-container mt-3">
-                            <canvas id="trafficChart"></canvas>
+        <!-- New Top Offices Section -->
+        <div class="container mt-4">
+            <div class="p-4 rounded shadow" style="background-color: #f8f9fa;">
+                <h3 class="text-center text-muted mb-4">Top Performing Offices</h3>
+                
+                <div class="row">
+                    <?php 
+                    // Get the highest compliance count for percentage calculation
+                    $max_compliance = 0;
+                    $office_data = array();
+                    while($office_row = mysqli_fetch_assoc($office_compliance_result)) {
+                        $office_data[] = $office_row;
+                        if($office_row['compliance_count'] > $max_compliance) {
+                            $max_compliance = $office_row['compliance_count'];
+                        }
+                    }
+                    
+                    // Display office compliance data
+                    foreach($office_data as $office): 
+                        $percentage = ($max_compliance > 0) ? ($office['compliance_count'] / $max_compliance) * 100 : 0;
+                    ?>
+                    <div class="col-md-6 mb-3">
+                        <div class="compliance-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0"><?php echo htmlspecialchars($office['office_name']); ?></h5>
+                                <span class="badge bg-primary"><?php echo $office['compliance_count']; ?> compliances</span>
+                            </div>
+                            <div class="compliance-bar">
+                                <div class="compliance-fill" style="width: <?php echo $percentage; ?>%"></div>
+                            </div>
                         </div>
                     </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
-    </div>
 
-        <div class="row" style="margin-left: 5rem;">
+        <div class="row" style="margin-left: 5rem; margin-top: 20px;">
             <div class="d-flex gap-3">
-                <!-- Total Members -->
+                <!-- Existing stat cards -->
                 <div class="card text-white bg-primary shadow-sm" style="width: 15rem;">
                     <div class="card-body text-center">
                         <i class="fas fa-users fa-3x mb-2"></i>
@@ -276,7 +130,6 @@ include '../components/config.php';
                     </div>
                 </div>
 
-                <!-- Total Offices -->
                 <div class="card text-white bg-success shadow-sm" style="width: 15rem;">
                     <div class="card-body text-center">
                         <i class="fas fa-building fa-3x mb-2"></i>
@@ -287,8 +140,8 @@ include '../components/config.php';
             </div>
         </div>
 
-
-            <div class="container d-flex justify-content-center">
+        
+        <div class="container d-flex justify-content-center">
                 <div class="p-4 rounded shadow" style="background-color: #f8f9fa; max-width: 800px; width: 100%; margin-top: 30px;">
                     <h3 class="card-title text-center text-muted">List of Offices/Department Complied</h3>
                 </div>
@@ -296,7 +149,7 @@ include '../components/config.php';
 
             <div class="container my-5">
                 <div class="table-responsive mt-4">
-                    <table class="table table-hover">
+                    <table class="table table-hover">`
                         <thead>
                             <tr>
                                 <th>Award</th>
@@ -338,6 +191,8 @@ include '../components/config.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script src='../js/modal.js'></script>
     <script src="../js/data.js"></script>
+
+
 
 </body>
 </html>
