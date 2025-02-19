@@ -21,15 +21,24 @@
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-             <i class="fas fa-folder-open me-1"></i>Services
+              <i class="fas fa-hammer me-1"></i>Services
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="./selection.php"><i class="fas fa-users me-2"></i>MIS</a></li>
+              <li class="dropdown-item-hover">
+                <a class="dropdown-item" href="mis.php">
+                  <i class="fas fa-users me-2"></i>MIS
+                </a>
+                <ul class="dropdown-menu second-level">
+                  <li><a class="dropdown-item" href="administrative.php">Administrative</a></li>
+                  <li><a class="dropdown-item" href="#"></a></li>
+                </ul>
+              </li>
               <li><a class="dropdown-item" href="#"><i class="fas fa-building me-2"></i>Planning</a></li>
-              <li><a class="dropdown-item" href="#"><i class="fas fa-user-tie me-2"></i>Gender and Development</a></li> 
+              <li><a class="dropdown-item" href="#"><i class="fas fa-user-tie me-2"></i>Gender and Development</a></li>
               <li><a class="dropdown-item" href="#"><i class="fas fa-id-badge me-2"></i>ISO QMS</a></li>
-            </ul> 
+            </ul>
           </li>
+
 
 
           <li class="nav-item dropdown">

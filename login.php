@@ -52,9 +52,9 @@ if (mysqli_num_rows($res) > 0) {
         header('location: ./ccje/home.php');
     } else if ($row['office_name'] && strtolower($row['office_name']) === 'iict') {
         header('location: ./iict/home.php');
-    } else {
+    } else if($row['office_name'] && strtolower(trim($row['office_name'])) === 'planning, management of information and services'){
         header('location: ./admin/dashboard.php');
-    }
+    }    
     exit();
 } else {
     echo "<script type='text/javascript'>alert('Invalid Username or Password!');

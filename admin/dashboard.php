@@ -17,6 +17,17 @@ include '../components/config.php';
     $row = mysqli_fetch_assoc($query);
     $total_office = $row['total_office'];
 
+    $awards_query = "SELECT 
+    a.*,
+    m.member_first,
+    m.member_last,
+    o.office_name
+    FROM awards a
+    LEFT JOIN member m ON a.member_id = m.member_id
+    LEFT JOIN office_name o ON m.office_id = o.office_id
+    ORDER BY a.date DESC";
+    $awards_result = mysqli_query($con, $awards_query) or die(mysqli_error($con));
+
 ?>
 
 <!DOCTYPE html>
@@ -175,6 +186,7 @@ include '../components/config.php';
 <body>
     <?php include('../components/header_admin.php'); ?>
 
+
     <div class="container-fluid py-3">
         <h3 class="text-center text-muted my-3">Dashboard</h3>
         
@@ -253,8 +265,7 @@ include '../components/config.php';
         </div>
     </div>
 
-    <div class="container">
-        <div class="row">
+        <div class="row" style="margin-left: 5rem;">
             <div class="d-flex gap-3">
                 <!-- Total Members -->
                 <div class="card text-white bg-primary shadow-sm" style="width: 15rem;">
@@ -275,16 +286,53 @@ include '../components/config.php';
                 </div>
             </div>
         </div>
-    </div>
 
 
+            <div class="container d-flex justify-content-center">
+                <div class="p-4 rounded shadow" style="background-color: #f8f9fa; max-width: 800px; width: 100%; margin-top: 30px;">
+                    <h3 class="card-title text-center text-muted">List of Offices/Department Complied</h3>
+                </div>
+            </div>
 
-    <div class="container d-flex justify-content-center">
-        <div class="p-4 rounded shadow" style="background-color: #f8f9fa; max-width: 800px; width: 100%; margin-top: 30px;">
-            <h3 class="card-title text-center text-muted">List of Offices/Department Complied</h3>
-        </div>
-    </div>
-
+            <div class="container my-5">
+                <div class="table-responsive mt-4">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Award</th>
+                                <th>Conferred To</th>
+                                <th>Conferred By</th>
+                                <th>Date</th>
+                                <th>Venue</th>
+                                <th>Member Name</th>
+                                <th>Office</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while($row = mysqli_fetch_assoc($awards_result)): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['award']); ?></td>
+                                <td><?php echo htmlspecialchars($row['conferred_to']); ?></td>
+                                <td><?php echo htmlspecialchars($row['conferred_by']); ?></td>
+                                <td><?php echo date('M d, Y', strtotime($row['date'])); ?></td>
+                                <td><?php echo htmlspecialchars($row['venue']); ?></td>
+                                <td><?php echo htmlspecialchars($row['member_first'] . ' ' . $row['member_last']); ?></td>
+                                <td><?php echo htmlspecialchars($row['office_name']); ?></td>
+                                <td>
+                                    <a href="edit_award.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="delete_award.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this award?');">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>    
+            </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

@@ -21,7 +21,6 @@ include '../components/config.php';
 <body>
     
     <?php include '../components/header.php'; ?>
-    <?php include '../components/user_sidebar.php'; ?>
 
 
     <div class="container" style="margin-top: 30px;">

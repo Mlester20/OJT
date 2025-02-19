@@ -50,7 +50,7 @@ $result = mysqli_query($con, $query);
         <table class="table table-bordered" style="margin-top: 10px;">
             <thead>
                 <tr>
-                    <th>User</th>
+                    <th>Users</th>
                     <th>Office</th>
                     <th>Office Address</th>
                     <th>Login Date & Time</th>

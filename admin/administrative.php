@@ -17,125 +17,203 @@ include '../components/config.php';
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/header_style.css">
 </head>
-<style>
-        .table-container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin: 20px 0;
-        }
 
-        .btn-custom {
-            padding: 8px 20px;
-            border-radius: 6px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin-right: 10px;
-        }
-
-        .btn-add-row {
-            background: #28a745;
-            border: none;
+    <style>
+        .awards-header {
+            background: #000080;
             color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
         }
+        
+        .category-header {
+            background: #f0f8f0;
+            padding: 10px;
+            margin-top: 20px;
+            border-left: 5px solid #2c5282;
+            font-weight: bold;
+        }
+        
+        .table-responsive {
+            margin-bottom: 30px;
+        }
+        
+        .table th {
+            background-color: #e2e8f0;
+        }
+        
+        .add-row-btn {
+            color: #718096;
+            font-style: italic;
+            padding: 8px;
+            background: #f7fafc;
+            border: 1px dashed #cbd5e0;
+            text-align: center;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+    </style>
 
-        .btn-add-row:hover {
-            background: #218838;
-            transform: translateY(-2px);
-        }
-
-        .btn-add-column {
-            background: #17a2b8;
-            border: none;
-            color: white;
-        }
-
-        .btn-add-column:hover {
-            background: #138496;
-            transform: translateY(-2px);
-        }
-
-        .table {
-            margin-top: 15px;
-            background: white;
-        }
-
-        .table thead th {
-            background: #f8f9fa;
-            border-bottom: 2px solid #dee2e6;
-            color: #495057;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-
-        .table td, .table th {
-            padding: 12px;
-            vertical-align: middle;
-        }
-
-        .table tbody tr:hover {
-            background-color: #f8f9fa;
-            transition: background-color 0.3s ease;
-        }
-
-        .action-buttons .btn {
-            padding: 5px 10px;
-            margin: 0 3px;
-            font-size: 0.875rem;
-        }
-</style>
 <body>
     <?php include '../components/header_admin.php'; ?>
 
-    <div class="container d-flex justify-content-center">
-        <div class="p-4 rounded shadow" style="background-color: #f8f9fa; max-width: 800px; width: 100%; margin-top: 30px;">
-            <h3 class="card-title text-center text-muted">Awards and Recognition Received</h3>
+
+    <div class="container py-5">
+        <div class="awards-header text-center mb-4">
+            <h1 class="h2 mb-0">AWARDS AND RECOGNITIONS RECEIVED</h1>
         </div>
-    </div>
 
-    <div class="container" style="margin-top: 2rem;">
-        <div class="table-container">
-            <div class="mb-4">
-                <button id="addRowBtn" class="btn btn-custom btn-add-row">
-                    <i class="fas fa-plus"></i> Add Row
-                </button>
-                <!-- <button id="addColumnBtn" class="btn btn-custom btn-add-column">
-                    <i class="fas fa-columns"></i> Add Column
-                </button> -->
-            </div>
+        <!-- International Awards -->
+        <div class="category-header">International</div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th width="5%">#</th>
+                        <th width="30%">Award/Recognition</th>
+                        <th width="25%">Conferred to</th>
+                        <th width="20%">Conferred by</th>
+                        <th width="10%">Date</th>
+                        <th width="10%">Venue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="add-row-btn">**insert more rows if necessary</div>
+        </div>
 
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr id="dynamicTableHeader">
-                            <th>#</th>
-                            <th>Awards/Recognition</th>
-                            <th>Conferred to</th>
-                            <th>Conferred by</th>
-                            <th>Date</th>
-                            <th>Venue</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dynamicTableBody">
-                        <tr>
-        
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="add-row-btn">**insert more rows if necessary</div>
-            </div>
+        <!-- National Awards -->
+        <div class="category-header">National</div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th width="5%">#</th>
+                        <th width="30%">Award/Recognition</th>
+                        <th width="25%">Conferred to</th>
+                        <th width="20%">Conferred by</th>
+                        <th width="10%">Date</th>
+                        <th width="10%">Venue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="add-row-btn">**insert more rows if necessary</div>
+        </div>
+
+        <!-- Regional/Provincial Awards -->
+        <div class="category-header">Regional / Provincial</div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th width="5%">#</th>
+                        <th width="30%">Award/Recognition</th>
+                        <th width="25%">Conferred to</th>
+                        <th width="20%">Conferred by</th>
+                        <th width="10%">Date</th>
+                        <th width="10%">Venue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="add-row-btn">**insert more rows if necessary</div>
+        </div>
+
+        <!-- Local Awards -->
+        <div class="category-header">Local</div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th width="5%">#</th>
+                        <th width="30%">Award/Recognition</th>
+                        <th width="25%">Conferred to</th>
+                        <th width="20%">Conferred by</th>
+                        <th width="10%">Date</th>
+                        <th width="10%">Venue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-    <script src="../js/dynamicTable.js"></script>
+    <script src="../js/controls.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
         let editButtons = document.querySelectorAll(".edit-btn");
 
         editButtons.forEach(button => {
