@@ -124,7 +124,6 @@
         cursor: pointer;
     }
 
-    /* Style for the second-level dropdown */
 .second-level {
     display: none;
     position: absolute;
@@ -144,4 +143,5 @@
   .dropdown-item:hover {
     background-color: #f1f1f1;
   }
+  
   

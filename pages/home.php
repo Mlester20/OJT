@@ -16,14 +16,57 @@ include '../components/config.php';
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../styles/user_header.css">
-    <link rel="stylesheet" href="../styles/hover.css">
+<style>
+/* Para sa main dropdown */
+.dropdown-item-hover {
+  position: relative;
+}
+
+.dropdown-submenu {
+  position: absolute;
+  left: -150px;
+  top: 0;
+  background: white;
+  border: 1px solid #ccc;
+  list-style: none;
+  padding: 10px 0;
+  display: none;
+  min-width: 150px;
+}
+
+.dropdown-submenu li {
+  padding: 5px 15px;
+}
+
+.dropdown-submenu li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+.dropdown-submenu li a:hover {
+  background: #f1f1f1;
+}
+
+.dropdown-item-hover:hover > .dropdown-submenu {
+  display: block;
+}
+
+.sub-left {
+  position: absolute;
+  left: -100%; 
+  top: 0;
+}
+
+</style>
+
 </head>
 <body>
     
     <?php include '../components/header.php'; ?>
 
     <div class="container">
-        <h3 class="card-title text-center text-muted" style="margin-top: 3rem;">Welcome IICT</h3>
+        <h3 class="card-title text-center text-muted" style="margin-top: 3rem;">Hello End User</h3>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

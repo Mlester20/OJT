@@ -2,6 +2,11 @@
 session_start();
 include '../components/config.php';
 
+if (empty($_SESSION['member_id'])):
+    header('Location: ../index.php');
+    exit();
+endif;
+
 if(isset($_POST['submit'])) {
     $first_name = mysqli_real_escape_string($con, $_POST['first_name']);
     $last_name = mysqli_real_escape_string($con, $_POST['last_name']);

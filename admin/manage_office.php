@@ -2,11 +2,10 @@
 session_start();
 include '../components/config.php';
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
+if (empty($_SESSION['member_id'])):
+    header('Location: ../index.php');
     exit();
-}
-
+endif;
 
 if(isset($_POST['save'])){
     $office = mysqli_real_escape_string($con, $_POST['office_name']);
@@ -308,7 +307,6 @@ if(isset($_POST['delete'])){
         </div>
     </div>
 
-    <!-- <?php include('../components/footer.php'); ?> -->
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

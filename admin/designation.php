@@ -2,6 +2,11 @@
 session_start();
 include '../components/config.php';
 
+if (empty($_SESSION['member_id'])):
+    header('Location: ../index.php');
+    exit();
+endif;
+
 if(isset($_POST['save'])){
     $designation = mysqli_real_escape_string($con, $_POST['designation']);
     $query = mysqli_query($con, "INSERT INTO `designation` (designation_name) VALUES ('$designation')") or die(mysqli_error($con));

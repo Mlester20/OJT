@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Add 4 default rows on page load
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 4; i++) { 
         addNewRow();
     }
 

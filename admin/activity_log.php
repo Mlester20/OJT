@@ -2,10 +2,10 @@
 session_start();
 include '../components/config.php';
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../index.php");
+if (empty($_SESSION['member_id'])):
+    header('Location: ../index.php');
     exit();
-}
+endif;
 
 // Set pagination variables
 $limit = 10; // Entries per page

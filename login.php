@@ -34,7 +34,7 @@ if (mysqli_num_rows($res) > 0) {
     $_SESSION['salut'] = $row['salut']; 
     $_SESSION['office_id'] = $row['office_id'];
     $_SESSION['office_name'] = $row['office_name'];
-    $_SESSION['office_address'] = $row['office_address']; // Store office address in session
+    $_SESSION['office_address'] = $row['office_address'];
 
     $name = $_SESSION['salut'] . ' ' . $_SESSION['member_first'] . ' ' . $_SESSION['member_last'];
     $_SESSION['full_name'] = $name; 
@@ -49,9 +49,9 @@ if (mysqli_num_rows($res) > 0) {
     mysqli_query($con, $log_query);
 
     if ($row['office_name'] && strtolower($row['office_name']) === 'ccje') {
-        header('location: ./ccje/home.php');
+        header('location: ./pages/home.php');
     } else if ($row['office_name'] && strtolower($row['office_name']) === 'iict') {
-        header('location: ./iict/home.php');
+        header('location: ./pages/home.php');
     } else if($row['office_name'] && strtolower(trim($row['office_name'])) === 'planning, management of information and services'){
         header('location: ./admin/dashboard.php');
     }    

@@ -2,6 +2,11 @@
 session_start();
 include '../components/config.php';
 
+if (empty($_SESSION['member_id'])):
+    header('Location: ../index.php');
+    exit();
+endif;
+
 if(isset($_POST['save'])){
     $salut = mysqli_real_escape_string($con, $_POST['salut']);
     $query = mysqli_query($con, "INSERT INTO `salut` (salut) VALUES ('$salut')") or die(mysqli_error($con));

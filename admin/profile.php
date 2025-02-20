@@ -3,10 +3,10 @@ session_start();
 include '../components/config.php';
 
 // Ensure the user is logged in
-if (!isset($_SESSION['member_id'])) {
-    header('location: ../index.php');
+if (empty($_SESSION['member_id'])):
+    header('Location: ../index.php');
     exit();
-}
+endif;
 
 $member_id = $_SESSION['member_id'];
 
