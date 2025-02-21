@@ -1,0 +1,38 @@
+.dropdown-item-hover {
+    position: relative;
+}
+
+.dropdown-submenu {
+    position: absolute;
+    right: 100%;
+    top: 0;
+    background: white;
+    border: 1px solid #ccc;
+    list-style: none;
+    padding: 10px 0;
+    display: none;
+    min-width: 180px;
+    z-index: 1000;
+    box-shadow: -2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.dropdown-submenu li {
+    padding: 5px 15px;
+    white-space: nowrap;
+}
+
+.dropdown-submenu li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 8px 15px;
+    transition: background 0.3s ease;
+}
+
+.dropdown-submenu li a:hover {
+    background: #f8f9fa;
+}
+
+.dropdown-item-hover:hover > .dropdown-submenu {
+    display: block;
+}
