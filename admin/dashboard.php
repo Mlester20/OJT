@@ -40,6 +40,23 @@ $awards_query = "SELECT
     LEFT JOIN office_name o ON m.office_id = o.office_id
     ORDER BY a.date DESC";
 $awards_result = mysqli_query($con, $awards_query) or die(mysqli_error($con));
+
+//delete function
+if (isset($_POST['delete'])) {
+    $delete_id = $_POST['delete_id'];
+
+    if (!empty($delete_id)) {
+        $stmt = $con->prepare("DELETE FROM awards WHERE id = ?");
+        $stmt->bind_param("i", $delete_id);
+        if ($stmt->execute()) {
+            echo "<script>alert('Award deleted successfully!'); window.location.href='dashboard.php';</script>";
+        } else {
+            echo "<script>alert('Error deleting award.'); window.location.href='dashboard.php';</script>";
+        }
+        $stmt->close();
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +70,7 @@ $awards_result = mysqli_query($con, $awards_query) or die(mysqli_error($con));
     <link rel="stylesheet" href="../styles/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="stylesheet" href="../styles/hover.css">
     <style>
         .compliance-card {
             background: #fff;
@@ -150,11 +168,19 @@ $awards_result = mysqli_query($con, $awards_query) or die(mysqli_error($con));
             </div>
         </div>
 
-        
         <div class="container my-5">
-            <div class="table-responsive mt-4">
+            <h3 class="card-title text-center text-muted text-md" style="margin-top: 10rem;">Recently Complied</h3>
+
+            <!-- Export Button -->
+            <div class="d-flex justify-content-end mb-3">
+                <a href="export_excel.php" class="btn btn-success">
+                    <i class="fas fa-file-excel"></i> Export to Excel
+                </a>
+            </div>
+
+            <div class="table-responsive" style="margin-top: 2.5rem;">
                 <table class="table table-hover">
-                    <thead>
+                    <thead class="table-secondary">
                         <tr>
                             <th>Award</th>
                             <th>Conferred To</th>
@@ -180,9 +206,12 @@ $awards_result = mysqli_query($con, $awards_query) or die(mysqli_error($con));
                                 <a href="edit_award.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-primary">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="delete_award.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this award?');">
-                                    <i class="fas fa-trash"></i>
-                                </a>
+                                <form method="POST" action="dashboard.php" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this award?');">
+                                    <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
+                                    <button type="submit" class="btn btn-sm btn-danger" name="delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         <?php endwhile; ?>
@@ -190,6 +219,8 @@ $awards_result = mysqli_query($con, $awards_query) or die(mysqli_error($con));
                 </table>
             </div>
         </div>
+
+
     </div>
 
     <script>

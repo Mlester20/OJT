@@ -82,7 +82,7 @@ $currentProgress = min(100, $currentProgress);
                 </div>
             </div>
         </div>
-
+        
         <div class="row">
             <!-- Category Cards -->
             <div class="col-md-8">
