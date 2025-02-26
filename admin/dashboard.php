@@ -41,6 +41,34 @@ $awards_query = "SELECT
     ORDER BY a.date DESC";
 $awards_result = mysqli_query($con, $awards_query) or die(mysqli_error($con));
 
+//query for employee with a disability
+$employee_query = "SELECT 
+    a.*,
+    m.member_first,
+    m.member_last,
+    o.office_name
+    FROM employees a
+    LEFT JOIN member m ON a.member_id = m.member_id
+    LEFT JOIN office_name o ON m.office_id = o.office_id";
+$employee_result = mysqli_query($con, $employee_query) or die(mysqli_error($con));
+
+$scholarshipQuery = "SELECT 
+                type_of_scholarship,
+                SUM(doctorate_male + masters_male + post_baccalaureate_male + baccalaureate_male + non_degree_male) AS male_total,
+                SUM(doctorate_female + masters_female + post_baccalaureate_female + baccalaureate_female + non_degree_female) AS female_total,
+                SUM(doctorate_total + masters_total + post_baccalaureate_total + baccalaureate_total + non_degree_total) AS overall_total
+              FROM scholarship_grants
+              GROUP BY type_of_scholarship";
+
+$scholarshipResult = $con->query($scholarshipQuery);
+
+// Check if query executed properly
+if (!$scholarshipResult) {
+    die("Query Error: " . $con->error); // Output MySQL error
+}
+
+
+
 //delete function
 if (isset($_POST['delete'])) {
     $delete_id = $_POST['delete_id'];
@@ -71,6 +99,7 @@ if (isset($_POST['delete'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/hover.css">
+    <link rel="stylesheet" href="../styles/tableDesign.css">
     <style>
         .compliance-card {
             background: #fff;
@@ -169,16 +198,16 @@ if (isset($_POST['delete'])) {
         </div>
 
         <div class="container my-5">
-            <h3 class="card-title text-center text-muted text-md" style="margin-top: 10rem;">Recently Complied</h3>
+            <h3 class="card-title text-center text-muted text-md" style="margin-top: 10rem;">Recently Awards Complied</h3>
 
             <!-- Export Button -->
             <div class="d-flex justify-content-end mb-3">
                 <a href="export_excel.php" class="btn btn-success">
-                    <i class="fas fa-file-excel"></i> Export to Excel
+                    <i class="fas fa-file-excel"></i> Export
                 </a>
             </div>
 
-            <div class="table-responsive" style="margin-top: 2.5rem;">
+            <div class="table-responsive" style="margin-top: 2rem;">
                 <table class="table table-hover">
                     <thead class="table-secondary">
                         <tr>
@@ -220,6 +249,90 @@ if (isset($_POST['delete'])) {
             </div>
         </div>
 
+
+        <!-- displaying data of employees with special needs -->
+
+        <div class="container my-5">
+            <h3 class="card-title text-center text-muted text-md" style="margin-top: 10rem;">Employees</h3>
+
+            <!-- Export Button -->
+            <!-- <div class="d-flex justify-content-end mb-3">
+                <a href="export_excel.php" class="btn btn-success">
+                    <i class="fas fa-file-excel"></i> Export
+                </a>
+            </div> -->
+
+            <div class="table-responsive" style="margin-top: 2rem;">
+                <table class="table table-hover">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th>Name</th>
+                            <th>Sex</th>
+                            <th>Employment Status</th>
+                            <th>Disability Type</th>
+                            <th>Campus</th>
+                            <th>Member</th>
+                            <th>Office</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while($row = mysqli_fetch_assoc($employee_result)): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['name']); ?></td>
+                                <td><?php echo htmlspecialchars($row['sex']); ?></td>
+                                <td><?php echo htmlspecialchars($row['employment_status']); ?></td>
+                                <td><?php echo htmlspecialchars($row['disability_type']); ?></td>
+                                <td><?php echo htmlspecialchars($row['campus']); ?></td>
+                                <td><?php echo htmlspecialchars($row['member_first'] . ' ' . $row['member_last']); ?></td>
+                                <td><?php echo htmlspecialchars($row['office_name']); ?></td>
+                                <td>
+                                    <a href="edit_award.php?id=<?php echo $row['employee_id']; ?>" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form method="POST" action="dashboard.php" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this award?');">
+                                        <input type="hidden" name="delete_id" value="<?php echo $row['employee_id']; ?>">
+                                        <button type="submit" class="btn btn-sm btn-danger" name="delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="container my-5">
+            <h3 class="card-title text-center text-muted text-md" style="margin-top: 10rem;">Total of Scholarship Grants</h3>
+
+            <div class="table-responsive" style="margin-top: 2rem;">
+                <table class="table table-hover">
+                    <thead class="table-secondary">
+                        <tr>
+                        <th>Scholarship Type</th>
+                        <th>Male Scholars</th>
+                        <th>Female Scholars</th>
+                        <th>Total Scholars</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while ($row = $scholarshipResult->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row['type_of_scholarship']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['male_total']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['female_total']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['overall_total']) . "</td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
 
     </div>
 

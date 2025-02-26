@@ -1,13 +1,13 @@
 <?php
-include '../components/config.php'; // Database connection
+include '../components/config.php';
 
-header("Content-Type: application/vnd.ms-excel");
-header("Content-Disposition: attachment; filename=awards_list.xls");
+header("Content-Type: text/csv");
+header("Content-Disposition: attachment; filename=awards_list.csv");
 header("Pragma: no-cache");
 header("Expires: 0");
 
-// Table headers
-echo "Award\tConferred To\tConferred By\tDate\tVenue\tMember Name\tOffice\n";
+// Output CSV headers
+echo "Award,Conferred To,Conferred By,Date,Venue,Member Name,Office\n";
 
 // SQL Query with JOIN
 $query = "SELECT 
@@ -31,13 +31,14 @@ if (!$result) {
 }
 
 while ($row = mysqli_fetch_assoc($result)) {
-    echo htmlspecialchars($row['award']) . "\t" .
-         htmlspecialchars($row['conferred_to']) . "\t" .
-         htmlspecialchars($row['conferred_by']) . "\t" .
-         date('M d, Y', strtotime($row['date'])) . "\t" .
-         htmlspecialchars($row['venue']) . "\t" .
-         htmlspecialchars($row['member_first'] . ' ' . $row['member_last']) . "\t" .
-         htmlspecialchars($row['office_name']) . "\n";
+    // Properly outputting data for CSV formatting
+    echo '"' . htmlspecialchars($row['award']) . '",'
+        . '"' . htmlspecialchars($row['conferred_to']) . '",'
+        . '"' . htmlspecialchars($row['conferred_by']) . '",'
+        . '"' . date('M d, Y', strtotime($row['date'])) . '",'
+        . '"' . htmlspecialchars($row['venue']) . '",'
+        . '"' . htmlspecialchars($row['member_first'] . ' ' . $row['member_last']) . '",'
+        . '"' . htmlspecialchars($row['office_name']) . '"' . "\n";
 }
 
 exit();
