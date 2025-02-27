@@ -22,6 +22,10 @@ if (!$data || !isset($data['tableData']) || !isset($data['category'])) {
 $tableData = $data['tableData'];
 $category = $data['category'];
 
+// Debugging: Log the category and table data
+error_log("Category: " . $category);
+error_log("Table Data: " . json_encode($tableData));
+
 $stmt = $con->prepare("INSERT INTO scholarship_grants (member_id, category, type_of_scholarship, doctorate_male, doctorate_female, doctorate_total, masters_male, masters_female, masters_total, post_baccalaureate_male, post_baccalaureate_female, post_baccalaureate_total, baccalaureate_male, baccalaureate_female, baccalaureate_total, non_degree_male, non_degree_female, non_degree_total, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
 
 if (!$stmt) {

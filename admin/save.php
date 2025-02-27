@@ -34,10 +34,11 @@ if (!empty($data["tableData"])) {
             $conferredTo = mysqli_real_escape_string($con, $row[1] ?? '');
             $conferredBy = mysqli_real_escape_string($con, $row[2] ?? '');
             $date = mysqli_real_escape_string($con, $row[3] ?? '');
-            $venue = mysqli_real_escape_string($con, $row[4] ?? '');
+            $dateEnded = mysqli_real_escape_string($con, $row[4] ?? '');
+            $venue = mysqli_real_escape_string($con, $row[5] ?? '');
 
             // Skip empty rows
-            if (empty($award) && empty($conferredTo) && empty($conferredBy) && empty($date) && empty($venue)) {
+            if (empty($award) && empty($conferredTo) && empty($conferredBy) && empty($date) && empty($dateEnded) && empty($venue)) {
                 continue;
             }
 
@@ -49,6 +50,7 @@ if (!empty($data["tableData"])) {
                           AND conferred_to = '$conferredTo' 
                           AND conferred_by = '$conferredBy' 
                           AND date = '$date' 
+                          AND date_ended = '$dateEnded'
                           AND venue = '$venue'";
 
             $result = mysqli_query($con, $check_sql);
@@ -56,8 +58,8 @@ if (!empty($data["tableData"])) {
 
             if ($row["count"] == 0) {
                 // Insert only if no duplicate found
-                $sql = "INSERT INTO awards (member_id, category, award, conferred_to, conferred_by, date, venue) 
-                        VALUES ('$member_id', '$category', '$award', '$conferredTo', '$conferredBy', '$date', '$venue')";
+                $sql = "INSERT INTO awards (member_id, category, award, conferred_to, conferred_by, date, date_ended, venue) 
+                        VALUES ('$member_id', '$category', '$award', '$conferredTo', '$conferredBy', '$date', '$dateEnded', '$venue')";
                 if (!mysqli_query($con, $sql)) {
                     echo "Error: " . mysqli_error($con);
                     exit;

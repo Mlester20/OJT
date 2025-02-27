@@ -8,8 +8,8 @@ if (!isset($_SESSION["member_id"])) {
 $member_id = $_SESSION["member_id"];
 
 // Determine category from URL parameter (default to Faculty)
-$category = isset($_GET['category']) ? $_GET['category'] : 'faculty';
-$categoryTitle = $category === 'non_academic' ? 'Scholarship Grants for Non-Academic Staff' : 'Scholarship Grants for Faculty';
+$category = isset($_GET['category']) ? $_GET['category'] : 'Faculty';
+$categoryTitle = $category === 'Non-Academic Staff' ? 'Scholarship Grants for Non-Academic Staff' : 'Scholarship Grants for Faculty';
 ?>
 
 <!DOCTYPE html>
@@ -76,8 +76,8 @@ $categoryTitle = $category === 'non_academic' ? 'Scholarship Grants for Non-Acad
 
     <!-- Navigation buttons -->
     <div class="d-flex justify-content-end gap-3 mb-3 mt-5">
-        <a href="?category=faculty" class="btn btn-info toggle-btn" id="facultyBtn">Faculty</a>
-        <a href="?category=non_academic" class="btn btn-info toggle-btn" id="nonFacultyBtn">Non-Academic Staff</a>
+        <a href="?category=Faculty" class="btn btn-info toggle-btn" id="facultyBtn">Faculty</a>
+        <a href="?category=Non-Academic Staff" class="btn btn-info toggle-btn" id="nonFacultyBtn">Non-Academic Staff</a>
         <button class="btn btn-success addRowBtn">Add Row</button>
         <button class="btn btn-primary submitData">Save Data</button>
     </div>
@@ -171,8 +171,14 @@ $categoryTitle = $category === 'non_academic' ? 'Scholarship Grants for Non-Acad
                     category: "<?php echo $category; ?>"
                 })
             })
-            .then(response => response.text())
-            .then(result => alert("Data Saved!\n" + result))
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === "success") {
+                    alert("Data Saved Successfully!");
+                } else {
+                    alert("Error: " + result.message);
+                }
+            })
             .catch(error => console.error("Error:", error));
         });
     });

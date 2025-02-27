@@ -48,12 +48,10 @@ if (mysqli_num_rows($res) > 0) {
                   VALUES ('$member_id', '$office_id', '$office_address')";
     mysqli_query($con, $log_query);
 
-    if ($row['office_name'] && strtolower($row['office_name']) === 'ccje') {
-        header('location: ./pages/home.php');
-    } else if ($row['office_name'] && strtolower($row['office_name']) === 'iict') {
-        header('location: ./pages/home.php');
-    } else if($row['office_name'] && strtolower(trim($row['office_name'])) === 'planning, management of information and services'){
+    if ($row['office_name'] && strtolower(trim($row['office_name'])) === 'planning, management of information and services') {
         header('location: ./admin/dashboard.php');
+    } else {
+        header('location: ./pages/home.php');
     }    
     exit();
 } else {
