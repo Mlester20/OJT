@@ -18,12 +18,18 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="home.php"><i class="fas fa-home me-1"></i> Home</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="upload.php"><i class="fas fa-arrow-down me-1"></i> Upload File</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-folder me-1"></i>Files
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="complied_data.php"><i class="fas fa-folder me-2"></i>Complied Data</a></li> 
+                    </ul>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="upload.php"><i class="fas fa-folder me-2"></i>Uploaded File</a></li> 
                     </ul> 
                 </li>
                 <li class="nav-item dropdown">

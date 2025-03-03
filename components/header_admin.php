@@ -26,7 +26,10 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownFiles">
                         <li><a class="dropdown-item" href="view_all.php"><i class="fas fa-folder me-2"></i>Archives</a></li>
-                        <li><a class="dropdown-item" href="complied_data.php"><i class="fas fa-folder me-2"></i>Complied Data</a></li> 
+                        <li><a class="dropdown-item" href="complied_data.php"><i class="fas fa-folder me-2"></i>Complied Data</a></li>
+                        <li><a class="dropdown-item" href="upload.php"><i class="fas fa-folder me-2"></i>Uploaded File</a></li> 
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        </ul> 
                     </ul> 
                 </li>
                 

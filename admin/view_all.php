@@ -22,16 +22,20 @@ include '../controllers/fetch_data.php';
     <div class="container my-5">
         <h3 class="card-title text-center text-muted text-md" style="margin-top: 1rem;">Your Archives this <?= date('Y'); ?></h3>
         
-        <div class="row" style="margin-top: 2rem;">
+        <!-- Search Input -->
+        <div class="row justify-content-end" style="margin-top: 2rem;">
+            <div class="col-md-4">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search Files...">
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 2rem;" id="cardContainer">
             <!-- Awards Section -->
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3 card-item">
                 <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title">Awards</h4>
                         <p class="card-text">View and export awards data.</p>
-                        <!-- <a href="view_awards.php" class="btn btn-primary">
-                            <i class="fas fa-eye"></i> View this data
-                        </a> -->
                         <a href="export_excel.php" class="btn btn-success">
                             <i class="fas fa-file-excel"></i> Export as Excel
                         </a>
@@ -40,14 +44,11 @@ include '../controllers/fetch_data.php';
             </div>
 
             <!-- Non-Academic Staff Section -->
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3 card-item">
                 <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title">Non-Academic Staff</h4>
                         <p class="card-text">View and export non-academic staff data.</p>
-                        <!-- <a href="view_non_academic_staff.php" class="btn btn-primary">
-                            <i class="fas fa-eye"></i> View this data
-                        </a> -->
                         <a href="download_non_academic_staff.php" class="btn btn-success">
                             <i class="fas fa-file-download"></i> Export as Excel
                         </a>
@@ -56,14 +57,11 @@ include '../controllers/fetch_data.php';
             </div>
 
             <!-- Employees Section -->
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3 card-item">
                 <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title">Employees</h4>
                         <p class="card-text">View and export employees data.</p>
-                        <!-- <a href="view_employees.php" class="btn btn-primary">
-                            <i class="fas fa-eye"></i> View this data
-                        </a> -->
                         <a href="../exports/export_employees.php" class="btn btn-success">
                             <i class="fas fa-file-excel"></i> Export as Excel
                         </a>
@@ -72,14 +70,11 @@ include '../controllers/fetch_data.php';
             </div>
 
             <!-- Scholarship Grants Section -->
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3 card-item">
                 <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title">Scholarship Grants</h4>
                         <p class="card-text">View and export scholarship grants data.</p>
-                        <!-- <a href="view_scholarship_grants.php" class="btn btn-primary">
-                            <i class="fas fa-eye"></i> View this data
-                        </a> -->
                         <a href="../exports/export_scholarship_grants.php" class="btn btn-success">
                             <i class="fas fa-file-excel"></i> Export as Excel
                         </a>
@@ -91,5 +86,20 @@ include '../controllers/fetch_data.php';
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            let filter = this.value.toLowerCase();
+            let cards = document.querySelectorAll('.card-item');
+
+            cards.forEach(function(card) {
+                let title = card.querySelector('.card-title').textContent.toLowerCase();
+                if (title.includes(filter)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
