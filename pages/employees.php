@@ -19,6 +19,7 @@ $member_id = $_SESSION["member_id"];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/header_style.css">
+    <link rel="stylesheet" href="../styles/hover.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         table {
@@ -142,10 +143,13 @@ $member_id = $_SESSION["member_id"];
                     data.push(rowData);
                 });
 
-                fetch("save.php", {
+                // Include member_id in the data being sent to the server
+                let memberId = <?php echo json_encode($member_id); ?>;
+
+                fetch("../controllers/save_employee.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ tableData: data })
+                    body: JSON.stringify({ tableData: data, member_id: memberId })
                 })
                 .then(response => response.text())
                 .then(result => alert("Data Saved!\n" + result))
@@ -154,5 +158,7 @@ $member_id = $_SESSION["member_id"];
         });
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

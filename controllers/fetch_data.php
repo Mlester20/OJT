@@ -8,6 +8,7 @@ $awards_query = "SELECT
     FROM awards a
     LEFT JOIN member m ON a.member_id = m.member_id
     LEFT JOIN office_name o ON m.office_id = o.office_id
+    WHERE a.year = 2025
     ORDER BY a.date DESC";
 $awards_result = mysqli_query($con, $awards_query) or die(mysqli_error($con));
 
@@ -19,7 +20,8 @@ m.member_last,
 o.office_name
 FROM employees a
 LEFT JOIN member m ON a.member_id = m.member_id
-LEFT JOIN office_name o ON m.office_id = o.office_id";
+LEFT JOIN office_name o ON m.office_id = o.office_id
+WHERE a.year = 2025";
 $employee_result = mysqli_query($con, $employee_query) or die(mysqli_error($con));
 
 //fetch data for faculty scholarships grants 
@@ -30,7 +32,7 @@ $facultyScholarshipQuery = "SELECT
     SUM(doctorate_male + masters_male + post_baccalaureate_male + baccalaureate_male + non_degree_male +
         doctorate_female + masters_female + post_baccalaureate_female + baccalaureate_female + non_degree_female) AS overall_total
     FROM scholarship_grants
-    WHERE category = 'Faculty'
+    WHERE category = 'Faculty' AND year = 2025
     GROUP BY type_of_scholarship";
 
 $facultyScholarshipResult = $con->query($facultyScholarshipQuery);
@@ -47,7 +49,7 @@ $nonAcademicScholarshipQuery = "SELECT
     SUM(doctorate_male + masters_male + post_baccalaureate_male + baccalaureate_male + non_degree_male +
         doctorate_female + masters_female + post_baccalaureate_female + baccalaureate_female + non_degree_female) AS overall_total
     FROM scholarship_grants
-    WHERE category = 'Non-Academic Staff'
+    WHERE category = 'Non-Academic Staff' AND year = 2025
     GROUP BY type_of_scholarship";
 
 $nonAcademicScholarshipResult = $con->query($nonAcademicScholarshipQuery);
@@ -65,7 +67,8 @@ sub_category,
 male_count,
 female_count,
 total_count
-FROM non_academic_staff";
+FROM non_academic_staff
+WHERE year = 2025";
 
 $non_academic_staff_result = mysqli_query($con, $non_academic_staff_query) or die(mysqli_error($con));
 

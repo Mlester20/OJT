@@ -19,14 +19,22 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="dashboard.php"><i class="fas fa-home me-1"></i> Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="choices.php"><i class="fas fa-folder me-1"></i>Files</a>
-                </li>
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownFiles" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-folder me-1"></i>Files
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownFiles">
+                        <li><a class="dropdown-item" href="view_all.php"><i class="fas fa-folder me-2"></i>Archives</a></li>
+                        <li><a class="dropdown-item" href="complied_data.php"><i class="fas fa-folder me-2"></i>Complied Data</a></li> 
+                    </ul> 
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownEntries" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-folder-open me-1"></i>Entries
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownEntries">
                         <li><a class="dropdown-item" href="manage_users.php"><i class="fas fa-users me-2"></i> Users</a></li>
                         <li><a class="dropdown-item" href="manage_office.php"><i class="fas fa-building me-2"></i> Manage Offices</a></li>
                         <li><a class="dropdown-item" href="salut.php"><i class="fas fa-user-tie me-2"></i> Salutation</a></li> 
@@ -36,10 +44,10 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownServices" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-hammer me-1"></i>Services
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownServices">
                         <li class="dropdown-item-hover">
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-users me-2"></i>MIS
@@ -72,26 +80,26 @@
                     </ul> 
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSettings" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-cog me-1"></i>Settings
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="activity_log.php"><i class="fas fa-cog me-2"></i>Activity Log</a></li>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownSettings">
+                        
                         <li><a class="dropdown-item" href="#"><i class="fas fa-user-tie me-2"></i>Set Quarterly</a></li>
-                        <li><a class="dropdown-item" href="view_all.php"><i class="fas fa-folder me-2"></i>Complied Data</a></li> 
                     </ul> 
-                </li>
+                </li> -->
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user-circle me-1"></i>
                         <?php echo isset($_SESSION['full_name']) ? $_SESSION['full_name'] : 'Guest'; ?>
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser">
                         <li><a class="dropdown-item" href="profile.php">
                             <i class="fas fa-user me-2"></i> Profile
                         </a></li>
+                        <li><a class="dropdown-item" href="activity_log.php"><i class="fas fa-cog me-2"></i>Activity Log</a></li>
                         <li><a class="dropdown-item" href="logout.php" onclick="return confirm('Are you sure you want to logout?')">Logout</a></li>
                     </ul>
                 </li>

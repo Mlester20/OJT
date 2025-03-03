@@ -37,14 +37,15 @@ if (!empty($data["tableData"])) {
             $conferredTo = mysqli_real_escape_string($con, $row[1] ?? '');
             $conferredBy = mysqli_real_escape_string($con, $row[2] ?? '');
             $date = mysqli_real_escape_string($con, $row[3] ?? '');
-            $venue = mysqli_real_escape_string($con, $row[4] ?? '');
+            $date_ended = mysqli_real_escape_string($con, $row[4] ?? '');
+            $venue = mysqli_real_escape_string($con, $row[5] ?? '');
 
             if (empty($award) && empty($conferredTo) && empty($conferredBy) && empty($date) && empty($venue)) {
                 continue;
             }
 
-            $sql = "INSERT INTO awards (member_id, category, award, conferred_to, conferred_by, date, venue) 
-                    VALUES ('$member_id', '$category', '$award', '$conferredTo', '$conferredBy', '$date', '$venue')";
+            $sql = "INSERT INTO awards (member_id, category, award, conferred_to, conferred_by, date, date_ended, venue) 
+                    VALUES ('$member_id', '$category', '$award', '$conferredTo', '$conferredBy', '$date', '$date_ended', '$venue')";
             
             if (!mysqli_query($con, $sql)) {
                 echo "Error: " . mysqli_error($con);
@@ -53,54 +54,8 @@ if (!empty($data["tableData"])) {
         }
         echo "Award data saved successfully for the " . $data["category"] . " category!";
     } else {
-        // Processing employee data
-        foreach ($data["tableData"] as $row) {
-            $name = mysqli_real_escape_string($con, $row[0] ?? '');
-            $sex = mysqli_real_escape_string($con, $row[1] ?? '');
-            $employment_status = mysqli_real_escape_string($con, $row[2] ?? '');
-            $disability_type = mysqli_real_escape_string($con, $row[3] ?? '');
-            $campus = mysqli_real_escape_string($con, $row[4] ?? '');
-
-            if (empty($name) && empty($sex) && empty($employment_status) && empty($disability_type) && empty($campus)) {
-                continue;
-            }
-
-            $sql = "INSERT INTO employees (name, sex, employment_status, disability_type, campus) 
-                    VALUES ('$name', '$sex', '$employment_status', '$disability_type', '$campus')";
-
-            if (!mysqli_query($con, $sql)) {
-                echo "Error: " . mysqli_error($con);
-                exit;
-            }
-        }
-        echo "Employee data saved successfully!";
+        echo "No category specified.";
     }
-    
-    // Processing scholarship grants data
-    foreach ($data["tableData"] as $row) {
-        $section = mysqli_real_escape_string($con, $row[0] ?? '');
-        $type_of_scholarship = mysqli_real_escape_string($con, $row[1] ?? '');
-        $doctorate_male = (int) ($row[2] ?? 0);
-        $doctorate_female = (int) ($row[3] ?? 0);
-        $doctorate_total = (int) ($row[4] ?? 0);
-        $masters_male = (int) ($row[5] ?? 0);
-        $masters_female = (int) ($row[6] ?? 0);
-        $masters_total = (int) ($row[7] ?? 0);
-        $baccalaureate_male = (int) ($row[8] ?? 0);
-        $baccalaureate_female = (int) ($row[9] ?? 0);
-        $baccalaureate_total = (int) ($row[10] ?? 0);
-        
-        $sql = "INSERT INTO scholarship_grants (member_id, section, type_of_scholarship, doctorate_male, doctorate_female, doctorate_total, 
-                masters_male, masters_female, masters_total, baccalaureate_male, baccalaureate_female, baccalaureate_total) 
-                VALUES ('$member_id', '$section', '$type_of_scholarship', '$doctorate_male', '$doctorate_female', '$doctorate_total',
-                '$masters_male', '$masters_female', '$masters_total', '$baccalaureate_male', '$baccalaureate_female', '$baccalaureate_total')";
-        
-        if (!mysqli_query($con, $sql)) {
-            echo "Error: " . mysqli_error($con);
-            exit;
-        }
-    }
-    echo "Scholarship grants data saved successfully!";
 } else {
     echo "No data received.";
 }

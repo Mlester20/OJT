@@ -10,10 +10,7 @@
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-    <link rel="stylesheet" href="../styles/hover.css">
     <style>
         body {
             background: #eee;
@@ -58,15 +55,21 @@
 
         /* Additional styles for responsiveness */
         @media (max-width: 767px) {
-            .header .date {
+            .header .date, .header .logo {
                 display: none;
-                /* Hide date/time on small screens */
+                /* Hide date/time and logo on small screens */
             }
 
-            .header .logo {
-                display: flex;
-                /* Keep logo and title visible on mobile */
+            .header .mobile-title {
+                display: block;
+                text-align: center;
+                font-size: 24px;
+                font-weight: bold;
             }
+        }
+
+        .mobile-title {
+            display: none;
         }
     </style>
 </head>
@@ -82,6 +85,7 @@
             <!-- Hide date/time on small screens -->
             <p id="currentDate" class="h5">Today is: </p>
         </div>
+        <div class="mobile-title">PMISGAD</div>
     </div>
 
     <div class="login-box">
@@ -121,10 +125,6 @@
 
         <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
-        <script src="plugins/fastclick/fastclick.min.js"></script>
-        <script src="dist/js/app.min.js"></script>
-        <script src="dist/js/demo.js"></script>
         <script>
         document.addEventListener("DOMContentLoaded", function() {
             function updateDateTime() {

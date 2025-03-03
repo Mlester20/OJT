@@ -17,7 +17,7 @@ if(isset($_POST['submit'])) {
               VALUES ('$first_name', '$last_name', '$gender', '$username', '$password', 
               '$office_id', '$salut_id', '$rank_id', '$designation_id')") or die (mysqli_connect($con));
     if($query){
-        echo "<script>alert('Registered Successfully!');document.location='register.php'</script>";
+        echo "<script>alert('Registered Successfully!');document.location='index.php'</script>";
     }
 }
 

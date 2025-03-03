@@ -6,6 +6,10 @@ if (!isset($_SESSION["member_id"])) {
 }
 
 $member_id = $_SESSION["member_id"];
+
+// Determine category from URL parameter (default to Faculty)
+$category = isset($_GET['category']) ? $_GET['category'] : 'Faculty';
+$categoryTitle = $category === 'Non-Academic Staff' ? 'Scholarship Grants for Non-Academic Staff' : 'Scholarship Grants for Faculty';
 ?>
 
 <!DOCTYPE html>
@@ -13,76 +17,73 @@ $member_id = $_SESSION["member_id"];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scholarship Grants</title>
+    <title><?php echo $categoryTitle; ?></title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/header_style.css">
+    <link rel="stylesheet" href="../styles/hover.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .category-header {
-            background: #f0f8f0;
-            padding: 10px;
-            border-left: 5px solid #2c5282;
-            font-weight: bold;
-            text-align: center;
-        }
-        .btn {
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        .btn-success {
-            background-color: green;
-            color: white;
-        }
-        .btn-primary {
-            background-color: blue;
-            color: white;
-        }
-    </style>
 </head>
+
+<style>
+    .toggle-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .toggle-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+    .btn-faculty {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-non-faculty {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .toggle-btn:hover {
+        opacity: 0.8;
+    }
+
+    /* Active state */
+    .toggle-btn.active {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+    }
+</style>
+
 <body>
 
 <?php include '../components/header.php'; ?>
 
 <div class="container my-5">
-    <?php 
-    $sections = [
-        "Faculty" => "facultyTable",
-        "Non-Academic Staff" => "staffTable"
-    ];
-    
-    $scholarship_types = [
-        "Institutional Scholarship",
-        "Government-sponsored Scholarship",
-        "Private, NGOs and Other Scholarship",
-        "Merit Scholarship"
-    ];
-    
-    foreach ($sections as $section => $tableId): ?>
     <div class="category-header">
-        <h1 class="h2 mb-0">Scholarship Grants for <?php echo $section; ?></h1>
+        <h1 class="h2 mb-0 text-center"><?php echo $categoryTitle; ?></h1>
     </div>
 
-    <div class="d-flex justify-content-end gap-3 mb-3">
-        <button class="btn btn-success addRowBtn" data-table="<?php echo $tableId; ?>">Add Row</button>
-        <button class="btn btn-primary saveDataBtn" data-table="<?php echo $tableId; ?>" data-endpoint="save_<?php echo strtolower(str_replace(' ', '_', $section)); ?>.php">Save Data</button>
+    <!-- Navigation buttons -->
+    <div class="d-flex justify-content-end gap-3 mb-3 mt-5">
+        <a href="?category=Faculty" class="btn btn-info toggle-btn" id="facultyBtn">Faculty</a>
+        <a href="?category=Non-Academic Staff" class="btn btn-info toggle-btn" id="nonFacultyBtn">Non-Academic Staff</a>
+        <button class="btn btn-success addRowBtn">Add Row</button>
+        <button class="btn btn-primary submitData">Save Data</button>
     </div>
+
     
-    <table class="table table-bordered mt-4" id="<?php echo $tableId; ?>">
+    <table class="table table-bordered mt-4">
         <thead>
             <tr>
                 <th rowspan="2">Type of Scholarship</th>
@@ -100,8 +101,16 @@ $member_id = $_SESSION["member_id"];
                 <?php endfor; ?>
             </tr>
         </thead>
-        <tbody>
-            <?php foreach ($scholarship_types as $type): ?>
+        <tbody id="scholarshipTable">
+            <?php 
+            $scholarship_types = [
+                "Institutional Scholarship",
+                "Government-sponsored Scholarship",
+                "Private, NGOs and Other Scholarship",
+                "Merit Scholarship"
+            ];
+            
+            foreach ($scholarship_types as $type): ?>
                 <tr>
                     <td><?php echo $type; ?></td>
                     <?php for ($i = 0; $i < 5; $i++): ?>
@@ -111,54 +120,73 @@ $member_id = $_SESSION["member_id"];
                     <?php endfor; ?>
                 </tr>
             <?php endforeach; ?>
-            <tr>
-                <td><strong>TOTAL</strong></td>
-                <?php for ($i = 0; $i < 5; $i++): ?>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                <?php endfor; ?>
-            </tr>
         </tbody>
     </table>
-    <?php endforeach; ?>
 </div>
 
 <script>
-    $(document).ready(function () {
-        function addRow(tableID) {
-            let newRow = `<tr><td contenteditable='true'>New Scholarship Type</td>`;
+    document.addEventListener("DOMContentLoaded", function () {
+        function addNewRow() {
+            let tableBody = document.getElementById("scholarshipTable");
+            let newRow = tableBody.insertRow();
+            
+            let typeCell = newRow.insertCell(0);
+            typeCell.contentEditable = "true";
+            typeCell.textContent = "New Scholarship Type";
+            
             for (let i = 0; i < 5; i++) {
-                newRow += `<td contenteditable='true'>0</td><td contenteditable='true'>0</td><td contenteditable='true'>0</td>`;
+                let maleCell = newRow.insertCell();
+                maleCell.contentEditable = "true";
+                maleCell.textContent = "0";
+                
+                let femaleCell = newRow.insertCell();
+                femaleCell.contentEditable = "true";
+                femaleCell.textContent = "0";
+                
+                let totalCell = newRow.insertCell();
+                totalCell.contentEditable = "true";
+                totalCell.textContent = "0";
             }
-            newRow += `</tr>`;
-            $("#" + tableID + " tbody").append(newRow);
         }
 
-        $(".addRowBtn").click(function () {
-            addRow($(this).data("table"));
-        });
+        document.querySelector(".addRowBtn").addEventListener("click", addNewRow);
 
-        function saveData(tableID, endpoint) {
+        document.querySelector(".submitData").addEventListener("click", function () {
+            let tableBody = document.getElementById("scholarshipTable");
             let data = [];
-            $("#" + tableID + " tbody tr").each(function () {
+
+            Array.from(tableBody.rows).forEach(row => {
                 let rowData = [];
-                $(this).find("td").each(function () {
-                    rowData.push($(this).text().trim());
+                Array.from(row.cells).forEach(cell => {
+                    rowData.push(cell.textContent.trim());
                 });
                 data.push(rowData);
             });
-            $.post(endpoint, { tableData: JSON.stringify(data) }, function (response) {
-                alert("Data Saved!\n" + response);
-            });
-        }
 
-        $(".saveDataBtn").click(function () {
-            saveData($(this).data("table"), $(this).data("endpoint"));
+            fetch("../controllers/save_scholarships.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    tableData: data, 
+                    category: "<?php echo $category; ?>"
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === "success") {
+                    alert("Data Saved Successfully!");
+                } else {
+                    alert("Error: " + result.message);
+                }
+            })
+            .catch(error => console.error("Error:", error));
         });
-        
     });
 </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="../js/hover.js"></script>
 
 </body>
 </html>

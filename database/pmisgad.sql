@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2025 at 08:29 AM
+-- Generation Time: Feb 28, 2025 at 04:55 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -113,7 +113,8 @@ CREATE TABLE `awards` (
   `date` date DEFAULT NULL,
   `date_ended` date DEFAULT NULL,
   `venue` varchar(255) DEFAULT NULL,
-  `category` enum('International','National','Regional','Local') NOT NULL
+  `category` enum('International','National','Regional','Local') NOT NULL,
+  `year` int(11) GENERATED ALWAYS AS (year(`date`)) STORED
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -170,8 +171,17 @@ CREATE TABLE `employees` (
   `disability_type` varchar(255) DEFAULT NULL,
   `campus` varchar(255) DEFAULT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `member_id` int(11) DEFAULT NULL
+  `member_id` int(11) DEFAULT NULL,
+  `year` int(11) DEFAULT year(current_timestamp())
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`employee_id`, `name`, `sex`, `employment_status`, `disability_type`, `campus`, `date_created`, `member_id`, `year`) VALUES
+(24, 'John Doe', 'Male', 'Helper', 'Color blind', 'Roxas-Campus', '2025-02-28 14:38:49', 12, 2025),
+(25, 'John Doe', 'Male', 'Helper', 'Color blind', 'Roxas-Campus', '2025-02-28 14:41:53', 12, 2025);
 
 -- --------------------------------------------------------
 
@@ -199,7 +209,7 @@ CREATE TABLE `member` (
 INSERT INTO `member` (`member_id`, `member_first`, `member_last`, `member_gender`, `username`, `password`, `office_id`, `salut_id`, `rank_id`, `designation_id`) VALUES
 (9, 'Carlito', 'Antolin', 'Male', 'test', 'test123', 20, 2, 1, 1),
 (11, 'Carlo', 'Baltazar', 'Male', 'carlo', '123', 21, 2, 2, 1),
-(12, 'Joey', 'Cereno', 'Male', 'admin', 'admin', 36, 2, 4, 1);
+(12, 'Lester', 'Raguindin', 'Male', 'admin', 'admin', 36, 2, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -220,6 +230,7 @@ CREATE TABLE `member_activitylog` (
 --
 
 INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `office_id`, `office_address`) VALUES
+(0, 12, '2025-02-28 05:51:19', 36, 'Newsite'),
 (1, 11, '2025-02-14 13:43:15', 21, ''),
 (2, 11, '2025-02-14 13:43:32', 21, ''),
 (3, 11, '2025-02-14 13:47:21', 21, 'Newsite'),
@@ -316,24 +327,35 @@ CREATE TABLE `non_academic_staff` (
   `sub_category` varchar(255) DEFAULT NULL,
   `male_count` int(11) DEFAULT 0,
   `female_count` int(11) DEFAULT 0,
-  `total_count` int(11) GENERATED ALWAYS AS (`male_count` + `female_count`) STORED
+  `total_count` int(11) GENERATED ALWAYS AS (`male_count` + `female_count`) STORED,
+  `year` int(11) DEFAULT year(current_timestamp())
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `non_academic_staff`
 --
 
-INSERT INTO `non_academic_staff` (`staff_id`, `member_id`, `category`, `sub_category`, `male_count`, `female_count`) VALUES
-(1, 12, 'Permanent/Regular', NULL, 2, 2),
-(2, 12, 'Administrative Officers and other employees holding positions requiring CS Prof or PRC License', NULL, 2, 2),
-(3, 12, 'Administrative Aides and other employees holding positions requiring CS Sub-prof or TESDA Certification', NULL, 0, 0),
-(4, 12, 'Other employees holding positions not requiring CS Eligibility or TESDA Certification', NULL, 0, 0),
-(5, 12, 'Casual', NULL, 0, 0),
-(6, 12, 'University', NULL, 0, 0),
-(7, 12, 'Campus', NULL, 0, 0),
-(8, 12, 'Contractual', NULL, 0, 0),
-(9, 12, 'Job Order', NULL, 0, 0),
-(10, 12, 'Job Contract/COS', NULL, 0, 0);
+INSERT INTO `non_academic_staff` (`staff_id`, `member_id`, `category`, `sub_category`, `male_count`, `female_count`, `year`) VALUES
+(1, 12, 'Permanent/Regular', NULL, 2, 2, 2025),
+(2, 12, 'Administrative Officers and other employees holding positions requiring CS Prof or PRC License', NULL, 2, 2, 2025),
+(3, 12, 'Administrative Aides and other employees holding positions requiring CS Sub-prof or TESDA Certification', NULL, 0, 0, 2025),
+(4, 12, 'Other employees holding positions not requiring CS Eligibility or TESDA Certification', NULL, 0, 0, 2025),
+(5, 12, 'Casual', NULL, 0, 0, 2025),
+(6, 12, 'University', NULL, 0, 0, 2025),
+(7, 12, 'Campus', NULL, 0, 0, 2025),
+(8, 12, 'Contractual', NULL, 0, 0, 2025),
+(9, 12, 'Job Order', NULL, 0, 0, 2025),
+(10, 12, 'Job Contract/COS', NULL, 0, 0, 2025),
+(11, 12, 'Permanent/Regular', NULL, 25, 3, 2025),
+(12, 12, 'Administrative Officers and other employees holding positions requiring CS Prof or PRC License', NULL, 0, 0, 2025),
+(13, 12, 'Administrative Aides and other employees holding positions requiring CS Sub-prof or TESDA Certification', NULL, 0, 0, 2025),
+(14, 12, 'Other employees holding positions not requiring CS Eligibility or TESDA Certification', NULL, 0, 0, 2025),
+(15, 12, 'Casual', NULL, 0, 0, 2025),
+(16, 12, 'University', NULL, 0, 0, 2025),
+(17, 12, 'Campus', NULL, 0, 0, 2025),
+(18, 12, 'Contractual', NULL, 0, 0, 2025),
+(19, 12, 'Job Order', NULL, 0, 0, 2025),
+(20, 12, 'Job Contract/COS', NULL, 0, 0, 2025);
 
 -- --------------------------------------------------------
 
@@ -444,30 +466,9 @@ CREATE TABLE `scholarship_grants` (
   `non_degree_total` int(11) DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `category` enum('Faculty','Non-Academic Staff') NOT NULL
+  `category` enum('Faculty','Non-Academic Staff') NOT NULL,
+  `year` int(11) DEFAULT year(current_timestamp())
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `scholarship_grants`
---
-
-INSERT INTO `scholarship_grants` (`id`, `member_id`, `type_of_scholarship`, `doctorate_male`, `doctorate_female`, `doctorate_total`, `masters_male`, `masters_female`, `masters_total`, `post_baccalaureate_male`, `post_baccalaureate_female`, `post_baccalaureate_total`, `baccalaureate_male`, `baccalaureate_female`, `baccalaureate_total`, `non_degree_male`, `non_degree_female`, `non_degree_total`, `created_at`, `updated_at`, `category`) VALUES
-(38, 12, 'Institutional Scholarship', 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 06:55:56', '2025-02-27 06:55:56', 'Non-Academic Staff'),
-(39, 12, 'Government-sponsored Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 06:55:56', '2025-02-27 06:55:56', 'Non-Academic Staff'),
-(40, 12, 'Private, NGOs and Other Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 06:55:56', '2025-02-27 06:55:56', 'Non-Academic Staff'),
-(41, 12, 'Merit Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 06:55:56', '2025-02-27 06:55:56', 'Non-Academic Staff'),
-(42, 12, 'Institutional Scholarship', 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 06:56:07', '2025-02-27 06:56:07', 'Faculty'),
-(43, 12, 'Government-sponsored Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 06:56:07', '2025-02-27 06:56:07', 'Faculty'),
-(44, 12, 'Private, NGOs and Other Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 06:56:07', '2025-02-27 06:56:07', 'Faculty'),
-(45, 12, 'Merit Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 06:56:07', '2025-02-27 06:56:07', 'Faculty'),
-(46, 12, 'Institutional Scholarship', 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, '2025-02-27 07:02:45', '2025-02-27 07:02:45', 'Non-Academic Staff'),
-(47, 12, 'Government-sponsored Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 07:02:45', '2025-02-27 07:02:45', 'Non-Academic Staff'),
-(48, 12, 'Private, NGOs and Other Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 07:02:45', '2025-02-27 07:02:45', 'Non-Academic Staff'),
-(49, 12, 'Merit Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 07:02:45', '2025-02-27 07:02:45', 'Non-Academic Staff'),
-(50, 12, 'Institutional Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 07:06:11', '2025-02-27 07:06:11', 'Non-Academic Staff'),
-(51, 12, 'Government-sponsored Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 07:06:11', '2025-02-27 07:06:11', 'Non-Academic Staff'),
-(52, 12, 'Private, NGOs and Other Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 07:06:11', '2025-02-27 07:06:11', 'Non-Academic Staff'),
-(53, 12, 'Merit Scholarship', 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-27 07:06:11', '2025-02-27 07:06:11', 'Non-Academic Staff');
 
 --
 -- Indexes for dumped tables
@@ -600,7 +601,7 @@ ALTER TABLE `dynamic_table`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `member`
@@ -618,7 +619,7 @@ ALTER TABLE `member_activitylog`
 -- AUTO_INCREMENT for table `non_academic_staff`
 --
 ALTER TABLE `non_academic_staff`
-  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `office_name`

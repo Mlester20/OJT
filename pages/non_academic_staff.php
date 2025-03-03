@@ -19,6 +19,7 @@ $member_id = $_SESSION["member_id"];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/header_style.css">
+    <link rel="stylesheet" href="../styles/hover.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
@@ -41,6 +42,14 @@ $member_id = $_SESSION["member_id"];
             font-size: 20px;
             font-weight: bold;
             border-radius: 5px;
+            position: relative;
+        }
+
+        .save-button-container {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
         }
 
         table {
@@ -51,7 +60,7 @@ $member_id = $_SESSION["member_id"];
         th, td {
             border: 1px solid #cbd5e0;
             padding: 12px;
-            text-align: ;
+            text-align: center;
             font-size: 14px;
             width: 100px;
         }
@@ -63,7 +72,7 @@ $member_id = $_SESSION["member_id"];
 
         .category {
             background-color: #e6efdb;
-            font-weight: ;
+            font-weight: bold;
             text-align: left;
         }
 
@@ -106,11 +115,17 @@ $member_id = $_SESSION["member_id"];
         }
     </style>
 </head>
-<body>
-<?php include '../components/header.php'; ?>
 
+<body>
+    <?php include '../components/header.php'; ?>
+    
     <div class="container my-5">
-        <div class="personnel-header">NON-ACADEMIC STAFF</div>
+        <div class="personnel-header">
+            NON-ACADEMIC STAFF
+            <div class="save-button-container">
+                <button id="save-button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
         <div class="table-container">
             <table class="table table-bordered">
                 <thead>
@@ -195,7 +210,32 @@ $member_id = $_SESSION["member_id"];
             });
 
             calculateTotals(); // Initial Calculation
+
+            $("#save-button").on("click", function() {
+                let data = [];
+                $("tbody tr").each(function() {
+                    let category = $(this).find("td:first").text();
+                    let male = parseInt($(this).find(".male-input").val()) || 0;
+                    let female = parseInt($(this).find(".female-input").val()) || 0;
+                    data.push({ category: category, male: male, female: female });
+                });
+
+                $.ajax({
+                    url: '../controllers/save_non_academic_staff.php',
+                    type: 'POST',
+                    data: { member_id: <?php echo $member_id; ?>, data: data },
+                    success: function(response) {
+                        alert("Data saved successfully!");
+                    },
+                    error: function() {
+                        alert("An error occurred while saving data.");
+                    }
+                });
+            });
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

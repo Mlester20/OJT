@@ -19,6 +19,7 @@ $member_id = $_SESSION["member_id"];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/header_style.css">
+    <link rel="stylesheet" href="../styles/hover.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         table {
@@ -102,6 +103,7 @@ $member_id = $_SESSION["member_id"];
                         <th>Conferred to</th>
                         <th>Conferred by</th>
                         <th>Date</th>
+                        <th>Date Ended</th>
                         <th>Venue</th>
                         <th>Actions</th>
                     </tr>
@@ -122,9 +124,9 @@ $member_id = $_SESSION["member_id"];
                 let tableBody = document.getElementById("table-" + category);
                 let newRow = tableBody.insertRow();
 
-                for (let i = 0; i < 5; i++) {
+                for (let i = 0; i < 6; i++) {
                     let newCell = newRow.insertCell();
-                    if (i === 3) {
+                    if (i === 3 || i === 4) {
                         newCell.innerHTML = '<input type="date">';
                     } else {
                         newCell.contentEditable = "true";
@@ -168,8 +170,8 @@ $member_id = $_SESSION["member_id"];
                     Array.from(tableBody.rows).forEach(row => {
                         let rowData = [];
                         Array.from(row.cells).forEach((cell, index) => {
-                            if (index < 5) {
-                                rowData.push(index === 3 ? cell.querySelector("input").value : cell.textContent.trim());
+                            if (index < 6) {
+                                rowData.push((index === 3 || index === 4) ? cell.querySelector("input").value : cell.textContent.trim());
                             }
                         });
                         data.push(rowData);
@@ -188,5 +190,9 @@ $member_id = $_SESSION["member_id"];
         });
     </script>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    
 </body>
 </html>
