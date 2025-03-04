@@ -124,6 +124,8 @@ $currentProgress = min(100, $currentProgress);
         </div>
     </div>
 
+    <?php include '../components/footer.php'; ?>
+
     <script>
     // Pie Chart initialization with smaller size
     const ctx = document.getElementById('categoryPieChart').getContext('2d');

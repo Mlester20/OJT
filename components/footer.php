@@ -1,31 +1,34 @@
 <footer class="site-footer">
     <div class="container">
         <div class="footer-content">
-            <div class="footer-info">
-                <h4>Isabela State University</h4>
-                <p class="tagline">A leading research University in the ASEAN region</p>
-                <p class="copyright">Copyright © <?= date('Y'); ?> Mark Lester Raguindin || Benedict Hernando </p>
-                
-                <!-- <div class="visitor-stats">
-                    <p>Online Visitors: 286,997</p>
-                    <p>Today's Visitors: 511</p>
-                    <p>Total Page Views: 200,627</p>
-                </div> -->
-
+            <div class="footer-logo-info">
+                <img src="../images/isu-logo.png" alt="ISU Logo" style="max-width: 80px; height: auto; margin-right: 10px;">
+                <div class="footer-info">
+                    <h4>Isabela State University</h4>
+                    <p class="tagline">A leading research University in the ASEAN region</p>
+                </div>
             </div>
-            
-            <div class="footer-logo">
-                <img src="../images/isu-logo.png" alt="">
+            <div class="footer-credits">
+                <p class="credits">© <?= date('Y'); ?> Isabela State University. All rights reserved.</p>
+                <p class="credits">Developed by Mark Lester Raguindin</p>
             </div>
         </div>
     </div>
 </footer>
 
 <style>
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
 .site-footer {
     background-color: #333;
     color: white;
-    padding: 40px 0;
+    padding: 20px 0;
+    margin-top: auto;
 }
 
 .container {
@@ -38,81 +41,46 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.footer-logo-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    text-align: left;
 }
 
 .footer-info {
-    flex: 2;
+    margin-left: 10px;
 }
 
-.footer-info h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+.footer-credits {
+    flex: 1;
+    text-align: right;
+}
+
+.footer-info h4 {
+    font-size: 20px;
+    margin-bottom: 5px;
     color: #fff;
 }
 
 .tagline {
     font-style: italic;
     color: #ccc;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-.contact-link a {
-    color: white;
-    text-decoration: none;
-}
-
-.contact-link a:hover {
-    text-decoration: underline;
-}
-
-.copyright {
+.credits {
     color: #ccc;
-    margin: 10px 0;
-}
-
-.visitor-stats {
-    margin-top: 20px;
-    color: #ccc;
-}
-
-.visitor-stats p {
-    margin: 5px 0;
-}
-
-.footer-logo {
-    flex: 1;
-    text-align: right;
+    margin-bottom: 5px;
 }
 
 .footer-logo img {
-    max-width: 100px;
+    max-width: 80px;
     height: auto;
-}
-
-.social-links {
-    position: absolute;
-    right: 20px;
-    margin-top: 200px;
-    display: flex;
-    gap: 10px;
-}
-
-.social-icon {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-}
-
-.social-icon:hover {
-    transform: translateY(-3px);
-}
-
-.social-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 @media (max-width: 768px) {
@@ -121,15 +89,9 @@
         text-align: center;
     }
     
-    .footer-logo {
-        margin-top: 20px;
+    .footer-logo-info, .footer-credits {
         text-align: center;
-    }
-    
-    .social-links {
-        position: static;
-        margin-top: 20px;
-        justify-content: center;
+        margin-top: 10px;
     }
 }
 </style>

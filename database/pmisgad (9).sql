@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2025 at 04:55 PM
+-- Generation Time: Mar 04, 2025 at 09:02 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -122,7 +122,7 @@ CREATE TABLE `awards` (
 --
 
 INSERT INTO `awards` (`id`, `member_id`, `award`, `conferred_to`, `conferred_by`, `date`, `date_ended`, `venue`, `category`) VALUES
-(76, 12, 'Champion for Programming', 'Mark Lester Raguindin', 'IICT', '2025-02-27', '2025-02-28', '', 'International');
+(78, 9, 'Test', 'John Doe', 'IICT', '2025-03-03', '2025-03-04', 'Roxas Astrodome', 'International');
 
 -- --------------------------------------------------------
 
@@ -180,8 +180,7 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`employee_id`, `name`, `sex`, `employment_status`, `disability_type`, `campus`, `date_created`, `member_id`, `year`) VALUES
-(24, 'John Doe', 'Male', 'Helper', 'Color blind', 'Roxas-Campus', '2025-02-28 14:38:49', 12, 2025),
-(25, 'John Doe', 'Male', 'Helper', 'Color blind', 'Roxas-Campus', '2025-02-28 14:41:53', 12, 2025);
+(32, 'John Doe', 'Male', 'Testing', 'N/A', 'Roxas', '2025-03-03 05:56:40', 9, 2025);
 
 -- --------------------------------------------------------
 
@@ -207,9 +206,10 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`member_id`, `member_first`, `member_last`, `member_gender`, `username`, `password`, `office_id`, `salut_id`, `rank_id`, `designation_id`) VALUES
-(9, 'Carlito', 'Antolin', 'Male', 'test', 'test123', 20, 2, 1, 1),
+(9, 'Carlito', 'Antolin', 'Male', 'Carlito', '123', 20, 2, 1, 1),
 (11, 'Carlo', 'Baltazar', 'Male', 'carlo', '123', 21, 2, 2, 1),
-(12, 'Lester', 'Raguindin', 'Male', 'admin', 'admin', 36, 2, 4, 1);
+(12, 'Lester', 'Raguindin', 'Male', 'admin', 'admin', 36, 2, 4, 1),
+(13, 'Benedict', 'Hernando', 'Male', 'benedict', '123', 31, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -230,89 +230,20 @@ CREATE TABLE `member_activitylog` (
 --
 
 INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `office_id`, `office_address`) VALUES
-(0, 12, '2025-02-28 05:51:19', 36, 'Newsite'),
-(1, 11, '2025-02-14 13:43:15', 21, ''),
-(2, 11, '2025-02-14 13:43:32', 21, ''),
-(3, 11, '2025-02-14 13:47:21', 21, 'Newsite'),
-(4, 9, '2025-02-14 13:49:00', 20, 'Oldsite'),
-(5, 11, '2025-02-18 10:49:59', 21, 'Newsite'),
-(6, 11, '2025-02-18 12:29:21', 21, 'Newsite'),
-(7, 12, '2025-02-19 12:28:40', 36, 'Newsite'),
-(8, 12, '2025-02-19 12:33:09', 36, 'Newsite'),
-(9, 12, '2025-02-19 12:42:32', 36, 'Newsite'),
-(10, 12, '2025-02-19 12:45:09', 36, 'Newsite'),
-(11, 11, '2025-02-19 12:47:06', 21, 'Newsite'),
-(12, 9, '2025-02-19 13:19:14', 20, 'Oldsite'),
-(13, 11, '2025-02-19 13:20:41', 21, 'Newsite'),
-(14, 9, '2025-02-19 13:22:04', 20, 'Oldsite'),
-(15, 12, '2025-02-19 15:08:00', 36, 'Newsite'),
-(16, 12, '2025-02-19 15:09:21', 36, 'Newsite'),
-(17, 9, '2025-02-19 15:28:47', 20, 'Oldsite'),
-(18, 12, '2025-02-19 15:29:46', 36, 'Newsite'),
-(19, 11, '2025-02-19 15:51:43', 21, 'Newsite'),
-(20, 12, '2025-02-19 15:53:09', 36, 'Newsite'),
-(21, 9, '2025-02-19 16:19:03', 20, 'Oldsite'),
-(22, 12, '2025-02-19 16:19:32', 36, 'Newsite'),
-(23, 12, '2025-02-20 08:35:47', 36, 'Newsite'),
-(24, 12, '2025-02-20 08:37:06', 36, 'Newsite'),
-(25, 12, '2025-02-20 08:38:10', 36, 'Newsite'),
-(26, 12, '2025-02-20 08:38:29', 36, 'Newsite'),
-(27, 12, '2025-02-20 08:44:42', 36, 'Newsite'),
-(28, 11, '2025-02-20 10:21:29', 21, 'Newsite'),
-(29, 12, '2025-02-20 10:22:43', 36, 'Newsite'),
-(30, 11, '2025-02-20 10:59:26', 21, 'Newsite'),
-(31, 12, '2025-02-20 11:00:40', 36, 'Newsite'),
-(32, 11, '2025-02-20 11:11:44', 21, 'Newsite'),
-(33, 11, '2025-02-20 11:16:00', 21, 'Newsite'),
-(34, 9, '2025-02-20 11:16:22', 20, 'Oldsite'),
-(35, 12, '2025-02-20 11:22:08', 36, 'Newsite'),
-(36, 11, '2025-02-20 11:36:20', 21, 'Newsite'),
-(37, 12, '2025-02-20 11:54:51', 36, 'Newsite'),
-(38, 11, '2025-02-20 13:12:50', 21, 'Newsite'),
-(39, 9, '2025-02-20 13:23:09', 20, 'Oldsite'),
-(40, 12, '2025-02-20 13:24:08', 36, 'Newsite'),
-(41, 12, '2025-02-20 16:16:01', 36, 'Newsite'),
-(42, 9, '2025-02-21 11:26:11', 20, 'Oldsite'),
-(43, 12, '2025-02-21 13:22:25', 36, 'Newsite'),
-(44, 9, '2025-02-21 13:22:51', 20, 'Oldsite'),
-(45, 11, '2025-02-21 13:25:14', 21, 'Newsite'),
-(46, 9, '2025-02-21 13:28:15', 20, 'Oldsite'),
-(47, 12, '2025-02-21 13:33:41', 36, 'Newsite'),
-(48, 9, '2025-02-21 13:34:17', 20, 'Oldsite'),
-(49, 11, '2025-02-21 13:35:53', 21, 'Newsite'),
-(50, 12, '2025-02-21 13:36:27', 36, 'Newsite'),
-(51, 9, '2025-02-21 13:40:19', 20, 'Oldsite'),
-(52, 9, '2025-02-24 10:49:41', 20, 'Oldsite'),
-(53, 12, '2025-02-24 10:51:26', 36, 'Newsite'),
-(54, 9, '2025-02-24 10:52:19', 20, 'Oldsite'),
-(55, 12, '2025-02-24 10:54:29', 36, 'Newsite'),
-(56, 12, '2025-02-24 11:18:54', 36, 'Newsite'),
-(57, 12, '2025-02-24 11:32:49', 36, 'Newsite'),
-(58, 9, '2025-02-24 11:33:22', 20, 'Oldsite'),
-(59, 12, '2025-02-24 11:34:17', 36, 'Newsite'),
-(60, 9, '2025-02-24 13:36:17', 20, 'Oldsite'),
-(61, 12, '2025-02-24 13:38:01', 36, 'Newsite'),
-(62, 12, '2025-02-24 13:45:49', 36, 'Newsite'),
-(63, 9, '2025-02-24 13:46:27', 20, 'Oldsite'),
-(64, 12, '2025-02-24 13:48:33', 36, 'Newsite'),
-(65, 12, '2025-02-24 13:49:12', 36, 'Newsite'),
-(66, 12, '2025-02-25 10:09:45', 36, 'Newsite'),
-(67, 11, '2025-02-25 10:16:40', 21, 'Newsite'),
-(68, 12, '2025-02-25 10:19:37', 36, 'Newsite'),
-(69, 11, '2025-02-25 10:43:15', 21, 'Newsite'),
-(70, 12, '2025-02-25 11:12:39', 36, 'Newsite'),
-(71, 12, '2025-02-25 13:08:34', 36, 'Newsite'),
-(72, 11, '2025-02-25 13:17:27', 21, 'Newsite'),
-(73, 12, '2025-02-25 14:59:56', 36, 'Newsite'),
-(74, 11, '2025-02-25 15:00:15', 21, 'Newsite'),
-(75, 11, '2025-02-26 09:51:17', 21, 'Newsite'),
-(76, 12, '2025-02-26 09:51:31', 36, 'Newsite'),
-(77, 12, '2025-02-26 09:54:23', 36, 'Newsite'),
-(78, 12, '2025-02-26 10:59:48', 36, 'Newsite'),
-(79, 12, '2025-02-27 10:33:29', 36, 'Newsite'),
-(80, 9, '2025-02-27 10:52:31', 20, 'Oldsite'),
-(81, 12, '2025-02-27 10:52:39', 36, 'Newsite'),
-(82, 12, '2025-02-27 13:35:23', 36, 'Newsite');
+(91, 12, '2025-03-03 14:21:05', 36, 'Newsite'),
+(92, 12, '2025-03-03 14:26:43', 36, 'Newsite'),
+(93, 12, '2025-03-03 14:28:49', 36, 'Newsite'),
+(94, 9, '2025-03-03 14:33:27', 20, 'Oldsite'),
+(95, 12, '2025-03-03 14:34:10', 36, 'Newsite'),
+(96, 9, '2025-03-03 16:00:56', 20, 'Oldsite'),
+(97, 12, '2025-03-03 16:02:44', 36, 'Newsite'),
+(98, 9, '2025-03-03 16:05:14', 20, 'Oldsite'),
+(99, 12, '2025-03-03 16:06:39', 36, 'Newsite'),
+(100, 13, '2025-03-03 16:26:22', 31, 'Newsite'),
+(101, 12, '2025-03-04 11:09:02', 36, 'Newsite'),
+(102, 12, '2025-03-04 13:47:38', 36, 'Newsite'),
+(103, 9, '2025-03-04 13:51:54', 20, 'Oldsite'),
+(104, 12, '2025-03-04 16:01:14', 36, 'Newsite');
 
 -- --------------------------------------------------------
 
@@ -331,32 +262,6 @@ CREATE TABLE `non_academic_staff` (
   `year` int(11) DEFAULT year(current_timestamp())
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `non_academic_staff`
---
-
-INSERT INTO `non_academic_staff` (`staff_id`, `member_id`, `category`, `sub_category`, `male_count`, `female_count`, `year`) VALUES
-(1, 12, 'Permanent/Regular', NULL, 2, 2, 2025),
-(2, 12, 'Administrative Officers and other employees holding positions requiring CS Prof or PRC License', NULL, 2, 2, 2025),
-(3, 12, 'Administrative Aides and other employees holding positions requiring CS Sub-prof or TESDA Certification', NULL, 0, 0, 2025),
-(4, 12, 'Other employees holding positions not requiring CS Eligibility or TESDA Certification', NULL, 0, 0, 2025),
-(5, 12, 'Casual', NULL, 0, 0, 2025),
-(6, 12, 'University', NULL, 0, 0, 2025),
-(7, 12, 'Campus', NULL, 0, 0, 2025),
-(8, 12, 'Contractual', NULL, 0, 0, 2025),
-(9, 12, 'Job Order', NULL, 0, 0, 2025),
-(10, 12, 'Job Contract/COS', NULL, 0, 0, 2025),
-(11, 12, 'Permanent/Regular', NULL, 25, 3, 2025),
-(12, 12, 'Administrative Officers and other employees holding positions requiring CS Prof or PRC License', NULL, 0, 0, 2025),
-(13, 12, 'Administrative Aides and other employees holding positions requiring CS Sub-prof or TESDA Certification', NULL, 0, 0, 2025),
-(14, 12, 'Other employees holding positions not requiring CS Eligibility or TESDA Certification', NULL, 0, 0, 2025),
-(15, 12, 'Casual', NULL, 0, 0, 2025),
-(16, 12, 'University', NULL, 0, 0, 2025),
-(17, 12, 'Campus', NULL, 0, 0, 2025),
-(18, 12, 'Contractual', NULL, 0, 0, 2025),
-(19, 12, 'Job Order', NULL, 0, 0, 2025),
-(20, 12, 'Job Contract/COS', NULL, 0, 0, 2025);
-
 -- --------------------------------------------------------
 
 --
@@ -374,7 +279,7 @@ CREATE TABLE `office_name` (
 --
 
 INSERT INTO `office_name` (`office_id`, `office_name`, `office_address`) VALUES
-(20, 'ccje', 'Oldsite'),
+(20, 'College of Criminal Justice Education', 'Oldsite'),
 (21, 'IICT', 'Newsite'),
 (22, 'CA', 'Newsite'),
 (23, 'AA', 'Newsite'),
@@ -470,6 +375,50 @@ CREATE TABLE `scholarship_grants` (
   `year` int(11) DEFAULT year(current_timestamp())
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trainings_conferences`
+--
+
+CREATE TABLE `trainings_conferences` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `level` varchar(50) DEFAULT NULL,
+  `faculty_male` int(11) DEFAULT 0,
+  `faculty_female` int(11) DEFAULT 0,
+  `faculty_total` int(11) DEFAULT 0,
+  `non_academic_male` int(11) DEFAULT 0,
+  `non_academic_female` int(11) DEFAULT 0,
+  `non_academic_total` int(11) DEFAULT 0,
+  `total_male` int(11) DEFAULT 0,
+  `total_female` int(11) DEFAULT 0,
+  `total` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `uploads`
+--
+
+CREATE TABLE `uploads` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  `upload_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `uploads`
+--
+
+INSERT INTO `uploads` (`id`, `member_id`, `file_name`, `file_path`, `upload_date`) VALUES
+(1, 12, 'List-of-Completed-Projects-as-of-December-2024.xlsx', '../uploads/List-of-Completed-Projects-as-of-December-2024.xlsx', '2025-03-03 07:28:58'),
+(2, 9, 'Administrative_2024.xlsx', '../uploads/Administrative_2024.xlsx', '2025-03-03 08:02:34'),
+(3, 9, '(BSAB 1d) NSTP 2 CWTSLTSMS(Second Semester, 2024-2025) _as of Feb172025 (2).xlsx', '../uploads/(BSAB 1d) NSTP 2 CWTSLTSMS(Second Semester, 2024-2025) _as of Feb172025 (2).xlsx', '2025-03-03 08:06:27');
+
 --
 -- Indexes for dumped tables
 --
@@ -564,6 +513,20 @@ ALTER TABLE `scholarship_grants`
   ADD KEY `member_id` (`member_id`);
 
 --
+-- Indexes for table `trainings_conferences`
+--
+ALTER TABLE `trainings_conferences`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `uploads`
+--
+ALTER TABLE `uploads`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -583,7 +546,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `awards`
 --
 ALTER TABLE `awards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `designation`
@@ -601,25 +564,25 @@ ALTER TABLE `dynamic_table`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `member_activitylog`
 --
 ALTER TABLE `member_activitylog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `non_academic_staff`
 --
 ALTER TABLE `non_academic_staff`
-  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `office_name`
@@ -643,7 +606,19 @@ ALTER TABLE `salut`
 -- AUTO_INCREMENT for table `scholarship_grants`
 --
 ALTER TABLE `scholarship_grants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT for table `trainings_conferences`
+--
+ALTER TABLE `trainings_conferences`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `uploads`
+--
+ALTER TABLE `uploads`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -694,6 +669,18 @@ ALTER TABLE `non_academic_staff`
 --
 ALTER TABLE `scholarship_grants`
   ADD CONSTRAINT `scholarship_grants_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `trainings_conferences`
+--
+ALTER TABLE `trainings_conferences`
+  ADD CONSTRAINT `trainings_conferences_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
+-- Constraints for table `uploads`
+--
+ALTER TABLE `uploads`
+  ADD CONSTRAINT `uploads_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
