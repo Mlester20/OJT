@@ -184,6 +184,8 @@ $member_id = $_SESSION["member_id"];
         </div>
     </div>
 
+    <?php include '../components/footer.php'; ?>
+
     <script>
         $(document).ready(function() {
             function calculateTotals() {

@@ -10,88 +10,100 @@
             </div>
             <div class="footer-credits">
                 <p class="credits">© <?= date('Y'); ?> Isabela State University. All rights reserved.</p>
-                <p class="credits">Developed by Mark Lester Raguindin</p>
+                <p class="credits">Developed by Pmisgad Interns</p>
             </div>
         </div>
     </div>
 </footer>
 
 <style>
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-}
-
-.site-footer {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-    margin-top: auto;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    text-align: center;
-}
-
-.footer-logo-info {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    text-align: left;
-}
-
-.footer-info {
-    margin-left: 10px;
-}
-
-.footer-credits {
-    flex: 1;
-    text-align: right;
-}
-
-.footer-info h4 {
-    font-size: 20px;
-    margin-bottom: 5px;
-    color: #fff;
-}
-
-.tagline {
-    font-style: italic;
-    color: #ccc;
-    margin-bottom: 10px;
-}
-
-.credits {
-    color: #ccc;
-    margin-bottom: 5px;
-}
-
-.footer-logo img {
-    max-width: 80px;
-    height: auto;
-}
-
-@media (max-width: 768px) {
-    .footer-content {
+    body {
+        display: flex;
         flex-direction: column;
-        text-align: center;
+        min-height: 100vh;
+        margin: 0;
     }
-    
-    .footer-logo-info, .footer-credits {
-        text-align: center;
-        margin-top: 10px;
+
+    .site-footer {
+        background-color: #333;
+        color: white;
+        padding: 20px 0;
+        margin-top: auto;
     }
-}
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .footer-logo-info {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        text-align: left;
+    }
+
+    .footer-info {
+        margin-left: 10px;
+    }
+
+    .footer-credits {
+        flex: 1;
+        text-align: right;
+    }
+
+    .footer-info h4 {
+        font-size: 20px;
+        margin-bottom: 5px;
+        color: #fff;
+    }
+
+    .tagline {
+        font-style: italic;
+        color: #ccc;
+        margin-bottom: 10px;
+    }
+
+    .credits {
+        color: #ccc;
+        margin-bottom: 5px;
+    }
+
+    .footer-logo-info img {
+        max-width: 80px;
+        height: auto;
+    }
+
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .footer-logo-info, 
+        .footer-credits {
+            text-align: center;
+            margin-top: 10px;
+            flex: none;
+            width: 100%;
+        }
+
+        .footer-logo-info {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-info {
+            margin-left: 0;
+            margin-top: 10px;
+        }
+    }
 </style>

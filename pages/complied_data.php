@@ -1,5 +1,6 @@
 <?php
 include '../controllers/fetch_complied_data.php';
+include '../controllers/purchaseController.php';
 ?>
 
 <!DOCTYPE html>
@@ -193,7 +194,41 @@ include '../controllers/fetch_complied_data.php';
                 ?>
             </tbody>
         </table>
+        
+        <div class="table-responsive">
+            <h3 class="card-title text-center section-title">Major Purchases</h3>
+            <table class="table table-bordered" style="margin-top: 2rem;">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Purpose</th>
+                        <th>Amount</th>
+                        <th>Purchase Date</th>
+                        <th>Complied By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($purchases_result && mysqli_num_rows($purchases_result) > 0) {
+                        while ($row = mysqli_fetch_assoc($purchases_result)) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row['item']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['purpose']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['amount']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['purchase_date']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['member_first'] . ' ' . $row['member_last']) . "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='5'>No purchases found.</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <?php include '../components/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

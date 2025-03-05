@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2025 at 09:02 AM
+-- Generation Time: Mar 05, 2025 at 09:00 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -185,6 +185,29 @@ INSERT INTO `employees` (`employee_id`, `name`, `sex`, `employment_status`, `dis
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `innovations`
+--
+
+CREATE TABLE `innovations` (
+  `innovation_id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `name_of_innovation` varchar(255) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `innovations`
+--
+
+INSERT INTO `innovations` (`innovation_id`, `member_id`, `name_of_innovation`, `description`) VALUES
+(2, 9, 'test', 'test'),
+(3, 9, 'test', 'test'),
+(4, 9, 'test', 'test'),
+(5, 9, 'test', 'teset');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `member`
 --
 
@@ -243,7 +266,14 @@ INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `offi
 (101, 12, '2025-03-04 11:09:02', 36, 'Newsite'),
 (102, 12, '2025-03-04 13:47:38', 36, 'Newsite'),
 (103, 9, '2025-03-04 13:51:54', 20, 'Oldsite'),
-(104, 12, '2025-03-04 16:01:14', 36, 'Newsite');
+(104, 12, '2025-03-04 16:01:14', 36, 'Newsite'),
+(105, 9, '2025-03-05 08:53:59', 20, 'Oldsite'),
+(106, 12, '2025-03-05 10:06:46', 36, 'Newsite'),
+(107, 9, '2025-03-05 10:10:21', 20, 'Oldsite'),
+(108, 9, '2025-03-05 10:16:00', 20, 'Oldsite'),
+(109, 12, '2025-03-05 10:17:49', 36, 'Newsite'),
+(110, 9, '2025-03-05 10:18:02', 20, 'Oldsite'),
+(111, 9, '2025-03-05 10:40:31', 20, 'Oldsite');
 
 -- --------------------------------------------------------
 
@@ -296,6 +326,49 @@ INSERT INTO `office_name` (`office_id`, `office_name`, `office_address`) VALUES
 (34, 'SUPPLY', 'Newsite'),
 (35, 'PROCUREMENT', 'Newsite'),
 (36, 'Planning, Management of Information and Services', 'Newsite');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `officials`
+--
+
+CREATE TABLE `officials` (
+  `official_id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `designation` varchar(255) DEFAULT NULL,
+  `designation_name` varchar(100) NOT NULL,
+  `contact_info` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `officials`
+--
+
+INSERT INTO `officials` (`official_id`, `member_id`, `designation`, `designation_name`, `contact_info`) VALUES
+(1, 9, 'Faculty', 'John Doe', '09350991034');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchases`
+--
+
+CREATE TABLE `purchases` (
+  `purchase_id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `item` varchar(255) DEFAULT NULL,
+  `purpose` varchar(255) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `purchase_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `purchases`
+--
+
+INSERT INTO `purchases` (`purchase_id`, `member_id`, `item`, `purpose`, `amount`, `purchase_date`) VALUES
+(1, 9, 'Laptop', 'For Interns', 25000.00, '2025-03-05 02:40:56');
 
 -- --------------------------------------------------------
 
@@ -463,6 +536,13 @@ ALTER TABLE `employees`
   ADD KEY `fk_member` (`member_id`);
 
 --
+-- Indexes for table `innovations`
+--
+ALTER TABLE `innovations`
+  ADD PRIMARY KEY (`innovation_id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
 -- Indexes for table `member`
 --
 ALTER TABLE `member`
@@ -492,6 +572,20 @@ ALTER TABLE `non_academic_staff`
 --
 ALTER TABLE `office_name`
   ADD PRIMARY KEY (`office_id`);
+
+--
+-- Indexes for table `officials`
+--
+ALTER TABLE `officials`
+  ADD PRIMARY KEY (`official_id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `purchases`
+--
+ALTER TABLE `purchases`
+  ADD PRIMARY KEY (`purchase_id`),
+  ADD KEY `member_id` (`member_id`);
 
 --
 -- Indexes for table `rank`
@@ -567,6 +661,12 @@ ALTER TABLE `employees`
   MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
+-- AUTO_INCREMENT for table `innovations`
+--
+ALTER TABLE `innovations`
+  MODIFY `innovation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
@@ -576,7 +676,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `member_activitylog`
 --
 ALTER TABLE `member_activitylog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `non_academic_staff`
@@ -589,6 +689,18 @@ ALTER TABLE `non_academic_staff`
 --
 ALTER TABLE `office_name`
   MODIFY `office_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `officials`
+--
+ALTER TABLE `officials`
+  MODIFY `official_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `purchases`
+--
+ALTER TABLE `purchases`
+  MODIFY `purchase_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rank`
@@ -643,6 +755,12 @@ ALTER TABLE `employees`
   ADD CONSTRAINT `fk_member` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `innovations`
+--
+ALTER TABLE `innovations`
+  ADD CONSTRAINT `innovations_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `member`
 --
 ALTER TABLE `member`
@@ -663,6 +781,18 @@ ALTER TABLE `member_activitylog`
 --
 ALTER TABLE `non_academic_staff`
   ADD CONSTRAINT `non_academic_staff_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
+-- Constraints for table `officials`
+--
+ALTER TABLE `officials`
+  ADD CONSTRAINT `officials_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
+-- Constraints for table `purchases`
+--
+ALTER TABLE `purchases`
+  ADD CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 
 --
 -- Constraints for table `scholarship_grants`

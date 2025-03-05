@@ -126,35 +126,39 @@ $stmt->close();
         </div>
 
         <h4 class="card-title text-muted">Uploaded Files</h4>
-        <table class="table table-bordered" style="margin-top: 2rem;">
-            <thead>
-                <tr>
-                    <th>File Name</th>
-                    <th>Upload Date</th>
-                    <th>Member Name</th>
-                    <th>Office</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if ($files_result && mysqli_num_rows($files_result) > 0) {
-                    while ($row = mysqli_fetch_assoc($files_result)) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['file_name']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['upload_date']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['member_first'] . ' ' . $row['member_last']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['office_name']) . "</td>";
-                        echo "<td><a href='" . htmlspecialchars($row['file_path']) . "' download class='btn btn-success btn-sm'>Download</a></td>";
-                        echo "</tr>";
+        <div class="table-responsive">
+            <table class="table table-bordered" style="margin-top: 2rem;">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Upload Date</th>
+                        <th>Member Name</th>
+                        <th>Office</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($files_result && mysqli_num_rows($files_result) > 0) {
+                        while ($row = mysqli_fetch_assoc($files_result)) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row['file_name']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['upload_date']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['member_first'] . ' ' . $row['member_last']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['office_name']) . "</td>";
+                            echo "<td><a href='" . htmlspecialchars($row['file_path']) . "' download class='btn btn-success btn-sm'>Download</a></td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='5'>No files uploaded yet.</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='5'>No files uploaded yet.</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <?php include '../components/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

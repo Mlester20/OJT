@@ -97,6 +97,9 @@ $member_id = $_SESSION["member_id"];
         </div>
     </div>
 
+    <?php include '../components/footer.php'; ?>
+
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Function to add a new row to the table
