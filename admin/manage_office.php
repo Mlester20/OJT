@@ -241,6 +241,7 @@ if(isset($_POST['delete'])){
             of <?php echo $total_records; ?> entries
         </div>
     </div>
+    <?php include '../components/footer.php'; ?>
 
 
     <!-- Add Office Modal -->

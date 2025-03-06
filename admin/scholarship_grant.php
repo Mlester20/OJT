@@ -69,60 +69,61 @@ $categoryTitle = $category === 'Non-Academic Staff' ? 'Scholarship Grants for No
 
 <?php include '../components/header_admin.php'; ?>
 
-<div class="container my-5">
-    <div class="category-header">
-        <h1 class="h2 mb-0 text-center"><?php echo $categoryTitle; ?></h1>
-    </div>
+    <div class="container my-5">
+        <div class="category-header">
+            <h1 class="h2 mb-0 text-center"><?php echo $categoryTitle; ?></h1>
+        </div>
 
-    <!-- Navigation buttons -->
-    <div class="d-flex justify-content-end gap-3 mb-3 mt-5">
-        <a href="?category=Faculty" class="btn btn-info toggle-btn" id="facultyBtn">Faculty</a>
-        <a href="?category=Non-Academic Staff" class="btn btn-info toggle-btn" id="nonFacultyBtn">Non-Academic Staff</a>
-        <button class="btn btn-success addRowBtn">Add Row</button>
-        <button class="btn btn-primary submitData">Save Data</button>
-    </div>
+        <!-- Navigation buttons -->
+        <div class="d-flex justify-content-end gap-3 mb-3 mt-5">
+            <a href="?category=Faculty" class="btn btn-info toggle-btn" id="facultyBtn">Faculty</a>
+            <a href="?category=Non-Academic Staff" class="btn btn-info toggle-btn" id="nonFacultyBtn">Non-Academic Staff</a>
+            <button class="btn btn-success addRowBtn">Add Row</button>
+            <button class="btn btn-primary submitData">Save Data</button>
+        </div>
 
-    
-    <table class="table table-bordered mt-4">
-        <thead>
-            <tr>
-                <th rowspan="2">Type of Scholarship</th>
-                <th colspan="3">Doctorate Degree</th>
-                <th colspan="3">Masters Degree</th>
-                <th colspan="3">Post-baccalaureate Degree</th>
-                <th colspan="3">Baccalaureate Degree</th>
-                <th colspan="3">Non-Degree Course</th>
-            </tr>
-            <tr>
-                <?php for ($i = 0; $i < 5; $i++): ?>
-                    <th>Male</th>
-                    <th>Female</th>
-                    <th>Total</th>
-                <?php endfor; ?>
-            </tr>
-        </thead>
-        <tbody id="scholarshipTable">
-            <?php 
-            $scholarship_types = [
-                "Institutional Scholarship",
-                "Government-sponsored Scholarship",
-                "Private, NGOs and Other Scholarship",
-                "Merit Scholarship"
-            ];
-            
-            foreach ($scholarship_types as $type): ?>
+        
+        <table class="table table-bordered mt-4">
+            <thead>
                 <tr>
-                    <td><?php echo $type; ?></td>
+                    <th rowspan="2">Type of Scholarship</th>
+                    <th colspan="3">Doctorate Degree</th>
+                    <th colspan="3">Masters Degree</th>
+                    <th colspan="3">Post-baccalaureate Degree</th>
+                    <th colspan="3">Baccalaureate Degree</th>
+                    <th colspan="3">Non-Degree Course</th>
+                </tr>
+                <tr>
                     <?php for ($i = 0; $i < 5; $i++): ?>
-                        <td contenteditable="true">0</td>
-                        <td contenteditable="true">0</td>
-                        <td contenteditable="true">0</td>
+                        <th>Male</th>
+                        <th>Female</th>
+                        <th>Total</th>
                     <?php endfor; ?>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody id="scholarshipTable">
+                <?php 
+                $scholarship_types = [
+                    "Institutional Scholarship",
+                    "Government-sponsored Scholarship",
+                    "Private, NGOs and Other Scholarship",
+                    "Merit Scholarship"
+                ];
+                
+                foreach ($scholarship_types as $type): ?>
+                    <tr>
+                        <td><?php echo $type; ?></td>
+                        <?php for ($i = 0; $i < 5; $i++): ?>
+                            <td contenteditable="true">0</td>
+                            <td contenteditable="true">0</td>
+                            <td contenteditable="true">0</td>
+                        <?php endfor; ?>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php include '../components/footer.php'; ?>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

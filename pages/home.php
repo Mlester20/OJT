@@ -15,6 +15,9 @@ $sql = "SELECT
         AND member_id = ?
         GROUP BY category";
 $stmt = $con->prepare($sql);
+if ($stmt === false) {
+    die('Prepare failed: ' . htmlspecialchars($con->error));
+}
 $stmt->bind_param("ss", $currentYear, $member_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -37,6 +40,29 @@ $targetTotal = 100;
 $currentProgress = ($totalAwards / 16) * 100;
 $currentProgress = min(100, $currentProgress);
 
+// Query to fetch rankings based on completion
+$rankingSql = "SELECT 
+    o.office_name, 
+    COUNT(a.id) as total_awards 
+    FROM awards a
+    JOIN member m ON a.member_id = m.member_id
+    JOIN office_name o ON m.office_id = o.office_id  -- Assuming merong `offices` table
+    WHERE YEAR(a.date) = ? 
+    GROUP BY o.office_name 
+    ORDER BY total_awards DESC 
+    LIMIT 5";
+$rankingStmt = $con->prepare($rankingSql);
+if ($rankingStmt === false) {
+    die('Prepare failed: ' . htmlspecialchars($con->error));
+}
+$rankingStmt->bind_param("s", $currentYear);
+$rankingStmt->execute();
+$rankingResult = $rankingStmt->get_result();
+
+$rankings = [];
+while ($row = $rankingResult->fetch_assoc()) {
+    $rankings[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -118,6 +144,35 @@ $currentProgress = min(100, $currentProgress);
                         <div style="height: 200px;"> <!-- Control pie chart height -->
                             <canvas id="categoryPieChart"></canvas>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rankings Section -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Top 5 Offices by Awards</h5>
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Office Name</th>
+                                    <th>Total Awards</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($rankings as $index => $ranking): ?>
+                                <tr>
+                                    <td><?= $index + 1 ?></td>
+                                    <td><?= $ranking['office_name'] ?></td>
+                                    <td><?= $ranking['total_awards'] ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

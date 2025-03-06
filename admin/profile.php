@@ -150,6 +150,7 @@ if (isset($_POST['update'])) {
             </section>
         </div>
     </div>
+    <?php include '../components/footer.php'; ?>
 
     
 

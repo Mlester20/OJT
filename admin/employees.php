@@ -95,6 +95,7 @@ $member_id = $_SESSION["member_id"];
             <div class="add-row-btn">**insert more rows if necessary</div>
         </div>
     </div>
+    <?php include '../components/footer.php'; ?>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {

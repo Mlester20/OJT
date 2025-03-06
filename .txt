@@ -113,88 +113,86 @@ if(isset($_POST['reactivate'])){
             </button>
         </div>
 
-        <table class="table table-bordered table-hover w-100">
+        <table class="table table-bordered table-hover">
             <thead class="table-light">
                 <tr>
+                    <th>ID</th>
                     <th>Name</th>
+                    <!-- <th>Gender</th> -->
                     <th>Office</th>
                     <th>Salutation</th>
                     <th>Rank</th>
                     <th>Designation</th>
+                    <!-- <th>Username</th> -->
                     <th>Actions</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $query = "SELECT m.*, 
-                        o.office_name,
-                        s.salut,
-                        r.rank,
-                        d.designation_name
-                        FROM member m
-                        LEFT JOIN office_name o ON m.office_id = o.office_id
-                        LEFT JOIN salut s ON m.salut_id = s.salut_id
-                        LEFT JOIN `rank` r ON m.rank_id = r.rank_id
-                        LEFT JOIN designation d ON m.designation_id = d.designation_id
-                        ORDER BY m.member_id DESC";
-
-                $result = mysqli_query($con, $query);
-                if (!$result) {
-                    die("Query failed: " . mysqli_error($con));
-                }
-
-                if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo '<tr>
-                            <td>' . $row['member_first'] . ' ' . $row['member_last'] . '</td>
-                            <td>' . $row['office_name'] . '</td>
-                            <td>' . $row['salut'] . '</td>
-                            <td>' . $row['rank'] . '</td>
-                            <td>' . $row['designation_name'] . '</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm edit-btn" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#editMemberModal"
-                                    data-id="' . $row['member_id'] . '"
-                                    data-first="' . $row['member_first'] . '"
-                                    data-last="' . $row['member_last'] . '"
-                                    data-gender="' . $row['member_gender'] . '"
-                                    data-username="' . $row['username'] . '"
-                                    data-office="' . $row['office_id'] . '"
-                                    data-salut="' . $row['salut_id'] . '"
-                                    data-rank="' . $row['rank_id'] . '"
-                                    data-designation="' . $row['designation_id'] . '">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <form action="" method="POST" class="d-inline">
-                                    <input type="hidden" name="delete_id" value="' . $row['member_id'] . '">
-                                    <button type="submit" name="delete" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure you want to delete this User?\')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                            <td>';
-                        if ($row['is_suspended']) {
-                            echo '<form action="" method="POST">
-                                    <input type="hidden" name="reactivate_id" value="' . $row['member_id'] . '">
-                                    <button type="submit" name="reactivate" class="btn btn-warning btn-sm" onclick="return confirm(\'Are you sure you want to reactivate this User?\')">
-                                        <i class="fas fa-undo"></i> Reactivate
-                                    </button>
-                                </form>';
-                        } else {
-                            echo '<span class="badge bg-success">Active</span>';
-                        }
-                        echo '</td>
-                        </tr>';
+                    $query = "SELECT m.*, 
+                    o.office_name,
+                    s.salut,
+                    r.rank,
+                    d.designation_name
+                    FROM member m
+                    LEFT JOIN office_name o ON m.office_id = o.office_id
+                    LEFT JOIN salut s ON m.salut_id = s.salut_id
+                    LEFT JOIN `rank` r ON m.rank_id = r.rank_id
+                    LEFT JOIN designation d ON m.designation_id = d.designation_id
+                    ORDER BY m.member_id DESC";
+                        
+                    $result = mysqli_query($con, $query);
+                    if(!$result) {
+                        die("Query failed: " . mysqli_error($con));
                     }
-                }
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<tr>
+                                <th scope="row">' . $row['member_id'] . '</th>
+                                <td>' . $row['member_first'] . ' ' . $row['member_last'] . '</td>
+                                <td>' . $row['office_name'] . '</td>
+                                <td>' . $row['salut'] . '</td>
+                                <td>' . $row['rank'] . '</td>
+                                <td>' . $row['designation_name'] . '</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm edit-btn" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#editMemberModal"
+                                        data-id="' . $row['member_id'] . '"
+                                        data-first="' . $row['member_first'] . '"
+                                        data-last="' . $row['member_last'] . '"
+                                        data-gender="' . $row['member_gender'] . '"
+                                        data-username="' . $row['username'] . '"
+                                        data-office="' . $row['office_id'] . '"
+                                        data-salut="' . $row['salut_id'] . '"
+                                        data-rank="' . $row['rank_id'] . '"
+                                        data-designation="' . $row['designation_id'] . '">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <form action="" method="POST" class="d-inline">
+                                        <input type="hidden" name="delete_id" value="' . $row['member_id'] . '">
+                                        <button type="submit" name="delete" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure you want to delete this User?\')">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                    <form action="" method="POST" class="d-inline">
+                                        <input type="hidden" name="reactivate_id" value="' . $row['member_id'] . '">
+                                        <button type="submit" name="reactivate" class="btn btn-warning btn-sm" onclick="return confirm(\'Are you sure you want to reactivate this User?\')">
+                                            <i class="fas fa-undo"></i> Reactivate
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>';
+                        }
+                    }
                 ?>
             </tbody>
         </table>
-
     </div>
-
+    
+    
     <div class="modal fade" id="addMemberModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -407,7 +405,6 @@ if(isset($_POST['reactivate'])){
             </div>
         </div>
     </div>
-    
     <?php include '../components/footer.php'; ?>
 
     <script src="../js/controls.js"></script>

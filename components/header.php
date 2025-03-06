@@ -45,7 +45,7 @@
                                         <li><a href="employees.php"><i class="fas fa-wheelchair"></i> Employees with Special Needs</a></li>
                                         <li><a href="scholarship_grant.php"><i class="fas fa-graduation-cap"></i> Scholarship Grant</a></li>
                                         <li><a href="non_academic_staff.php"><i class="fas fa-users"></i> Non-Academic Staff</a></li>
-                                        <li><a href="#"><i class="fas fa-building"></i> Infrastructure</a></li>
+                                        <li><a href="infrastructure.php"><i class="fas fa-building"></i> Infrastructure</a></li>
                                         <li><a href="purchase.php"><i class="fas fa-shopping-cart"></i> Major Purchases</a></li>
                                         <li><a href="list_officials.php"><i class="fas fa-user-tie"></i> List of Officials</a></li>
                                         <li><a href="#"><i class="fas fa-coins"></i> Income Generating Enterprises</a></li>

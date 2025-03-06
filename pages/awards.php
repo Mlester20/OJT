@@ -117,6 +117,9 @@ $member_id = $_SESSION["member_id"];
         <?php endforeach; ?>
     </div>
 
+
+    <?php include '../components/footer.php'; ?>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Function to add a new row to a specific category

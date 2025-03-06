@@ -96,8 +96,9 @@ $result = mysqli_query($con, $query);
                 <?php endif; ?>
             </ul>
         </nav>
-
     </div>
+
+    <?php include '../components/footer.php'; ?>
 
 </body>
 </html>

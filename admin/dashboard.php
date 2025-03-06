@@ -158,6 +158,8 @@ if (isset($_POST['delete'])) {
         </div>
     </div>
 
+    <?php include '../components/footer.php'; ?>
+
     <script>
         const officeNames = <?php echo json_encode(array_column($office_data, 'office_name')); ?>;
         const complianceCounts = <?php echo json_encode(array_column($office_data, 'compliance_count')); ?>;

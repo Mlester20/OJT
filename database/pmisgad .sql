@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2025 at 09:00 AM
+-- Generation Time: Mar 06, 2025 at 08:59 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -122,7 +122,9 @@ CREATE TABLE `awards` (
 --
 
 INSERT INTO `awards` (`id`, `member_id`, `award`, `conferred_to`, `conferred_by`, `date`, `date_ended`, `venue`, `category`) VALUES
-(78, 9, 'Test', 'John Doe', 'IICT', '2025-03-03', '2025-03-04', 'Roxas Astrodome', 'International');
+(78, 9, 'Test', 'John Doe', 'IICT', '2025-03-03', '2025-03-04', 'Roxas Astrodome', 'International'),
+(79, 9, 'dadsa', 'asda', 'asdas', '2025-03-06', '2025-03-07', 'sada', 'International'),
+(80, 14, 'Programming Contest', 'Mark Lester', 'IICT', '2025-03-06', '2025-03-07', 'ISUR- Gym', 'International');
 
 -- --------------------------------------------------------
 
@@ -185,6 +187,23 @@ INSERT INTO `employees` (`employee_id`, `name`, `sex`, `employment_status`, `dis
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `infrastructure_projects`
+--
+
+CREATE TABLE `infrastructure_projects` (
+  `project_id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `name_of_project` varchar(255) NOT NULL,
+  `allocated_budget` decimal(15,2) NOT NULL,
+  `project_duration` varchar(100) NOT NULL,
+  `date_started` date NOT NULL,
+  `expected_completion_date` date NOT NULL,
+  `status` enum('Pending','Ongoing','Completed','Cancelled') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `innovations`
 --
 
@@ -221,18 +240,21 @@ CREATE TABLE `member` (
   `office_id` int(11) DEFAULT NULL,
   `salut_id` int(11) DEFAULT NULL,
   `rank_id` int(11) DEFAULT NULL,
-  `designation_id` int(11) DEFAULT NULL
+  `designation_id` int(11) DEFAULT NULL,
+  `failed_attempts` int(11) DEFAULT 0,
+  `last_failed_attempt` timestamp NULL DEFAULT NULL,
+  `is_suspended` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `member`
 --
 
-INSERT INTO `member` (`member_id`, `member_first`, `member_last`, `member_gender`, `username`, `password`, `office_id`, `salut_id`, `rank_id`, `designation_id`) VALUES
-(9, 'Carlito', 'Antolin', 'Male', 'Carlito', '123', 20, 2, 1, 1),
-(11, 'Carlo', 'Baltazar', 'Male', 'carlo', '123', 21, 2, 2, 1),
-(12, 'Lester', 'Raguindin', 'Male', 'admin', 'admin', 36, 2, 4, 1),
-(13, 'Benedict', 'Hernando', 'Male', 'benedict', '123', 31, 2, 1, 1);
+INSERT INTO `member` (`member_id`, `member_first`, `member_last`, `member_gender`, `username`, `password`, `office_id`, `salut_id`, `rank_id`, `designation_id`, `failed_attempts`, `last_failed_attempt`, `is_suspended`) VALUES
+(9, 'Carlito', 'Antolin', 'Male', 'Carlito', '123', 20, 2, 1, 1, 0, NULL, 0),
+(11, 'Carlo', 'Baltazar', 'Male', 'carlo', '123', 21, 2, 2, 1, 0, NULL, 0),
+(12, 'Lester', 'Raguindin', 'Male', 'admin', 'admin', 36, 2, 4, 1, 0, NULL, 0),
+(14, 'Ryan', 'Suguitan', 'Male', 'ryan', '123', 21, 2, 1, 1, 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -262,7 +284,6 @@ INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `offi
 (97, 12, '2025-03-03 16:02:44', 36, 'Newsite'),
 (98, 9, '2025-03-03 16:05:14', 20, 'Oldsite'),
 (99, 12, '2025-03-03 16:06:39', 36, 'Newsite'),
-(100, 13, '2025-03-03 16:26:22', 31, 'Newsite'),
 (101, 12, '2025-03-04 11:09:02', 36, 'Newsite'),
 (102, 12, '2025-03-04 13:47:38', 36, 'Newsite'),
 (103, 9, '2025-03-04 13:51:54', 20, 'Oldsite'),
@@ -273,7 +294,21 @@ INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `offi
 (108, 9, '2025-03-05 10:16:00', 20, 'Oldsite'),
 (109, 12, '2025-03-05 10:17:49', 36, 'Newsite'),
 (110, 9, '2025-03-05 10:18:02', 20, 'Oldsite'),
-(111, 9, '2025-03-05 10:40:31', 20, 'Oldsite');
+(111, 9, '2025-03-05 10:40:31', 20, 'Oldsite'),
+(112, 9, '2025-03-06 09:40:04', 20, 'Oldsite'),
+(113, 12, '2025-03-06 09:40:27', 36, 'Newsite'),
+(114, 9, '2025-03-06 09:45:47', 20, 'Oldsite'),
+(115, 12, '2025-03-06 11:10:27', 36, 'Newsite'),
+(116, 9, '2025-03-06 13:20:45', 20, 'Oldsite'),
+(117, 12, '2025-03-06 13:26:04', 36, 'Newsite'),
+(118, 14, '2025-03-06 13:35:46', 21, 'Newsite'),
+(119, 12, '2025-03-06 13:41:12', 36, 'Newsite'),
+(120, 14, '2025-03-06 14:57:59', 21, 'Newsite'),
+(121, 12, '2025-03-06 15:11:46', 36, 'Newsite'),
+(122, 12, '2025-03-06 15:42:17', 36, 'Newsite'),
+(123, 12, '2025-03-06 15:51:42', 36, 'Newsite'),
+(124, 11, '2025-03-06 15:52:31', 21, 'Newsite'),
+(125, 12, '2025-03-06 15:53:41', 36, 'Newsite');
 
 -- --------------------------------------------------------
 
@@ -310,7 +345,7 @@ CREATE TABLE `office_name` (
 
 INSERT INTO `office_name` (`office_id`, `office_name`, `office_address`) VALUES
 (20, 'College of Criminal Justice Education', 'Oldsite'),
-(21, 'IICT', 'Newsite'),
+(21, 'Institute of Information and Communication Technology', 'Newsite'),
 (22, 'CA', 'Newsite'),
 (23, 'AA', 'Newsite'),
 (24, 'Research', 'Newsite'),
@@ -346,7 +381,8 @@ CREATE TABLE `officials` (
 --
 
 INSERT INTO `officials` (`official_id`, `member_id`, `designation`, `designation_name`, `contact_info`) VALUES
-(1, 9, 'Faculty', 'John Doe', '09350991034');
+(1, 9, 'Faculty', 'John Doe', '09350991034'),
+(2, 12, 'Staff', 'Benedict Hernando', '09350991034');
 
 -- --------------------------------------------------------
 
@@ -536,6 +572,13 @@ ALTER TABLE `employees`
   ADD KEY `fk_member` (`member_id`);
 
 --
+-- Indexes for table `infrastructure_projects`
+--
+ALTER TABLE `infrastructure_projects`
+  ADD PRIMARY KEY (`project_id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
 -- Indexes for table `innovations`
 --
 ALTER TABLE `innovations`
@@ -640,7 +683,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `awards`
 --
 ALTER TABLE `awards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `designation`
@@ -661,6 +704,12 @@ ALTER TABLE `employees`
   MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
+-- AUTO_INCREMENT for table `infrastructure_projects`
+--
+ALTER TABLE `infrastructure_projects`
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `innovations`
 --
 ALTER TABLE `innovations`
@@ -670,13 +719,13 @@ ALTER TABLE `innovations`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `member_activitylog`
 --
 ALTER TABLE `member_activitylog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT for table `non_academic_staff`
@@ -694,7 +743,7 @@ ALTER TABLE `office_name`
 -- AUTO_INCREMENT for table `officials`
 --
 ALTER TABLE `officials`
-  MODIFY `official_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `official_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `purchases`
@@ -753,6 +802,12 @@ ALTER TABLE `awards`
 --
 ALTER TABLE `employees`
   ADD CONSTRAINT `fk_member` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `infrastructure_projects`
+--
+ALTER TABLE `infrastructure_projects`
+  ADD CONSTRAINT `infrastructure_projects_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `innovations`
