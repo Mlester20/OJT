@@ -26,7 +26,6 @@ if(isset($_POST['update'])){
     }
 }
 
-
 // Delete Office
 if(isset($_POST['delete'])){
     $delete_id = $_POST['delete_id'];
@@ -36,7 +35,6 @@ if(isset($_POST['delete'])){
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -113,8 +111,9 @@ if(isset($_POST['delete'])){
 
     .btn:hover {
         transform: translateY(-1px);
+    }
 
-        .site-footer {
+    .site-footer {
         background-color: #333;
         color: white;
         padding: 40px 0;
@@ -125,8 +124,6 @@ if(isset($_POST['delete'])){
         margin: 0 auto;
         padding: 0 20px;
     }
-    }
-
 </style>
 
 <body>
@@ -157,47 +154,49 @@ if(isset($_POST['delete'])){
         $select = mysqli_query($con, "SELECT * FROM office_name ORDER BY office_name LIMIT $offset, $records_per_page");
         ?>
 
-        <table class="table table-bordered table-hover" style="margin-top: 15px">
-            <thead class="table-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Office/Departments</th>
-                    <th class="col">Office Address</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $counter = $offset + 1;
-                while($row = mysqli_fetch_assoc($select)){
-                    echo '
-                        <tr>
-                            <th scope="row">'.$counter.'</th>
-                            <td>'.$row['office_name'].'</td>
-                            <td>'.$row['office_address'].'</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm edit-btn" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#editOfficeModal"
-                                    data-id="'.$row['office_id'].'"
-                                    data-name="'.$row['office_name'].'">
-                                    <i class="fas fa-edit"></i> Edit
-                                </button>
-
-                                <form action="" method="POST" class="d-inline">
-                                    <input type="hidden" name="delete_id" value="'.$row['office_id'].'">
-                                    <button type="submit" name="delete" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure you want to delete this office?\')">
-                                        <i class="fas fa-trash"></i> Delete
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" style="margin-top: 15px">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Office/Departments</th>
+                        <th class="col">Office Address</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $counter = $offset + 1;
+                    while($row = mysqli_fetch_assoc($select)){
+                        echo '
+                            <tr>
+                                <th scope="row">'.$counter.'</th>
+                                <td>'.$row['office_name'].'</td>
+                                <td>'.$row['office_address'].'</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm edit-btn" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#editOfficeModal"
+                                        data-id="'.$row['office_id'].'"
+                                        data-name="'.$row['office_name'].'">
+                                        <i class="fas fa-edit"></i>
                                     </button>
-                                </form>
-                            </td>
-                        </tr>
-                    ';
-                    $counter++;
-                }
-                ?>
-            </tbody>
-        </table>
+
+                                    <form action="" method="POST" class="d-inline">
+                                        <input type="hidden" name="delete_id" value="'.$row['office_id'].'">
+                                        <button type="submit" name="delete" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure you want to delete this office?\')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        ';
+                        $counter++;
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
 
         <!-- Pagination -->
         <?php if($total_pages > 1): ?>
@@ -308,8 +307,6 @@ if(isset($_POST['delete'])){
         </div>
     </div>
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script src="../js/controls.js"></script>
@@ -328,7 +325,6 @@ if(isset($_POST['delete'])){
                 });
             });
         });
-
     </script>
 
 </body>

@@ -2,10 +2,10 @@
 session_start();
 include '../components/config.php';
 
-    if (empty($_SESSION['member_id'])):
-        header('Location: ../index.php');
-        exit();
-    endif;
+if (empty($_SESSION['member_id'])):
+    header('Location: ../index.php');
+    exit();
+endif;
 
 // Existing queries (same as before)
 $query = "SELECT COUNT(*) as total_members FROM member";
@@ -81,7 +81,7 @@ if (isset($_POST['delete'])) {
             transition: width 0.5s ease-in-out;
         }
         .chart-container {
-            max-width: 350px;
+            max-width: 100%;
             margin: 0 auto;
         }
     </style>
@@ -94,7 +94,7 @@ if (isset($_POST['delete'])) {
 
         <div class="row">
             <!-- Left Column for Top Performing Offices -->
-            <div class="col-md-6">
+            <div class="col-lg-6 col-md-12">
                 <div class="p-4 rounded shadow" style="background-color: #f8f9fa;">
                     <h3 class="text-center text-muted mb-4">Top Performing Offices</h3>
                     <div class="row">
@@ -130,14 +130,14 @@ if (isset($_POST['delete'])) {
             </div>
 
             <!-- Right Column for Pie Chart and Stats -->
-            <div class="col-md-6">
+            <div class="col-lg-6 col-md-12">
                 <div class="d-flex flex-column align-items-center">
                     <!-- Pie Chart -->
                     <div class="chart-container mt-4">
                         <canvas id="pieChart"></canvas>
                     </div>
                     <!-- Stats below the pie chart -->
-                    <div class="d-flex gap-3 mt-4">
+                    <div class="d-flex flex-wrap gap-3 mt-4 justify-content-center">
                         <div class="card text-white bg-primary shadow-sm" style="width: 10rem;">
                             <div class="card-body text-center">
                                 <i class="fas fa-users fa-3x mb-2"></i>

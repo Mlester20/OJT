@@ -62,6 +62,7 @@ if (mysqli_num_rows($res) > 0) {
     $_SESSION['office_id'] = $row['office_id'];
     $_SESSION['office_name'] = $row['office_name'];
     $_SESSION['office_address'] = $row['office_address'];
+    $_SESSION['role'] = $row['role'];
 
     $name = $_SESSION['salut'] . ' ' . $_SESSION['member_first'] . ' ' . $_SESSION['member_last'];
     $_SESSION['full_name'] = $name; 
@@ -79,11 +80,11 @@ if (mysqli_num_rows($res) > 0) {
     $reset_attempts_query = "UPDATE member SET failed_attempts = 0, last_failed_attempt = NULL WHERE member_id = '$member_id'";
     mysqli_query($con, $reset_attempts_query);
 
-    if ($row['office_name'] && strtolower(trim($row['office_name'])) === 'planning, management of information and services') {
+    if($_SESSION['role'] == 'admin') {
         header('location: ./admin/dashboard.php');
     } else {
         header('location: ./pages/home.php');
-    }    
+    }
     exit();
 } else {
     // Increment failed attempts on unsuccessful login

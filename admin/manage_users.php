@@ -2,15 +2,16 @@
 session_start();
 include '../components/config.php';
 
-if (empty($_SESSION['member_id'])):
+if (!isset($_SESSION['member_id'])) {
     header('Location: ../index.php');
     exit();
-endif;
+}
 
 if(isset($_POST['submit'])) {
     $first_name = mysqli_real_escape_string($con, $_POST['first_name']);
     $last_name = mysqli_real_escape_string($con, $_POST['last_name']);
     $gender = mysqli_real_escape_string($con, $_POST['gender']);
+    $role = mysqli_real_escape_string($con, $_POST['role']);
     $username = mysqli_real_escape_string($con, $_POST['username']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
     $office_id = mysqli_real_escape_string($con, $_POST['office_id']);
@@ -18,9 +19,9 @@ if(isset($_POST['submit'])) {
     $rank_id = mysqli_real_escape_string($con, $_POST['rank_id']);
     $designation_id = mysqli_real_escape_string($con, $_POST['designation_id']);
 
-    $query = mysqli_query($con, "INSERT INTO member (member_first, member_last, member_gender, username, password, 
+    $query = mysqli_query($con, "INSERT INTO member (member_first, member_last, member_gender, role, username, password, 
               office_id, salut_id, rank_id, designation_id) 
-              VALUES ('$first_name', '$last_name', '$gender', '$username', '$password', 
+              VALUES ('$first_name', '$last_name', '$gender', '$role', '$username', '$password', 
               '$office_id', '$salut_id', '$rank_id', '$designation_id')") or die (mysqli_connect($con));
     if($query){
         echo "<script>alert('Member Added Successfully!');document.location='manage_users.php'</script>";
@@ -78,7 +79,7 @@ if(isset($_POST['delete'])){
 if(isset($_POST['reactivate'])){
     $reactivate_id = $_POST['reactivate_id'];
     $stmt = $con->prepare("UPDATE member SET is_suspended = FALSE, failed_attempts = 0, last_failed_attempt = NULL WHERE member_id = ?");
-    $stmt->bind_param("i", $reactivate_id); // "i" means integer
+    $stmt->bind_param("i", $reactivate_id);
     if($stmt->execute()){
         echo "<script>alert('Member Reactivated Successfully!');document.location='manage_users.php'</script>";
     } else {
@@ -102,6 +103,7 @@ if(isset($_POST['reactivate'])){
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/header_style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <?php include('../components/header_admin.php'); ?>
@@ -121,6 +123,7 @@ if(isset($_POST['reactivate'])){
                     <th>Salutation</th>
                     <th>Rank</th>
                     <th>Designation</th>
+                    <th>Role</th>
                     <th>Actions</th>
                     <th>Status</th>
                 </tr>
@@ -152,6 +155,7 @@ if(isset($_POST['reactivate'])){
                             <td>' . $row['salut'] . '</td>
                             <td>' . $row['rank'] . '</td>
                             <td>' . $row['designation_name'] . '</td>
+                            <td>' . $row['role'] . '</td>
                             <td>
                                 <button class="btn btn-primary btn-sm edit-btn" 
                                     data-bs-toggle="modal" 
@@ -222,6 +226,14 @@ if(isset($_POST['reactivate'])){
                                     <option value="">Select Gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Role</label>
+                                <select name="role" class="form-select" required>
+                                    <option value="">Select Role</option>
+                                    <option value="admin">admin</option>
+                                    <option value="user">user</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
@@ -411,6 +423,10 @@ if(isset($_POST['reactivate'])){
     <?php include '../components/footer.php'; ?>
 
     <script src="../js/controls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -443,8 +459,5 @@ if(isset($_POST['reactivate'])){
             });
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2025 at 08:59 AM
+-- Generation Time: Mar 10, 2025 at 08:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -243,18 +243,19 @@ CREATE TABLE `member` (
   `designation_id` int(11) DEFAULT NULL,
   `failed_attempts` int(11) DEFAULT 0,
   `last_failed_attempt` timestamp NULL DEFAULT NULL,
-  `is_suspended` tinyint(1) DEFAULT 0
+  `is_suspended` tinyint(1) DEFAULT 0,
+  `role` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `member`
 --
 
-INSERT INTO `member` (`member_id`, `member_first`, `member_last`, `member_gender`, `username`, `password`, `office_id`, `salut_id`, `rank_id`, `designation_id`, `failed_attempts`, `last_failed_attempt`, `is_suspended`) VALUES
-(9, 'Carlito', 'Antolin', 'Male', 'Carlito', '123', 20, 2, 1, 1, 0, NULL, 0),
-(11, 'Carlo', 'Baltazar', 'Male', 'carlo', '123', 21, 2, 2, 1, 0, NULL, 0),
-(12, 'Lester', 'Raguindin', 'Male', 'admin', 'admin', 36, 2, 4, 1, 0, NULL, 0),
-(14, 'Ryan', 'Suguitan', 'Male', 'ryan', '123', 21, 2, 1, 1, 0, NULL, 0);
+INSERT INTO `member` (`member_id`, `member_first`, `member_last`, `member_gender`, `username`, `password`, `office_id`, `salut_id`, `rank_id`, `designation_id`, `failed_attempts`, `last_failed_attempt`, `is_suspended`, `role`) VALUES
+(9, 'Carlito', 'Antolin', 'Male', 'Carlito', '123', 20, 2, 1, 1, 0, NULL, 0, 'user'),
+(12, 'Lester', 'Raguindin', 'Male', 'admin', 'admin', 36, 2, 4, 1, 0, NULL, 0, 'admin'),
+(14, 'Ryan', 'Suguitan', 'Male', 'ryan', '123', 21, 2, 1, 1, 0, NULL, 0, 'user'),
+(15, 'John ', 'Doe', 'Male', 'john', '123', 24, 2, 6, 1, 0, NULL, 0, 'user');
 
 -- --------------------------------------------------------
 
@@ -275,40 +276,40 @@ CREATE TABLE `member_activitylog` (
 --
 
 INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `office_id`, `office_address`) VALUES
-(91, 12, '2025-03-03 14:21:05', 36, 'Newsite'),
-(92, 12, '2025-03-03 14:26:43', 36, 'Newsite'),
-(93, 12, '2025-03-03 14:28:49', 36, 'Newsite'),
-(94, 9, '2025-03-03 14:33:27', 20, 'Oldsite'),
-(95, 12, '2025-03-03 14:34:10', 36, 'Newsite'),
-(96, 9, '2025-03-03 16:00:56', 20, 'Oldsite'),
-(97, 12, '2025-03-03 16:02:44', 36, 'Newsite'),
-(98, 9, '2025-03-03 16:05:14', 20, 'Oldsite'),
-(99, 12, '2025-03-03 16:06:39', 36, 'Newsite'),
-(101, 12, '2025-03-04 11:09:02', 36, 'Newsite'),
-(102, 12, '2025-03-04 13:47:38', 36, 'Newsite'),
-(103, 9, '2025-03-04 13:51:54', 20, 'Oldsite'),
-(104, 12, '2025-03-04 16:01:14', 36, 'Newsite'),
-(105, 9, '2025-03-05 08:53:59', 20, 'Oldsite'),
-(106, 12, '2025-03-05 10:06:46', 36, 'Newsite'),
-(107, 9, '2025-03-05 10:10:21', 20, 'Oldsite'),
-(108, 9, '2025-03-05 10:16:00', 20, 'Oldsite'),
-(109, 12, '2025-03-05 10:17:49', 36, 'Newsite'),
-(110, 9, '2025-03-05 10:18:02', 20, 'Oldsite'),
-(111, 9, '2025-03-05 10:40:31', 20, 'Oldsite'),
-(112, 9, '2025-03-06 09:40:04', 20, 'Oldsite'),
-(113, 12, '2025-03-06 09:40:27', 36, 'Newsite'),
-(114, 9, '2025-03-06 09:45:47', 20, 'Oldsite'),
-(115, 12, '2025-03-06 11:10:27', 36, 'Newsite'),
-(116, 9, '2025-03-06 13:20:45', 20, 'Oldsite'),
-(117, 12, '2025-03-06 13:26:04', 36, 'Newsite'),
-(118, 14, '2025-03-06 13:35:46', 21, 'Newsite'),
-(119, 12, '2025-03-06 13:41:12', 36, 'Newsite'),
-(120, 14, '2025-03-06 14:57:59', 21, 'Newsite'),
-(121, 12, '2025-03-06 15:11:46', 36, 'Newsite'),
-(122, 12, '2025-03-06 15:42:17', 36, 'Newsite'),
-(123, 12, '2025-03-06 15:51:42', 36, 'Newsite'),
-(124, 11, '2025-03-06 15:52:31', 21, 'Newsite'),
-(125, 12, '2025-03-06 15:53:41', 36, 'Newsite');
+(128, 9, '2025-03-10 10:54:32', 20, 'Oldsite'),
+(129, 9, '2025-03-10 10:54:53', 20, 'Oldsite'),
+(130, 12, '2025-03-10 10:55:16', 36, 'Newsite'),
+(131, 12, '2025-03-10 10:55:29', 36, 'Newsite'),
+(132, 12, '2025-03-10 11:01:46', 36, 'Newsite'),
+(133, 12, '2025-03-10 11:04:23', 36, 'Newsite'),
+(134, 12, '2025-03-10 11:05:06', 36, 'Newsite'),
+(135, 9, '2025-03-10 14:49:06', 20, 'Oldsite'),
+(136, 12, '2025-03-10 14:54:54', 36, 'Newsite'),
+(137, 12, '2025-03-10 14:56:41', 36, 'Newsite'),
+(138, 9, '2025-03-10 15:01:24', 20, 'Oldsite');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `national_certification_performance`
+--
+
+CREATE TABLE `national_certification_performance` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `certification` varchar(255) NOT NULL,
+  `date_complete` date NOT NULL,
+  `examinees_male` int(11) NOT NULL,
+  `examinees_female` int(11) NOT NULL,
+  `examinees_total` int(11) GENERATED ALWAYS AS (`examinees_male` + `examinees_female`) STORED,
+  `passers_male` int(11) NOT NULL,
+  `passers_female` int(11) NOT NULL,
+  `passers_total` int(11) GENERATED ALWAYS AS (`passers_male` + `passers_female`) STORED,
+  `passing_rate_male` decimal(5,2) NOT NULL,
+  `passing_rate_female` decimal(5,2) NOT NULL,
+  `passing_rate_total` decimal(5,2) GENERATED ALWAYS AS ((`passers_male` + `passers_female`) / (`examinees_male` + `examinees_female`) * 100) STORED,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -346,16 +347,16 @@ CREATE TABLE `office_name` (
 INSERT INTO `office_name` (`office_id`, `office_name`, `office_address`) VALUES
 (20, 'College of Criminal Justice Education', 'Oldsite'),
 (21, 'Institute of Information and Communication Technology', 'Newsite'),
-(22, 'CA', 'Newsite'),
-(23, 'AA', 'Newsite'),
+(22, 'Campus Administration', 'Newsite'),
+(23, 'Academic Affairs', 'Newsite'),
 (24, 'Research', 'Newsite'),
 (25, 'REGISTRAR', 'Newsite'),
 (26, 'GUIDANCE', 'Newsite'),
-(27, 'OSAS', 'Newsite'),
+(27, 'Office of Student Affairs and Services', 'Newsite'),
 (28, 'RECORDS', 'Newsite'),
 (29, 'BUDGET', 'Newsite'),
 (30, 'Cashiering', 'Newsite'),
-(31, 'HR', 'Newsite'),
+(31, 'Human Resource', 'Newsite'),
 (32, 'ACCOUNTING', 'Newsite'),
 (33, 'MEDICAL/DENTAL', 'Newsite/Oldsite'),
 (34, 'SUPPLY', 'Newsite'),
@@ -430,6 +431,58 @@ INSERT INTO `rank` (`rank_id`, `rank`) VALUES
 (6, 'Assistant Professor 1'),
 (7, 'Assistant Professor 3'),
 (8, 'Assistant Professor 2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `research_centers`
+--
+
+CREATE TABLE `research_centers` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `nature_of_research` text NOT NULL,
+  `collaborating_agencies` text DEFAULT NULL,
+  `funding_support` varchar(255) DEFAULT NULL,
+  `supported_sdgs` text DEFAULT NULL,
+  `member_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `research_funding`
+--
+
+CREATE TABLE `research_funding` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `fund` varchar(255) NOT NULL,
+  `no_of_researches_funded` int(11) NOT NULL,
+  `no_of_researchers_male` int(11) NOT NULL,
+  `no_of_researchers_female` int(11) NOT NULL,
+  `no_of_researchers_total` int(11) GENERATED ALWAYS AS (`no_of_researchers_male` + `no_of_researchers_female`) STORED,
+  `total_budget` decimal(10,2) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `research_linkages`
+--
+
+CREATE TABLE `research_linkages` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `institution` varchar(255) NOT NULL,
+  `moa_mou` varchar(255) NOT NULL,
+  `linkage` varchar(255) NOT NULL,
+  `date_from` date NOT NULL,
+  `date_to` date NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `linkage_type` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -604,6 +657,13 @@ ALTER TABLE `member_activitylog`
   ADD KEY `office_id` (`office_id`);
 
 --
+-- Indexes for table `national_certification_performance`
+--
+ALTER TABLE `national_certification_performance`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
 -- Indexes for table `non_academic_staff`
 --
 ALTER TABLE `non_academic_staff`
@@ -635,6 +695,27 @@ ALTER TABLE `purchases`
 --
 ALTER TABLE `rank`
   ADD PRIMARY KEY (`rank_id`);
+
+--
+-- Indexes for table `research_centers`
+--
+ALTER TABLE `research_centers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `research_funding`
+--
+ALTER TABLE `research_funding`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `research_linkages`
+--
+ALTER TABLE `research_linkages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
 
 --
 -- Indexes for table `salut`
@@ -719,13 +800,19 @@ ALTER TABLE `innovations`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `member_activitylog`
 --
 ALTER TABLE `member_activitylog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+
+--
+-- AUTO_INCREMENT for table `national_certification_performance`
+--
+ALTER TABLE `national_certification_performance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `non_academic_staff`
@@ -756,6 +843,24 @@ ALTER TABLE `purchases`
 --
 ALTER TABLE `rank`
   MODIFY `rank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `research_centers`
+--
+ALTER TABLE `research_centers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `research_funding`
+--
+ALTER TABLE `research_funding`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `research_linkages`
+--
+ALTER TABLE `research_linkages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `salut`
@@ -832,6 +937,12 @@ ALTER TABLE `member_activitylog`
   ADD CONSTRAINT `member_activitylog_ibfk_2` FOREIGN KEY (`office_id`) REFERENCES `office_name` (`office_id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `national_certification_performance`
+--
+ALTER TABLE `national_certification_performance`
+  ADD CONSTRAINT `national_certification_performance_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
 -- Constraints for table `non_academic_staff`
 --
 ALTER TABLE `non_academic_staff`
@@ -848,6 +959,24 @@ ALTER TABLE `officials`
 --
 ALTER TABLE `purchases`
   ADD CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
+-- Constraints for table `research_centers`
+--
+ALTER TABLE `research_centers`
+  ADD CONSTRAINT `research_centers_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `research_funding`
+--
+ALTER TABLE `research_funding`
+  ADD CONSTRAINT `research_funding_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
+-- Constraints for table `research_linkages`
+--
+ALTER TABLE `research_linkages`
+  ADD CONSTRAINT `research_linkages_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 
 --
 -- Constraints for table `scholarship_grants`
