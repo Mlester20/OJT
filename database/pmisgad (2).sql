@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2025 at 08:56 AM
+-- Generation Time: Mar 11, 2025 at 08:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -101,6 +101,25 @@ INSERT INTO `admin` (`user_id`, `name`, `username`, `password`, `created_at`) VA
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `administrative_linkages`
+--
+
+CREATE TABLE `administrative_linkages` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `institution` varchar(255) NOT NULL,
+  `moa_mou` varchar(255) NOT NULL,
+  `linkage` varchar(255) NOT NULL,
+  `date_from` date NOT NULL,
+  `date_to` date NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `linkage_type` varchar(50) NOT NULL,
+  `linkage_level` enum('International','National','Regional','Municipal/Local') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `awards`
 --
 
@@ -183,6 +202,44 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`employee_id`, `name`, `sex`, `employment_status`, `disability_type`, `campus`, `date_created`, `member_id`, `year`) VALUES
 (32, 'John Doe', 'Male', 'Testing', 'N/A', 'Roxas', '2025-03-03 05:56:40', 9, 2025);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `extension_awards`
+--
+
+CREATE TABLE `extension_awards` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `award` varchar(255) DEFAULT NULL,
+  `conferred_to` varchar(255) DEFAULT NULL,
+  `conferred_by` varchar(255) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `date_ended` date DEFAULT NULL,
+  `venue` varchar(255) DEFAULT NULL,
+  `category` enum('International','National','Regional','Local') NOT NULL,
+  `year` int(11) GENERATED ALWAYS AS (year(`date`)) STORED
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `extension_linkages`
+--
+
+CREATE TABLE `extension_linkages` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `institution` varchar(255) NOT NULL,
+  `moa_mou` varchar(255) NOT NULL,
+  `linkage` varchar(255) NOT NULL,
+  `date_from` date NOT NULL,
+  `date_to` date NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `linkage_type` varchar(50) NOT NULL,
+  `linkage_level` enum('International','National','Regional','Municipal/Local') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -286,7 +343,12 @@ INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `offi
 (135, 9, '2025-03-10 14:49:06', 20, 'Oldsite'),
 (136, 12, '2025-03-10 14:54:54', 36, 'Newsite'),
 (137, 12, '2025-03-10 14:56:41', 36, 'Newsite'),
-(138, 9, '2025-03-10 15:01:24', 20, 'Oldsite');
+(138, 9, '2025-03-10 15:01:24', 20, 'Oldsite'),
+(139, 14, '2025-03-10 16:07:57', 21, 'Newsite'),
+(140, 9, '2025-03-10 16:08:09', 20, 'Oldsite'),
+(141, 12, '2025-03-11 09:32:51', 36, 'Newsite'),
+(142, 9, '2025-03-11 09:36:05', 20, 'Oldsite'),
+(143, 12, '2025-03-11 10:44:36', 36, 'Newsite');
 
 -- --------------------------------------------------------
 
@@ -599,6 +661,13 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `administrative_linkages`
+--
+ALTER TABLE `administrative_linkages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
 -- Indexes for table `awards`
 --
 ALTER TABLE `awards`
@@ -623,6 +692,20 @@ ALTER TABLE `dynamic_table`
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`employee_id`),
   ADD KEY `fk_member` (`member_id`);
+
+--
+-- Indexes for table `extension_awards`
+--
+ALTER TABLE `extension_awards`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `extension_linkages`
+--
+ALTER TABLE `extension_linkages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
 
 --
 -- Indexes for table `infrastructure_projects`
@@ -761,6 +844,12 @@ ALTER TABLE `admin`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `administrative_linkages`
+--
+ALTER TABLE `administrative_linkages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT for table `awards`
 --
 ALTER TABLE `awards`
@@ -785,6 +874,18 @@ ALTER TABLE `employees`
   MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
+-- AUTO_INCREMENT for table `extension_awards`
+--
+ALTER TABLE `extension_awards`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `extension_linkages`
+--
+ALTER TABLE `extension_linkages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `infrastructure_projects`
 --
 ALTER TABLE `infrastructure_projects`
@@ -806,7 +907,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `member_activitylog`
 --
 ALTER TABLE `member_activitylog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `national_certification_performance`
@@ -897,6 +998,12 @@ ALTER TABLE `activity_log`
   ADD CONSTRAINT `activity_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `admin` (`user_id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `administrative_linkages`
+--
+ALTER TABLE `administrative_linkages`
+  ADD CONSTRAINT `administrative_linkages_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
 -- Constraints for table `awards`
 --
 ALTER TABLE `awards`
@@ -907,6 +1014,18 @@ ALTER TABLE `awards`
 --
 ALTER TABLE `employees`
   ADD CONSTRAINT `fk_member` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `extension_awards`
+--
+ALTER TABLE `extension_awards`
+  ADD CONSTRAINT `extension_awards_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
+-- Constraints for table `extension_linkages`
+--
+ALTER TABLE `extension_linkages`
+  ADD CONSTRAINT `extension_linkages_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 
 --
 -- Constraints for table `infrastructure_projects`
