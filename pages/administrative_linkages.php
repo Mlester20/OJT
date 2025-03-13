@@ -27,7 +27,7 @@ if (isset($_SESSION['success_message'])) {
     <link rel="stylesheet" href="../styles/hover.css">
 </head>
 <body>
-    <?php include '../components/header_admin.php'; ?>
+    <?php include '../components/header.php'; ?>
 
     <div class="container mt-4">
         <h2 class="text-center">Administrative Linkages</h2>

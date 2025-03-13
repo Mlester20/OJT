@@ -1,6 +1,8 @@
 <?php
 include '../controllers/fetch_complied_data.php';
 include '../controllers/purchaseController.php';
+
+    
 ?>
 
 <!DOCTYPE html>

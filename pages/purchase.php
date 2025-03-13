@@ -42,34 +42,6 @@ include '../controllers/purchaseController.php';
             <button type="submit" class="btn btn-primary">Save Purchase</button>
         </form>
 
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover" style="margin-top: 2rem;">
-                <thead class="table-light">
-                    <tr>
-                        <th>Item</th>
-                        <th>Purpose</th>
-                        <th>Amount</th>
-                        <th>Purchase Date</th>
-                    </tr>
-                </thead>
-                <tbody id="purchasesTableBody">
-                    <?php
-                    if ($purchases_result && mysqli_num_rows($purchases_result) > 0) {
-                        while ($row = mysqli_fetch_assoc($purchases_result)) {
-                            echo "<tr>";
-                            echo "<td>" . htmlspecialchars($row['item']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['purpose']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['amount']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['purchase_date']) . "</td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "<tr><td colspan='4'>No purchases found.</td></tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
     </div>
 
     <?php include '../components/footer.php'; ?>

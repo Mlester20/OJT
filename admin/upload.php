@@ -8,7 +8,33 @@ if (!isset($_SESSION['member_id'])) {
 
 $member_id = $_SESSION['member_id'];
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
+// Handle file deletion
+if (isset($_POST['delete_file']) && isset($_POST['delete_file_id']) && isset($_POST['delete_file_path'])) {
+    $file_id = $_POST['delete_file_id'];
+    $file_path = $_POST['delete_file_path'];
+    
+    // Delete the file from the database
+    $delete_query = "DELETE FROM uploads WHERE id = ?";
+    $stmt = $con->prepare($delete_query);
+    if ($stmt === false) {
+        die('Prepare failed: ' . htmlspecialchars($con->error));
+    }
+    $stmt->bind_param("i", $file_id);
+    
+    if ($stmt->execute()) {
+        // Delete the physical file if it exists
+        if (file_exists($file_path)) {
+            unlink($file_path);
+        }
+        echo "<script>alert('File deleted successfully.');document.location='upload.php'</script>";
+    } else {
+        echo "<script>alert('Error deleting file: " . htmlspecialchars($stmt->error) . "');document.location='upload.php'</script>";
+    }
+    $stmt->close();
+}
+
+// Handle file upload
+if (isset($_FILES['file'])) {
     $target_dir = "../uploads/";
     $target_file = $target_dir . basename($_FILES["file"]["name"]);
     $uploadOk = 1;
@@ -57,7 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
 
 // Fetch all uploaded files
 $files_query = "
-    SELECT 
+    SELECT
+        u.id, 
         u.file_name, 
         u.file_path, 
         u.upload_date, 
@@ -153,7 +180,14 @@ $stmt->close();
                         echo "<td>" . htmlspecialchars($row['upload_date']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['member_first'] . ' ' . $row['member_last']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['office_name']) . "</td>";
-                        echo "<td><a href='" . htmlspecialchars($row['file_path']) . "' download class='btn btn-success btn-sm'>Download</a></td>";
+                        echo "<td>
+                                <a href='" . htmlspecialchars($row['file_path']) . "' download class='btn btn-sm btn-success'>Download</a>
+                                <form method='POST' style='display:inline;' onsubmit='return confirm(\"Are you sure you want to delete this file?\");'>
+                                    <input type='hidden' name='delete_file_id' value='" . $row['id'] . "'>
+                                    <input type='hidden' name='delete_file_path' value='" . htmlspecialchars($row['file_path']) . "'>
+                                    <button type='submit' name='delete_file' class='btn btn-sm btn-danger'>Delete</button>
+                                </form>
+                            </td>";
                         echo "</tr>";
                     }
                 } else {
@@ -161,6 +195,7 @@ $stmt->close();
                 }
                 ?>
             </tbody>
+
         </table>
     </div>
 

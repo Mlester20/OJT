@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2025 at 08:05 AM
+-- Generation Time: Mar 13, 2025 at 08:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -24,6 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `academic_services_innovation`
+--
+
+CREATE TABLE `academic_services_innovation` (
+  `innovation_id` int(11) NOT NULL,
+  `name_of_innovation` varchar(500) NOT NULL,
+  `description` text NOT NULL,
+  `member_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `academic_services_innovation`
+--
+
+INSERT INTO `academic_services_innovation` (`innovation_id`, `name_of_innovation`, `description`, `member_id`) VALUES
+(5, 'ben', 'test', 12),
+(6, 'aAa', 'EWEDWEW', 9),
+(7, 'ben and ben', 'lol', 9);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `activity_log`
 --
 
@@ -33,49 +55,6 @@ CREATE TABLE `activity_log` (
   `action` varchar(50) NOT NULL,
   `timestamp` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `activity_log`
---
-
-INSERT INTO `activity_log` (`id`, `user_id`, `action`, `timestamp`) VALUES
-(1, 1, 'Admin Logged in', '2025-02-11 13:16:59'),
-(2, 1, 'Admin Logged in', '2025-02-11 14:42:59'),
-(3, 1, 'Admin Logged in', '2025-02-11 16:18:44'),
-(4, 1, 'Admin Logged in', '2025-02-12 09:16:30'),
-(5, 1, 'Admin Logged in', '2025-02-12 14:40:01'),
-(6, 1, 'Admin Logged in', '2025-02-12 15:57:53'),
-(7, 1, 'Admin Logged in', '2025-02-12 16:14:32'),
-(8, 1, 'Admin Logged in', '2025-02-13 07:48:35'),
-(9, 1, 'Admin Logged in', '2025-02-13 08:36:18'),
-(10, 1, 'Admin Logged in', '2025-02-13 08:41:49'),
-(11, 1, 'Admin Logged in', '2025-02-13 08:43:39'),
-(12, 1, 'Admin Logged in', '2025-02-13 09:00:39'),
-(13, 1, 'Admin Logged in', '2025-02-13 10:35:19'),
-(14, 1, 'Admin Logged in', '2025-02-13 11:12:05'),
-(15, 1, 'Admin Logged in', '2025-02-13 11:12:57'),
-(16, 1, 'Admin Logged in', '2025-02-13 11:41:34'),
-(17, 1, 'Admin Logged in', '2025-02-13 12:04:26'),
-(18, 1, 'Admin Logged in', '2025-02-13 13:06:38'),
-(19, 1, 'Admin Logged in', '2025-02-13 13:08:10'),
-(20, 1, 'Admin Logged in', '2025-02-13 13:20:50'),
-(21, 1, 'Admin Logged in', '2025-02-13 14:34:01'),
-(22, 1, 'Admin Logged in', '2025-02-14 13:07:04'),
-(23, 1, 'Admin Logged in', '2025-02-14 13:22:12'),
-(24, 1, 'Admin Logged in', '2025-02-14 13:28:02'),
-(25, 1, 'Admin Logged in', '2025-02-14 13:43:47'),
-(26, 1, 'Admin Logged in', '2025-02-14 13:45:13'),
-(27, 1, 'Admin Logged in', '2025-02-14 13:48:06'),
-(28, 1, 'Admin Logged in', '2025-02-18 09:01:37'),
-(29, 1, 'Admin Logged in', '2025-02-18 10:50:16'),
-(30, 1, 'Admin Logged in', '2025-02-18 10:53:10'),
-(31, 1, 'Admin Logged in', '2025-02-18 12:28:44'),
-(32, 1, 'Admin Logged in', '2025-02-18 12:39:22'),
-(33, 1, 'Admin Logged in', '2025-02-18 15:12:16'),
-(34, 1, 'Admin Logged in', '2025-02-18 15:24:58'),
-(35, 1, 'Admin Logged in', '2025-02-18 15:25:22'),
-(36, 1, 'Admin Logged in', '2025-02-19 10:20:16'),
-(37, 1, 'Admin Logged in', '2025-02-19 12:22:16');
 
 -- --------------------------------------------------------
 
@@ -143,7 +122,10 @@ CREATE TABLE `awards` (
 INSERT INTO `awards` (`id`, `member_id`, `award`, `conferred_to`, `conferred_by`, `date`, `date_ended`, `venue`, `category`) VALUES
 (78, 9, 'Test', 'John Doe', 'IICT', '2025-03-03', '2025-03-04', 'Roxas Astrodome', 'International'),
 (79, 9, 'dadsa', 'asda', 'asdas', '2025-03-06', '2025-03-07', 'sada', 'International'),
-(80, 14, 'Programming Contest', 'Mark Lester', 'IICT', '2025-03-06', '2025-03-07', 'ISUR- Gym', 'International');
+(80, 14, 'Programming Contest', 'Mark Lester', 'IICT', '2025-03-06', '2025-03-07', 'ISUR- Gym', 'International'),
+(81, 9, 'Test', 'teste', 'test', '2025-03-13', '2025-03-14', 'test', 'Local'),
+(82, 9, 'test', 'test', 'test', '2025-03-13', '2025-03-13', 'test', 'Local'),
+(83, 9, 'teset', 'test', 'test', '2025-03-13', '2025-03-13', 'test', 'Local');
 
 -- --------------------------------------------------------
 
@@ -225,6 +207,27 @@ CREATE TABLE `extension_awards` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `extension_innovations`
+--
+
+CREATE TABLE `extension_innovations` (
+  `innovation_id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `name_of_innovation` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `extension_innovations`
+--
+
+INSERT INTO `extension_innovations` (`innovation_id`, `member_id`, `name_of_innovation`, `description`) VALUES
+(21, 12, 'aAa', 'EWEDWEW'),
+(22, 9, 'ben and ben', 'test');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `extension_linkages`
 --
 
@@ -276,10 +279,7 @@ CREATE TABLE `innovations` (
 --
 
 INSERT INTO `innovations` (`innovation_id`, `member_id`, `name_of_innovation`, `description`) VALUES
-(2, 9, 'test', 'test'),
-(3, 9, 'test', 'test'),
-(4, 9, 'test', 'test'),
-(5, 9, 'test', 'teset');
+(6, 12, 'aAa', 'EWEDWEW');
 
 -- --------------------------------------------------------
 
@@ -348,7 +348,22 @@ INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `offi
 (140, 9, '2025-03-10 16:08:09', 20, 'Oldsite'),
 (141, 12, '2025-03-11 09:32:51', 36, 'Newsite'),
 (142, 9, '2025-03-11 09:36:05', 20, 'Oldsite'),
-(143, 12, '2025-03-11 10:44:36', 36, 'Newsite');
+(143, 12, '2025-03-11 10:44:36', 36, 'Newsite'),
+(144, 12, '2025-03-12 08:55:43', 36, 'Newsite'),
+(145, 12, '2025-03-12 09:40:46', 36, 'Newsite'),
+(146, 12, '2025-03-12 11:40:34', 36, 'Newsite'),
+(147, 9, '2025-03-12 11:40:54', 20, 'Oldsite'),
+(148, 12, '2025-03-12 12:27:18', 36, 'Newsite'),
+(149, 12, '2025-03-13 10:45:31', 36, 'Newsite'),
+(150, 9, '2025-03-13 12:51:25', 20, 'Oldsite'),
+(151, 9, '2025-03-13 13:01:37', 20, 'Oldsite'),
+(152, 12, '2025-03-13 14:34:04', 36, 'Newsite'),
+(153, 9, '2025-03-13 14:39:18', 20, 'Oldsite'),
+(154, 12, '2025-03-13 14:44:18', 36, 'Newsite'),
+(155, 9, '2025-03-13 14:45:30', 20, 'Oldsite'),
+(156, 12, '2025-03-13 14:47:59', 36, 'Newsite'),
+(157, 12, '2025-03-13 14:50:15', 36, 'Newsite'),
+(158, 9, '2025-03-13 15:07:50', 20, 'Oldsite');
 
 -- --------------------------------------------------------
 
@@ -635,17 +650,15 @@ CREATE TABLE `uploads` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `uploads`
---
-
-INSERT INTO `uploads` (`id`, `member_id`, `file_name`, `file_path`, `upload_date`) VALUES
-(1, 12, 'List-of-Completed-Projects-as-of-December-2024.xlsx', '../uploads/List-of-Completed-Projects-as-of-December-2024.xlsx', '2025-03-03 07:28:58'),
-(2, 9, 'Administrative_2024.xlsx', '../uploads/Administrative_2024.xlsx', '2025-03-03 08:02:34'),
-(3, 9, '(BSAB 1d) NSTP 2 CWTSLTSMS(Second Semester, 2024-2025) _as of Feb172025 (2).xlsx', '../uploads/(BSAB 1d) NSTP 2 CWTSLTSMS(Second Semester, 2024-2025) _as of Feb172025 (2).xlsx', '2025-03-03 08:06:27');
-
---
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `academic_services_innovation`
+--
+ALTER TABLE `academic_services_innovation`
+  ADD PRIMARY KEY (`innovation_id`),
+  ADD KEY `fk_member_id` (`member_id`);
 
 --
 -- Indexes for table `activity_log`
@@ -698,6 +711,13 @@ ALTER TABLE `employees`
 --
 ALTER TABLE `extension_awards`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `extension_innovations`
+--
+ALTER TABLE `extension_innovations`
+  ADD PRIMARY KEY (`innovation_id`),
   ADD KEY `member_id` (`member_id`);
 
 --
@@ -832,6 +852,12 @@ ALTER TABLE `uploads`
 --
 
 --
+-- AUTO_INCREMENT for table `academic_services_innovation`
+--
+ALTER TABLE `academic_services_innovation`
+  MODIFY `innovation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `activity_log`
 --
 ALTER TABLE `activity_log`
@@ -853,7 +879,7 @@ ALTER TABLE `administrative_linkages`
 -- AUTO_INCREMENT for table `awards`
 --
 ALTER TABLE `awards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `designation`
@@ -880,6 +906,12 @@ ALTER TABLE `extension_awards`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `extension_innovations`
+--
+ALTER TABLE `extension_innovations`
+  MODIFY `innovation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
 -- AUTO_INCREMENT for table `extension_linkages`
 --
 ALTER TABLE `extension_linkages`
@@ -895,7 +927,7 @@ ALTER TABLE `infrastructure_projects`
 -- AUTO_INCREMENT for table `innovations`
 --
 ALTER TABLE `innovations`
-  MODIFY `innovation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `innovation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `member`
@@ -907,7 +939,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `member_activitylog`
 --
 ALTER TABLE `member_activitylog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT for table `national_certification_performance`
@@ -992,6 +1024,12 @@ ALTER TABLE `uploads`
 --
 
 --
+-- Constraints for table `academic_services_innovation`
+--
+ALTER TABLE `academic_services_innovation`
+  ADD CONSTRAINT `fk_member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
 -- Constraints for table `activity_log`
 --
 ALTER TABLE `activity_log`
@@ -1020,6 +1058,12 @@ ALTER TABLE `employees`
 --
 ALTER TABLE `extension_awards`
   ADD CONSTRAINT `extension_awards_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
+-- Constraints for table `extension_innovations`
+--
+ALTER TABLE `extension_innovations`
+  ADD CONSTRAINT `extension_innovations_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 
 --
 -- Constraints for table `extension_linkages`

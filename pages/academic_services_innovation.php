@@ -1,6 +1,11 @@
 <?php
 session_start();
-include '../components/config.php'; 
+include '../components/config.php';
+
+if (!isset($_SESSION['member_id'])) {
+    header('Location: ../index.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +27,7 @@ include '../components/config.php';
     <?php include '../components/header.php'; ?>
     
     <div class="container mt-4">
-        <h3 class="text-center bg-primary text-white p-2">ADMINISTRATIVE SERVICE INNOVATIONS</h3>
+        <h3 class="text-center bg-primary text-white p-2">Academic and Related SERVICES INNOVATIONS</h3>
         <table class="table table-bordered text-center">
             <thead class="table-success">
                 <tr>
@@ -108,7 +113,7 @@ include '../components/config.php';
             }
 
             $.ajax({
-                url: '../controllers/save_innovations.php',
+                url: '../controllers/save_academic_innovationsController.php',
                 type: 'POST',
                 data: { innovations: JSON.stringify(innovations) },
                 success: function(response) {

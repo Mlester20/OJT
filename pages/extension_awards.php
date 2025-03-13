@@ -79,7 +79,7 @@ $member_id = $_SESSION["member_id"];
 </head>
 <body>
 
-    <?php include '../components/header_admin.php'; ?>
+    <?php include '../components/header.php'; ?>
 
     <div class="container my-5">
         <div class="awards-header text-center mb-4">

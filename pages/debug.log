@@ -1,36 +1,36 @@
 Array
 (
-    [category] => International
+    [category] => Local
     [tableData] => Array
         (
             [0] => Array
                 (
-                    [0] => Programming Contest
-                    [1] => Mark Lester
-                    [2] => IICT
-                    [3] => 2025-03-06
-                    [4] => 2025-03-07
-                    [5] => ISUR- Gym
+                    [0] => Test
+                    [1] => teste
+                    [2] => test
+                    [3] => 2025-03-13
+                    [4] => 2025-03-14
+                    [5] => test
                 )
 
             [1] => Array
                 (
-                    [0] => 
-                    [1] => 
-                    [2] => 
-                    [3] => 
-                    [4] => 
-                    [5] => 
+                    [0] => test
+                    [1] => test
+                    [2] => test
+                    [3] => 2025-03-13
+                    [4] => 2025-03-13
+                    [5] => test
                 )
 
             [2] => Array
                 (
-                    [0] => 
-                    [1] => 
-                    [2] => 
-                    [3] => 
-                    [4] => 
-                    [5] => 
+                    [0] => teset
+                    [1] => test
+                    [2] => test
+                    [3] => 2025-03-13
+                    [4] => 2025-03-13
+                    [5] => test
                 )
 
             [3] => Array

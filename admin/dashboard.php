@@ -2,10 +2,9 @@
 session_start();
 include '../components/config.php';
 
-if (empty($_SESSION['member_id'])):
+if (!isset($_SESSION['member_id'])) {
     header('Location: ../index.php');
-    exit();
-endif;
+}
 
 // Existing queries (same as before)
 $query = "SELECT COUNT(*) as total_members FROM member";

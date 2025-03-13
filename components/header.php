@@ -51,7 +51,7 @@
                                         <li><a href="#"><i class="fas fa-coins"></i> Income Generating Enterprises</a></li>
                                         <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Faculty Profile</a></li>
                                         <li><a href="trainings.php"><i class="fas fa-users-cog"></i> Trainings and Conferences</a></li>
-                                        <li><a href="#"><i class="fas fa-handshake"></i> Administrative Linkages</a></li>
+                                        <li><a href="administrative_linkages.php"><i class="fas fa-handshake"></i> Administrative Linkages</a></li>
                                         <li><a href="innovations.php"><i class="fas fa-lightbulb"></i> Administrative Service Innovations</a></li>
                                     </ul>
                                 </li>
@@ -61,17 +61,31 @@
                                         <li><a href="research.php"><i class="fas fa-book"></i>Research Center</a></li>
                                         <li><a href="research_linkages.php"><i class="fas fa-book"></i>Research Likages</a></li>
                                         <li><a href="research_funding.php"><i class="fas fa-book"></i> Research Funding</a></li>
-                                        <li><a href="non_academic_staff.php"><i class="fas fa-users"></i> On-going Research</a></li>
-                                        <li><a href="infrastructure.php"><i class="fas fa-building"></i> Researchers Presented</a></li>
-                                        <li><a href="purchase"><i class="fas fa-shopping-cart"></i> Researchers Published</a></li>
+                                        <li><a href="#"><i class="fas fa-users"></i> On-going Research</a></li>
+                                        <li><a href="#"><i class="fas fa-building"></i> Researchers Presented</a></li>
+                                        <li><a href="#"><i class="fas fa-shopping-cart"></i> Researchers Published</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Security</a></li>
+                                <li class="dropdown-item-hover">
+                                    <a href="#"><i class="fas fa-chalkboard-teacher"></i> Instruction</a>
+                                    <ul class="dropdown-submenu sub-left">
+                                        <li><a href="national_certificate.php"><i class="fas fa-book"></i>National Certificate of Performance</a></li>
+                                        <li><a href="academic_services_innovation.php"><i class="fas fa-book"></i>Academic and Related Services Innovations</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-item-hover">
+                                    <a href="#"><i class="fas fa-book-open"></i> Extension</a>
+                                    <ul class="dropdown-submenu sub-left">
+                                        <li><a href="extension_linkages.php"><i class="fas fa-book"></i>Extension Linkages</a></li>
+                                        <li><a href="extension_awards.php"><i class="fas fa-book"></i>Extension Awards and Recognition</a></li>
+                                        <li><a href="extension_training_services_innovations.php"><i class="fas fa-book"></i>Extension and Training Service Innovations</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-building me-2"></i>Planning</a></li>
+                        <!-- <li><a class="dropdown-item" href="#"><i class="fas fa-building me-2"></i>Planning</a></li>
                         <li><a class="dropdown-item" href="#"><i class="fas fa-user-tie me-2"></i>Gender and Development</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-id-badge me-2"></i>ISO QMS</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-id-badge me-2"></i>ISO QMS</a></li> -->
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

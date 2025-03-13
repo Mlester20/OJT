@@ -3,6 +3,10 @@ session_start();
 include '../components/config.php';
 include '../controllers/fetch_data.php';
 
+if (!isset($_SESSION['member_id'])) {
+    header('Location: ../index.php');
+}
+
 // Fetch the list of offices
 $offices_query = "SELECT office_name FROM office_name";
 $offices_result = mysqli_query($con, $offices_query);
@@ -37,6 +41,18 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
             text-align: center;
             margin-top: 2rem;
         }
+        @media print {
+            @page {
+            margin: 0; /* Remove default margins */
+            }
+            body {
+            margin: 0;
+            padding: 0;
+            }
+            header, footer {
+            display: none; /* Hide header and footer */
+            }
+        }
     </style>
 </head>
 <body>
@@ -45,10 +61,10 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
 
     <div class="container my-5">
         <h1 class="h2 mb-4 text-center text-primary">List of Complied Data</h1>
-        
+
         <h2 class="section-title">Awards</h2>
-        <div class="text-end mb-3">
-            <select id="officeSelect" class="form-select d-inline-block w-auto">
+        <div class="text-end mb-3 d-flex flex-column flex-md-row align-items-md-center gap-2">
+            <select id="officeSelect" class="form-select w-100 w-md-auto">
                 <option value="">Select Office</option>
                 <?php
                 if ($offices_result && mysqli_num_rows($offices_result) > 0) {
@@ -58,88 +74,94 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
                 }
                 ?>
             </select>
-            <button id="printButton" class="btn btn-primary" onclick="printAwards()">Print Awards</button>
+            <button id="printButton" class="btn btn-primary w-100 w-md-auto" onclick="printAwards()">Print Awards</button>
         </div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Award</th>
-                    <th>Conferred To</th>
-                    <th>Conferred By</th>
-                    <th>Date</th>
-                    <th>Date Ended</th>
-                    <th>Venue</th>
-                    <th>Category</th>
-                    <th>Year</th>
-                    <th>Member First</th>
-                    <th>Member Last</th>
-                    <th>Office Name</th>
-                </tr>
-            </thead>
-            <tbody id="awardsTableBody">
-                <?php
-                if (!empty($awards_data)) {
-                    foreach ($awards_data as $row) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['award']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['conferred_to']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['conferred_by']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['date']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['date_ended']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['venue']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['category']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['year']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['member_first']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['member_last']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['office_name']) . "</td>";
-                        echo "</tr>";
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Award</th>
+                        <th>Conferred To</th>
+                        <th>Conferred By</th>
+                        <th>Date</th>
+                        <th>Date Ended</th>
+                        <th>Venue</th>
+                        <th>Category</th>
+                        <th>Year</th>
+                        <th>Member First</th>
+                        <th>Member Last</th>
+                        <th>Office Name</th>
+                    </tr>
+                </thead>
+                <tbody id="awardsTableBody">
+                    <?php
+                    if (!empty($awards_data)) {
+                        foreach ($awards_data as $row) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row['award']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['conferred_to']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['conferred_by']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['date']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['date_ended']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['venue']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['category']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['year']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['member_first']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['member_last']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['office_name']) . "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='11' class='text-center'>No awards data found.</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='11'>No awards data found.</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+            </table>
+        </div>
 
         <h2 class="section-title">Employees</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Status</th>
-                    <th>Disability</th>
-                    <th>Campus</th>
-                    <th>Year</th>
-                    <th>Member First</th>
-                    <th>Member Last</th>
-                    <th>Office Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if ($employee_result && mysqli_num_rows($employee_result) > 0) {
-                    while ($row = mysqli_fetch_assoc($employee_result)) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['name']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['sex']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['employment_status']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['disability_type']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['campus']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['year']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['member_first']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['member_last']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['office_name']) . "</td>";
-                        echo "</tr>";
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Sex</th>
+                        <th>Status</th>
+                        <th>Disability</th>
+                        <th>Campus</th>
+                        <th>Year</th>
+                        <th>Member First</th>
+                        <th>Member Last</th>
+                        <th>Office Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($employee_result && mysqli_num_rows($employee_result) > 0) {
+                        while ($row = mysqli_fetch_assoc($employee_result)) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['sex']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['employment_status']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['disability_type']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['campus']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['year']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['member_first']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['member_last']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['office_name']) . "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='9' class='text-center'>No employees data found.</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='9'>No employees data found.</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+            </table>
+        </div>
 
-        <h2 class="section-title">Faculty Scholarship Grants</h2>
+    <h2 class="section-title">Faculty Scholarship Grants</h2>
+    <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -161,13 +183,15 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='4'>No faculty scholarship grants data found.</td></tr>";
+                    echo "<tr><td colspan='4' class='text-center'>No faculty scholarship grants data found.</td></tr>";
                 }
                 ?>
             </tbody>
         </table>
+    </div>
 
-        <h2 class="section-title">Non-Academic Staff Scholarship Grants</h2>
+    <h2 class="section-title">Non-Academic Staff Scholarship Grants</h2>
+    <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -189,13 +213,15 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='4'>No non-academic staff scholarship grants data found.</td></tr>";
+                    echo "<tr><td colspan='4' class='text-center'>No non-academic staff scholarship grants data found.</td></tr>";
                 }
                 ?>
             </tbody>
         </table>
+    </div>
 
-        <h2 class="section-title">Non-Academic Staff Details</h2>
+    <h2 class="section-title">Non-Academic Staff Details</h2>
+    <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -219,12 +245,14 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='5'>No non-academic staff details found.</td></tr>";
+                    echo "<tr><td colspan='5' class='text-center'>No non-academic staff details found.</td></tr>";
                 }
                 ?>
             </tbody>
         </table>
     </div>
+</div>
+
 
     <?php include '../components/footer.php'; ?>
 
