@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2025 at 08:19 AM
+-- Generation Time: Mar 13, 2025 at 08:47 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -96,6 +96,19 @@ CREATE TABLE `administrative_linkages` (
   `linkage_level` enum('International','National','Regional','Municipal/Local') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `administrative_linkages`
+--
+
+INSERT INTO `administrative_linkages` (`id`, `member_id`, `institution`, `moa_mou`, `linkage`, `date_from`, `date_to`, `created_at`, `linkage_type`, `linkage_level`) VALUES
+(14, 9, 'adas', 'asda', 'adas', '2025-03-13', '2027-12-20', '2025-03-13 07:22:43', 'international', 'International'),
+(15, 9, '', '', '', '0000-00-00', '0000-00-00', '2025-03-13 07:22:44', 'international', 'International'),
+(16, 9, '', '', '', '0000-00-00', '0000-00-00', '2025-03-13 07:22:44', 'international', 'International'),
+(17, 9, '', '', '', '0000-00-00', '0000-00-00', '2025-03-13 07:22:44', 'international', 'International'),
+(18, 9, '', '', '', '0000-00-00', '0000-00-00', '2025-03-13 07:22:44', 'international', 'International'),
+(19, 9, '', '', '', '0000-00-00', '0000-00-00', '2025-03-13 07:22:44', 'regional', 'Regional'),
+(20, 9, '', '', '', '0000-00-00', '0000-00-00', '2025-03-13 07:22:44', 'municipal', 'Regional');
+
 -- --------------------------------------------------------
 
 --
@@ -144,7 +157,8 @@ CREATE TABLE `designation` (
 
 INSERT INTO `designation` (`designation_id`, `designation_name`) VALUES
 (1, 'Faculty'),
-(3, 'Campus Administration');
+(3, 'Campus Administration'),
+(4, 'Staff');
 
 -- --------------------------------------------------------
 
@@ -363,7 +377,12 @@ INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `offi
 (155, 9, '2025-03-13 14:45:30', 20, 'Oldsite'),
 (156, 12, '2025-03-13 14:47:59', 36, 'Newsite'),
 (157, 12, '2025-03-13 14:50:15', 36, 'Newsite'),
-(158, 9, '2025-03-13 15:07:50', 20, 'Oldsite');
+(158, 9, '2025-03-13 15:07:50', 20, 'Oldsite'),
+(159, 9, '2025-03-13 15:22:17', 20, 'Oldsite'),
+(160, 9, '2025-03-13 15:25:07', 20, 'Oldsite'),
+(161, 12, '2025-03-13 15:26:41', 36, 'Newsite'),
+(162, 12, '2025-03-13 15:30:01', 36, 'Newsite'),
+(163, 12, '2025-03-13 15:32:53', 36, 'Newsite');
 
 -- --------------------------------------------------------
 
@@ -428,17 +447,28 @@ INSERT INTO `office_name` (`office_id`, `office_name`, `office_address`) VALUES
 (23, 'Academic Affairs', 'Newsite'),
 (24, 'Research', 'Newsite'),
 (25, 'REGISTRAR', 'Newsite'),
-(26, 'GUIDANCE', 'Newsite'),
+(26, 'Guidance', 'Newsite'),
 (27, 'Office of Student Affairs and Services', 'Newsite'),
-(28, 'RECORDS', 'Newsite'),
-(29, 'BUDGET', 'Newsite'),
+(28, 'Records', 'Newsite'),
+(29, 'Budget', 'Newsite'),
 (30, 'Cashiering', 'Newsite'),
 (31, 'Human Resource', 'Newsite'),
-(32, 'ACCOUNTING', 'Newsite'),
-(33, 'MEDICAL/DENTAL', 'Newsite/Oldsite'),
+(32, 'Accounting', 'Newsite'),
+(33, 'Medical/Dental', 'Newsite/Oldsite'),
 (34, 'SUPPLY', 'Newsite'),
-(35, 'PROCUREMENT', 'Newsite'),
-(36, 'Planning, Management of Information and Services', 'Newsite');
+(35, 'Procurement', 'Newsite'),
+(36, 'Planning, Management of Information and Services', 'Newsite'),
+(37, 'College of Education', 'Newsite'),
+(38, 'Supreme Student Council', 'Newsite'),
+(39, 'Publication', 'Newsite'),
+(40, 'School of Agriculture and Agribusiness', 'Newsite'),
+(41, 'Admin Office', 'Newsite'),
+(42, 'Extension', 'Newsite'),
+(43, 'General Services', 'Oldsite'),
+(44, 'Cgrmo', 'Oldsite'),
+(45, 'Pif', 'Oldsite'),
+(46, 'Sports', 'Oldsite'),
+(47, 'Socio Cultural', 'Oldsite');
 
 -- --------------------------------------------------------
 
@@ -873,7 +903,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `administrative_linkages`
 --
 ALTER TABLE `administrative_linkages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `awards`
@@ -885,7 +915,7 @@ ALTER TABLE `awards`
 -- AUTO_INCREMENT for table `designation`
 --
 ALTER TABLE `designation`
-  MODIFY `designation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `designation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `dynamic_table`
@@ -939,7 +969,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `member_activitylog`
 --
 ALTER TABLE `member_activitylog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT for table `national_certification_performance`
@@ -957,7 +987,7 @@ ALTER TABLE `non_academic_staff`
 -- AUTO_INCREMENT for table `office_name`
 --
 ALTER TABLE `office_name`
-  MODIFY `office_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `office_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `officials`
