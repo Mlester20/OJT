@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2025 at 08:47 AM
+-- Generation Time: Mar 17, 2025 at 07:41 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -298,6 +298,23 @@ INSERT INTO `innovations` (`innovation_id`, `member_id`, `name_of_innovation`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `instruction_student_disability`
+--
+
+CREATE TABLE `instruction_student_disability` (
+  `student_id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `sex` varchar(10) DEFAULT NULL,
+  `program_enrolled` varchar(100) DEFAULT NULL,
+  `year_level` varchar(100) DEFAULT NULL,
+  `type_of_disability` varchar(255) DEFAULT NULL,
+  `campus` varchar(50) DEFAULT NULL,
+  `member_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `member`
 --
 
@@ -382,7 +399,16 @@ INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `offi
 (160, 9, '2025-03-13 15:25:07', 20, 'Oldsite'),
 (161, 12, '2025-03-13 15:26:41', 36, 'Newsite'),
 (162, 12, '2025-03-13 15:30:01', 36, 'Newsite'),
-(163, 12, '2025-03-13 15:32:53', 36, 'Newsite');
+(163, 12, '2025-03-13 15:32:53', 36, 'Newsite'),
+(164, 12, '2025-03-14 10:11:30', 36, 'Newsite'),
+(165, 12, '2025-03-14 11:30:30', 36, 'Newsite'),
+(166, 9, '2025-03-14 12:16:57', 20, 'Oldsite'),
+(167, 12, '2025-03-14 12:24:23', 36, 'Newsite'),
+(168, 12, '2025-03-17 10:36:31', 36, 'Newsite'),
+(169, 12, '2025-03-17 11:10:58', 36, 'Newsite'),
+(170, 12, '2025-03-17 12:56:18', 36, 'Newsite'),
+(171, 9, '2025-03-17 13:41:21', 20, 'Oldsite'),
+(172, 12, '2025-03-17 14:19:21', 36, 'Newsite');
 
 -- --------------------------------------------------------
 
@@ -512,7 +538,8 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`purchase_id`, `member_id`, `item`, `purpose`, `amount`, `purchase_date`) VALUES
-(1, 9, 'Laptop', 'For Interns', 25000.00, '2025-03-05 02:40:56');
+(1, 9, 'Laptop', 'For Interns', 25000.00, '2025-03-05 02:40:56'),
+(2, 12, 'Laptop', 'Interns', 15000.00, '2025-03-14 03:27:19');
 
 -- --------------------------------------------------------
 
@@ -772,6 +799,13 @@ ALTER TABLE `innovations`
   ADD KEY `member_id` (`member_id`);
 
 --
+-- Indexes for table `instruction_student_disability`
+--
+ALTER TABLE `instruction_student_disability`
+  ADD PRIMARY KEY (`student_id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
 -- Indexes for table `member`
 --
 ALTER TABLE `member`
@@ -960,6 +994,12 @@ ALTER TABLE `innovations`
   MODIFY `innovation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `instruction_student_disability`
+--
+ALTER TABLE `instruction_student_disability`
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
@@ -969,7 +1009,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `member_activitylog`
 --
 ALTER TABLE `member_activitylog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
 
 --
 -- AUTO_INCREMENT for table `national_certification_performance`
@@ -999,7 +1039,7 @@ ALTER TABLE `officials`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `purchase_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `purchase_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `rank`
@@ -1112,6 +1152,12 @@ ALTER TABLE `infrastructure_projects`
 --
 ALTER TABLE `innovations`
   ADD CONSTRAINT `innovations_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `instruction_student_disability`
+--
+ALTER TABLE `instruction_student_disability`
+  ADD CONSTRAINT `instruction_student_disability_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 
 --
 -- Constraints for table `member`

@@ -273,11 +273,11 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
                 const printWindow = window.open('', '_blank');
                 printWindow.document.write('<html><head><title>Print Awards - ' + officeName + '</title>');
                 printWindow.document.write('<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">');
-                printWindow.document.write('<style>.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; } .header img { height: 80px; } .header h1 { text-align: center; flex-grow: 1; margin: 0; } .table { width: 100%; margin-bottom: 1rem; color: #212529; } .table th, .table td { padding: 0.75rem; vertical-align: top; border-top: 1px solid #dee2e6; } .table thead th { vertical-align: bottom; border-bottom: 2px solid #dee2e6; } .table tbody + tbody { border-top: 2px solid #dee2e6; } .container { max-width: 900px; margin: auto; }</style>');
+                printWindow.document.write('<style>.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; } .header img { height: 80px; } .header-text { text-align: center; flex-grow: 1; margin: 0; } .table { width: 100%; margin-bottom: 1rem; color: #212529; } .table th, .table td { padding: 0.75rem; vertical-align: top; border-top: 1px solid #dee2e6; } .table thead th { vertical-align: bottom; border-bottom: 2px solid #dee2e6; } .table tbody + tbody { border-top: 2px solid #dee2e6; } .container { max-width: 900px; margin: auto; }</style>');
                 printWindow.document.write('</head><body>');
                 printWindow.document.write('<div class="container">');
                 const images = officeImages[officeName] || ['', ''];
-                printWindow.document.write('<div class="header"><img src="' + images[0] + '" alt="Logo 1"><h6>' + officeName + '</h6><img src="' + images[1] + '" alt="Logo 2"></div>');
+                printWindow.document.write('<div class="header"><img src="' + images[1] + '" alt="Logo 1"><h5 class="header-text">' + 'Isabela State University <br>Roxas Campus</div>');
                 printWindow.document.write('<table class="table table-bordered"><thead><tr><th>Award</th><th>Conferred To</th><th>Conferred By</th><th>Date</th><th>Date Ended</th><th>Venue</th><th>Category</th></tr></thead><tbody>');
                 if (filteredData.length > 0) {
                     filteredData.forEach(row => {
