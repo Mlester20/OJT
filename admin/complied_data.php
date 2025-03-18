@@ -7,10 +7,6 @@ if (!isset($_SESSION['member_id'])) {
     header('Location: ../index.php');
 }
 
-// Fetch the list of offices
-$offices_query = "SELECT office_name FROM office_name";
-$offices_result = mysqli_query($con, $offices_query);
-
 // Fetch all awards data
 $awards_query = "SELECT award, conferred_to, conferred_by, date, date_ended, venue, category, year, member_first, member_last, office_name 
                  FROM awards 
@@ -36,6 +32,7 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/hover.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .section-title {
             text-align: center;
@@ -64,15 +61,12 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
 
         <h2 class="section-title">Awards</h2>
         <div class="text-end mb-3 d-flex flex-column flex-md-row align-items-md-center gap-2">
-            <select id="officeSelect" class="form-select w-100 w-md-auto">
-                <option value="">Select Office</option>
-                <?php
-                if ($offices_result && mysqli_num_rows($offices_result) > 0) {
-                    while ($office = mysqli_fetch_assoc($offices_result)) {
-                        echo '<option value="' . htmlspecialchars($office['office_name']) . '">' . htmlspecialchars($office['office_name']) . '</option>';
-                    }
-                }
-                ?>
+            <select id="categorySelect" class="form-select w-100 w-md-auto">
+                <option value="">Select Category</option>
+                <option value="International">International</option>
+                <option value="National">National</option>
+                <option value="Regional">Regional</option>
+                <option value="Local">Local</option>
             </select>
             <button id="printButton" class="btn btn-primary w-100 w-md-auto" onclick="printAwards()">Print Awards</button>
         </div>
@@ -251,7 +245,8 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
             </tbody>
         </table>
     </div>
-</div>
+
+    </div>
 
 
     <?php include '../components/footer.php'; ?>
@@ -259,51 +254,126 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
     <script>
         const awardsData = <?php echo json_encode($awards_data); ?>;
 
-        // Define a mapping of office names to image paths
-        const officeImages = {
-            'College of Criminal Justice Education': ['../images/ccje.jpg', '../images/isu-logo.png'],
-            'Institute of Information and Communication Technology': ['../images/iict.png', '../images/isu-logo.png'],
-            // Add more office names and their corresponding image paths here
-        };
-
         function printAwards() {
-            const officeName = document.getElementById('officeSelect').value;
-            if (officeName) {
-                const filteredData = awardsData.filter(row => row.office_name === officeName);
+            const category = document.getElementById('categorySelect').value;
+            if (category) {
+                const filteredData = awardsData.filter(row => row.category === category);
                 const printWindow = window.open('', '_blank');
-                printWindow.document.write('<html><head><title>Print Awards - ' + officeName + '</title>');
-                printWindow.document.write('<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">');
-                printWindow.document.write('<style>.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; } .header img { height: 80px; } .header-text { text-align: center; flex-grow: 1; margin: 0; } .table { width: 100%; margin-bottom: 1rem; color: #212529; } .table th, .table td { padding: 0.75rem; vertical-align: top; border-top: 1px solid #dee2e6; } .table thead th { vertical-align: bottom; border-bottom: 2px solid #dee2e6; } .table tbody + tbody { border-top: 2px solid #dee2e6; } .container { max-width: 900px; margin: auto; }</style>');
-                printWindow.document.write('</head><body>');
-                printWindow.document.write('<div class="container">');
-                const images = officeImages[officeName] || ['', ''];
-                printWindow.document.write('<div class="header"><img src="' + images[1] + '" alt="Logo 1"><h5 class="header-text">' + 'Isabela State University <br>Roxas Campus</div>');
-                printWindow.document.write('<table class="table table-bordered"><thead><tr><th>Award</th><th>Conferred To</th><th>Conferred By</th><th>Date</th><th>Date Ended</th><th>Venue</th><th>Category</th></tr></thead><tbody>');
+
+                printWindow.document.write(`
+                                <html>
+                                <head>
+                                    <title>Print Awards - ${category}</title>
+                                    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+                                    <style>
+                                        .header { text-align: center; margin-bottom: 2rem; }
+                                        .header img { height: 80px; margin-bottom: 10px; }
+                                        .table { width: 100%; margin-bottom: 1rem; color: #212529; }
+                                        .table th, .table td { padding: 0.75rem; text-align: center; border: 1px solid #dee2e6; }
+                                        .container { max-width: 900px; margin: auto; }
+                                    </style>
+                                </head>
+                                <body>
+                                    <div class="container">
+                                        <div class="header">
+                                            <img src="../images/isu-logo.png" alt="ISU Logo">
+                                            <h5>Isabela State University <br>Roxas, Isabela</h5>
+                                            <h6 style="margin-top: 25px;">${category} Awards</h6>
+                                        </div>
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Award</th>
+                                                    <th>Conferred To</th>
+                                                    <th>Conferred By</th>
+                                                    <th>Date</th>
+                                                    <th>Date Ended</th>
+                                                    <th>Venue</th>
+                                                    <th>Category</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                            `);
+
                 if (filteredData.length > 0) {
                     filteredData.forEach(row => {
-                        printWindow.document.write('<tr>');
-                        printWindow.document.write('<td>' + row.award + '</td>');
-                        printWindow.document.write('<td>' + row.conferred_to + '</td>');
-                        printWindow.document.write('<td>' + row.conferred_by + '</td>');
-                        printWindow.document.write('<td>' + row.date + '</td>');
-                        printWindow.document.write('<td>' + row.date_ended + '</td>');
-                        printWindow.document.write('<td>' + row.venue + '</td>');
-                        printWindow.document.write('<td>' + row.category + '</td>');
-                        printWindow.document.write('</tr>');
+                        printWindow.document.write(`
+                            <tr>
+                                <td>${row.award}</td>
+                                <td>${row.conferred_to}</td>
+                                <td>${row.conferred_by}</td>
+                                <td>${row.date}</td>
+                                <td>${row.date_ended}</td>
+                                <td>${row.venue}</td>
+                                <td>${row.category}</td>
+                            </tr>
+                        `);
                     });
                 } else {
-                    printWindow.document.write('<tr><td colspan="7">No awards data found.</td></tr>');
+                    printWindow.document.write(`<tr><td colspan="7">No awards data found for ${category} category.</td></tr>`);
                 }
-                printWindow.document.write('</tbody></table></div>');
-                printWindow.document.write('<script>window.print();<\/script>');
-                printWindow.document.write('</body></html>');
+
+                printWindow.document.write(`
+                                </tbody>
+                            </table>
+                        </div>
+                        <script>window.print();<\/script>
+                    </body>
+                    </html>
+                `);
                 printWindow.document.close();
             } else {
-                alert('Please select an office.');
+                alert('Please select a category.');
             }
         }
+
+        // Update table when category is selected
+        document.getElementById('categorySelect').addEventListener('change', function() {
+            const category = this.value;
+            const tableBody = document.getElementById('awardsTableBody');
+            tableBody.innerHTML = '';
+            
+            if (category === '') {
+                // Show all data when no category is selected
+                awardsData.forEach(row => {
+                    addRowToTable(row, tableBody);
+                });
+            } else {
+                // Filter data by selected category
+                const filteredData = awardsData.filter(row => row.category === category);
+                
+                if (filteredData.length > 0) {
+                    filteredData.forEach(row => {
+                        addRowToTable(row, tableBody);
+                    });
+                } else {
+                    tableBody.innerHTML = `<tr><td colspan="11" class="text-center">No awards data found for ${category} category.</td></tr>`;
+                }
+            }
+        });
+
+        function addRowToTable(row, tableBody) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.award}</td>
+                <td>${row.conferred_to}</td>
+                <td>${row.conferred_by}</td>
+                <td>${row.date}</td>
+                <td>${row.date_ended}</td>
+                <td>${row.venue}</td>
+                <td>${row.category}</td>
+                <td>${row.year}</td>
+                <td>${row.member_first}</td>
+                <td>${row.member_last}</td>
+                <td>${row.office_name}</td>
+            `;
+            tableBody.appendChild(tr);
+        }
     </script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="../js/notif.js"></script>
 </body>
 </html>

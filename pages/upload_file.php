@@ -7,50 +7,63 @@ if (!isset($_SESSION['member_id'])) {
 }
 
 $member_id = $_SESSION['member_id'];
+$file_name = ""; // Initialize $file_name to avoid "undefined variable" error
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
     $target_dir = "../uploads/";
-    $target_file = $target_dir . basename($_FILES["file"]["name"]);
+    $file_name = basename($_FILES["file"]["name"]);
+    $target_file = $target_dir . $file_name;
     $uploadOk = 1;
     $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
+    // Check if file already exists
     if (file_exists($target_file)) {
-        echo "<script>alert('Sorry, file already exists.');document.location='upload.php'</script>";
+        echo "<script>alert('Sorry, file already exists.');document.location='upload_file.php'</script>";
         $uploadOk = 0;
     }
 
+    // Check file size (limit: 5MB)
     if ($_FILES["file"]["size"] > 5000000) {
-        echo "<script>alert('Sorry, your file is too large.');document.location='upload.php'</script>";
+        echo "<script>alert('Sorry, your file is too large.');document.location='upload_file.php'</script>";
         $uploadOk = 0;
     }
 
-    $allowed_types = array("jpg", "png", "jpeg", "gif", "pdf", "doc", "docx", "xls", "xlsx");
+    // Allow only specific file formats
+    $allowed_types = ["jpg", "png", "jpeg", "gif", "pdf", "doc", "docx", "xls", "xlsx"];
     if (!in_array($fileType, $allowed_types)) {
-        echo "<script>alert('Sorry, only JPG, JPEG, PNG, GIF, PDF, DOC, DOCX, XLS, and XLSX files are allowed.');document.location='upload.php'</script>";
+        echo "<script>alert('Sorry, only JPG, JPEG, PNG, GIF, PDF, DOC, DOCX, XLS, and XLSX files are allowed.');document.location='upload_file.php'</script>";
         $uploadOk = 0;
     }
 
-    if ($uploadOk == 0) {
-        echo "<script>alert('Sorry, your file was not uploaded.');document.location='upload.php'</script>";
-    } else {
+    if ($uploadOk == 1) {
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-            $file_name = basename($_FILES["file"]["name"]);
-            $file_path = $target_file;
+            $file_path = htmlspecialchars($target_file, ENT_QUOTES, 'UTF-8');
 
-            // Insert file info into database
+            // Insert file info into the database
             $stmt = $con->prepare("INSERT INTO uploads (member_id, file_name, file_path) VALUES (?, ?, ?)");
             if ($stmt === false) {
-                die('Prepare failed: ' . htmlspecialchars($con->error));
+                die('Database Error: ' . htmlspecialchars($con->error));
             }
             $stmt->bind_param("iss", $member_id, $file_name, $file_path);
+            
             if ($stmt->execute()) {
-                echo "<script>alert('File Uploaded Successfully!');document.location='upload.php'</script>";
+                // Insert notification into the database
+                $notif_message = "User " . $member_id . " uploaded a new file: " . $file_name;
+                $notif_stmt = $con->prepare("INSERT INTO notifications (member_id, message, is_read, created_at) VALUES (?, ?, 0, NOW())");
+                if ($notif_stmt === false) {
+                    die('Database Error: ' . htmlspecialchars($con->error));
+                }
+                $notif_stmt->bind_param("is", $member_id, $notif_message);
+                $notif_stmt->execute();
+                $notif_stmt->close();
+
+                echo "<script>alert('File Uploaded Successfully!');document.location='upload_file.php'</script>";
             } else {
-                echo "<script>alert('Sorry, there was an error uploading your file.');document.location='upload.php'</script>";
+                echo "<script>alert('Sorry, there was an error uploading your file.');document.location='upload_file.php'</script>";
             }
             $stmt->close();
         } else {
-            echo "<script>alert('Sorry, there was an error uploading your file.');document.location='upload.php'</script>";
+            echo "<script>alert('Sorry, there was an error uploading your file.');document.location='upload_file.php'</script>";
         }
     }
 }
@@ -73,15 +86,18 @@ $files_query = "
     WHERE 
         u.member_id = ?
 ";
+
 $stmt = $con->prepare($files_query);
 if ($stmt === false) {
-    die('Prepare failed: ' . htmlspecialchars($con->error));
+    die('Database Error: ' . htmlspecialchars($con->error));
 }
 $stmt->bind_param("i", $member_id);
 $stmt->execute();
 $files_result = $stmt->get_result();
 $stmt->close();
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -116,7 +132,7 @@ $stmt->close();
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="upload.php" method="post" enctype="multipart/form-data">
+                        <form action="upload_file.php" method="post" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="file" class="form-label">Choose file to upload:</label>
                                 <input type="file" class="form-control" id="file" name="file" required>

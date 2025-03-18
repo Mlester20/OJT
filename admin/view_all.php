@@ -103,5 +103,6 @@ include '../controllers/fetch_data.php';
             });
         });
     </script>
+    <script src="../js/notif.js"></script>
 </body>
 </html>

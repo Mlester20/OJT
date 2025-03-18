@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2025 at 07:41 AM
+-- Generation Time: Mar 18, 2025 at 08:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -197,7 +197,8 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`employee_id`, `name`, `sex`, `employment_status`, `disability_type`, `campus`, `date_created`, `member_id`, `year`) VALUES
-(32, 'John Doe', 'Male', 'Testing', 'N/A', 'Roxas', '2025-03-03 05:56:40', 9, 2025);
+(32, 'John Doe', 'Male', 'Testing', 'N/A', 'Roxas', '2025-03-03 05:56:40', 9, 2025),
+(33, 'John Doe', 'Male', 'NA', 'TEST', 'TEST', '2025-03-18 04:40:32', 12, 2025);
 
 -- --------------------------------------------------------
 
@@ -256,6 +257,20 @@ CREATE TABLE `extension_linkages` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `linkage_type` varchar(50) NOT NULL,
   `linkage_level` enum('International','National','Regional','Municipal/Local') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `folders`
+--
+
+CREATE TABLE `folders` (
+  `folder_id` int(11) NOT NULL,
+  `folder_name` varchar(255) NOT NULL,
+  `parent_id` int(11) DEFAULT 0,
+  `member_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -364,51 +379,8 @@ CREATE TABLE `member_activitylog` (
 --
 
 INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `office_id`, `office_address`) VALUES
-(128, 9, '2025-03-10 10:54:32', 20, 'Oldsite'),
-(129, 9, '2025-03-10 10:54:53', 20, 'Oldsite'),
-(130, 12, '2025-03-10 10:55:16', 36, 'Newsite'),
-(131, 12, '2025-03-10 10:55:29', 36, 'Newsite'),
-(132, 12, '2025-03-10 11:01:46', 36, 'Newsite'),
-(133, 12, '2025-03-10 11:04:23', 36, 'Newsite'),
-(134, 12, '2025-03-10 11:05:06', 36, 'Newsite'),
-(135, 9, '2025-03-10 14:49:06', 20, 'Oldsite'),
-(136, 12, '2025-03-10 14:54:54', 36, 'Newsite'),
-(137, 12, '2025-03-10 14:56:41', 36, 'Newsite'),
-(138, 9, '2025-03-10 15:01:24', 20, 'Oldsite'),
-(139, 14, '2025-03-10 16:07:57', 21, 'Newsite'),
-(140, 9, '2025-03-10 16:08:09', 20, 'Oldsite'),
-(141, 12, '2025-03-11 09:32:51', 36, 'Newsite'),
-(142, 9, '2025-03-11 09:36:05', 20, 'Oldsite'),
-(143, 12, '2025-03-11 10:44:36', 36, 'Newsite'),
-(144, 12, '2025-03-12 08:55:43', 36, 'Newsite'),
-(145, 12, '2025-03-12 09:40:46', 36, 'Newsite'),
-(146, 12, '2025-03-12 11:40:34', 36, 'Newsite'),
-(147, 9, '2025-03-12 11:40:54', 20, 'Oldsite'),
-(148, 12, '2025-03-12 12:27:18', 36, 'Newsite'),
-(149, 12, '2025-03-13 10:45:31', 36, 'Newsite'),
-(150, 9, '2025-03-13 12:51:25', 20, 'Oldsite'),
-(151, 9, '2025-03-13 13:01:37', 20, 'Oldsite'),
-(152, 12, '2025-03-13 14:34:04', 36, 'Newsite'),
-(153, 9, '2025-03-13 14:39:18', 20, 'Oldsite'),
-(154, 12, '2025-03-13 14:44:18', 36, 'Newsite'),
-(155, 9, '2025-03-13 14:45:30', 20, 'Oldsite'),
-(156, 12, '2025-03-13 14:47:59', 36, 'Newsite'),
-(157, 12, '2025-03-13 14:50:15', 36, 'Newsite'),
-(158, 9, '2025-03-13 15:07:50', 20, 'Oldsite'),
-(159, 9, '2025-03-13 15:22:17', 20, 'Oldsite'),
-(160, 9, '2025-03-13 15:25:07', 20, 'Oldsite'),
-(161, 12, '2025-03-13 15:26:41', 36, 'Newsite'),
-(162, 12, '2025-03-13 15:30:01', 36, 'Newsite'),
-(163, 12, '2025-03-13 15:32:53', 36, 'Newsite'),
-(164, 12, '2025-03-14 10:11:30', 36, 'Newsite'),
-(165, 12, '2025-03-14 11:30:30', 36, 'Newsite'),
-(166, 9, '2025-03-14 12:16:57', 20, 'Oldsite'),
-(167, 12, '2025-03-14 12:24:23', 36, 'Newsite'),
-(168, 12, '2025-03-17 10:36:31', 36, 'Newsite'),
-(169, 12, '2025-03-17 11:10:58', 36, 'Newsite'),
-(170, 12, '2025-03-17 12:56:18', 36, 'Newsite'),
-(171, 9, '2025-03-17 13:41:21', 20, 'Oldsite'),
-(172, 12, '2025-03-17 14:19:21', 36, 'Newsite');
+(180, 9, '2025-03-18 15:29:39', 20, 'Oldsite'),
+(181, 9, '2025-03-18 15:36:06', 20, 'Oldsite');
 
 -- --------------------------------------------------------
 
@@ -449,6 +421,27 @@ CREATE TABLE `non_academic_staff` (
   `total_count` int(11) GENERATED ALWAYS AS (`male_count` + `female_count`) STORED,
   `year` int(11) DEFAULT year(current_timestamp())
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `is_read` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `member_id`, `message`, `is_read`, `created_at`) VALUES
+(5, 9, 'User 9 uploaded a new file: IRREGULAR.docx', 1, '2025-03-18 07:36:17');
 
 -- --------------------------------------------------------
 
@@ -671,6 +664,20 @@ CREATE TABLE `scholarship_grants` (
   `year` int(11) DEFAULT year(current_timestamp())
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `scholarship_grants`
+--
+
+INSERT INTO `scholarship_grants` (`id`, `member_id`, `type_of_scholarship`, `doctorate_male`, `doctorate_female`, `doctorate_total`, `masters_male`, `masters_female`, `masters_total`, `post_baccalaureate_male`, `post_baccalaureate_female`, `post_baccalaureate_total`, `baccalaureate_male`, `baccalaureate_female`, `baccalaureate_total`, `non_degree_male`, `non_degree_female`, `non_degree_total`, `created_at`, `updated_at`, `category`, `year`) VALUES
+(58, 12, 'Institutional Scholarship', 1, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-03-18 04:41:14', '2025-03-18 04:41:14', 'Faculty', 2025),
+(59, 12, 'Government-sponsored Scholarship', 2, 2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-03-18 04:41:14', '2025-03-18 04:41:14', 'Faculty', 2025),
+(60, 12, 'Private, NGOs and Other Scholarship', 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-03-18 04:41:14', '2025-03-18 04:41:14', 'Faculty', 2025),
+(61, 12, 'Merit Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-03-18 04:41:14', '2025-03-18 04:41:14', 'Faculty', 2025),
+(62, 12, 'Institutional Scholarship', 2, 2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-03-18 04:41:48', '2025-03-18 04:41:48', 'Non-Academic Staff', 2025),
+(63, 12, 'Government-sponsored Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-03-18 04:41:48', '2025-03-18 04:41:48', 'Non-Academic Staff', 2025),
+(64, 12, 'Private, NGOs and Other Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-03-18 04:41:48', '2025-03-18 04:41:48', 'Non-Academic Staff', 2025),
+(65, 12, 'Merit Scholarship', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2025-03-18 04:41:48', '2025-03-18 04:41:48', 'Non-Academic Staff', 2025);
+
 -- --------------------------------------------------------
 
 --
@@ -703,8 +710,16 @@ CREATE TABLE `uploads` (
   `member_id` int(11) NOT NULL,
   `file_name` varchar(255) NOT NULL,
   `file_path` varchar(255) NOT NULL,
-  `upload_date` timestamp NOT NULL DEFAULT current_timestamp()
+  `upload_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `folder_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `uploads`
+--
+
+INSERT INTO `uploads` (`id`, `member_id`, `file_name`, `file_path`, `upload_date`, `folder_id`) VALUES
+(9, 9, 'IRREGULAR.docx', '../uploads/IRREGULAR.docx', '2025-03-18 07:36:17', NULL);
 
 --
 -- Indexes for dumped tables
@@ -785,6 +800,13 @@ ALTER TABLE `extension_linkages`
   ADD KEY `member_id` (`member_id`);
 
 --
+-- Indexes for table `folders`
+--
+ALTER TABLE `folders`
+  ADD PRIMARY KEY (`folder_id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
 -- Indexes for table `infrastructure_projects`
 --
 ALTER TABLE `infrastructure_projects`
@@ -835,6 +857,13 @@ ALTER TABLE `national_certification_performance`
 --
 ALTER TABLE `non_academic_staff`
   ADD PRIMARY KEY (`staff_id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `member_id` (`member_id`);
 
 --
@@ -961,7 +990,7 @@ ALTER TABLE `dynamic_table`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `extension_awards`
@@ -980,6 +1009,12 @@ ALTER TABLE `extension_innovations`
 --
 ALTER TABLE `extension_linkages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `folders`
+--
+ALTER TABLE `folders`
+  MODIFY `folder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `infrastructure_projects`
@@ -1009,7 +1044,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `member_activitylog`
 --
 ALTER TABLE `member_activitylog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
 -- AUTO_INCREMENT for table `national_certification_performance`
@@ -1022,6 +1057,12 @@ ALTER TABLE `national_certification_performance`
 --
 ALTER TABLE `non_academic_staff`
   MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `office_name`
@@ -1075,7 +1116,7 @@ ALTER TABLE `salut`
 -- AUTO_INCREMENT for table `scholarship_grants`
 --
 ALTER TABLE `scholarship_grants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `trainings_conferences`
@@ -1087,7 +1128,7 @@ ALTER TABLE `trainings_conferences`
 -- AUTO_INCREMENT for table `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
@@ -1142,6 +1183,12 @@ ALTER TABLE `extension_linkages`
   ADD CONSTRAINT `extension_linkages_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 
 --
+-- Constraints for table `folders`
+--
+ALTER TABLE `folders`
+  ADD CONSTRAINT `folders_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
 -- Constraints for table `infrastructure_projects`
 --
 ALTER TABLE `infrastructure_projects`
@@ -1186,6 +1233,12 @@ ALTER TABLE `national_certification_performance`
 --
 ALTER TABLE `non_academic_staff`
   ADD CONSTRAINT `non_academic_staff_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
+-- Constraints for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `officials`

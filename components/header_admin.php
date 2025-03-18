@@ -46,6 +46,14 @@
                     </ul> 
                 </li>
 
+                <!-- notifications -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bell"></i> Notifications <span id="notifCount" class="badge bg-danger"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="notifList"></ul>
+                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownServices" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-hammer me-1"></i>Services
@@ -102,22 +110,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <!-- <li><a class="dropdown-item" href="#"><i class="fas fa-building me-2"></i>Planning</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user-tie me-2"></i>Gender and Development</a></li> 
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-id-badge me-2"></i>ISO QMS</a></li> -->
                     </ul> 
                 </li>
-
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSettings" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-cog me-1"></i>Settings
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownSettings">
-                        
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user-tie me-2"></i>Set Quarterly</a></li>
-                    </ul> 
-                </li> -->
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user-circle me-1"></i>
@@ -160,3 +154,4 @@
         color: #000;
     }
 </style>
+

@@ -95,7 +95,7 @@
                         <?php echo isset($_SESSION['full_name']) ? $_SESSION['full_name'] : 'Guest'; ?>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="./profile.php">
+                        <li><a class="dropdown-item" href="profile.php">
                             <i class="fas fa-user me-2"></i> Profile
                         </a></li>
                         <li><a class="dropdown-item" href="logout.php" onclick="return confirm('Are you sure you want to logout?')">Logout</a></li>

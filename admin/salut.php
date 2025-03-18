@@ -168,5 +168,6 @@ if(isset($_POST['delete'])){
         });
     });
     </script>
+    <script src="../js/notif.js"></script>
 </body>
 </html>

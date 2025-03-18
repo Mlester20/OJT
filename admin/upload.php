@@ -117,6 +117,8 @@ $stmt->close();
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="stylesheet" href="../styles/hover.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -218,5 +220,6 @@ $stmt->close();
             });
         });
     </script>
+    <script src="../js/notif.js"></script>
 </body>
 </html>

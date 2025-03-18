@@ -1,7 +1,7 @@
 import time
 import sys
 
-# Function to create a simple loading animation
+
 def loading_animation(message, duration=3):
     print(message, end="")
     for _ in range(duration):
@@ -10,7 +10,7 @@ def loading_animation(message, duration=3):
         time.sleep(0.5)
     print("\n")
 
-# Initial Setup
+
 pin = '1234'
 balance = 10000
 attempts = 3

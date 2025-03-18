@@ -99,6 +99,7 @@ $result = mysqli_query($con, $query);
     </div>
 
     <?php include '../components/footer.php'; ?>
+    <script src="../js/notif.js"></script>
 
 </body>
 </html>
