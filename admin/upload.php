@@ -119,6 +119,7 @@ $stmt->close();
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/hover.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../styles/darkLight.css">
 </head>
 <body>
 
@@ -160,9 +161,7 @@ $stmt->close();
         </div>
 
 
-
-
-        <h4 class="card-title text-muted text-center text-success" style="margin-top: 2rem;">Uploaded Files</h4>
+        <h4 class="card-title text-center" style="margin-top: 2rem;">Uploaded Files</h4>
         <table class="table table-bordered" style="margin-top: 2rem;">
             <thead>
                 <tr>
@@ -203,6 +202,7 @@ $stmt->close();
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="../js/darkLight.js"></script>
     <script>
         document.getElementById('searchInput').addEventListener('keyup', function() {
             let filter = this.value.toLowerCase();

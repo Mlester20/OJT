@@ -19,6 +19,8 @@ if (!isset($_SESSION['member_id'])) {
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../styles/user_header.css">
+    <link rel="stylesheet" href="../styles/darkLight.css">
+    <script src="../js/darkLight.js"></script>
     <link rel="stylesheet" href="../styles/hover.css">
 </head>
 <body>

@@ -46,8 +46,10 @@ if(isset($_POST['delete'])){
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="stylesheet" href="../styles/darkLight.css">
+    <script src="../js/darkLight.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-
 <style>
     .header-section {
         display: flex;
@@ -125,11 +127,10 @@ if(isset($_POST['delete'])){
         padding: 0 20px;
     }
 </style>
-
 <body>
     <?php include '../components/header_admin.php'; ?>
 
-    <div class="container" style="margin-top: 30px;">
+    <div class="container fade-in" style="margin-top: 30px;">
         <div class="header-section">
             <h3 class="card-title text-center">Offices/Departments</h3>
             <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addOfficeModal">
@@ -235,7 +236,7 @@ if(isset($_POST['delete'])){
         <?php endif; ?>
 
         <!-- Records info -->
-        <div class="text-center text-muted mt-2">
+        <div class="text-center mt-2">
             Showing <?php echo $offset + 1; ?> to <?php echo min($offset + $records_per_page, $total_records); ?> 
             of <?php echo $total_records; ?> entries
         </div>

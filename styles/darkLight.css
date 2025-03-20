@@ -1,0 +1,172 @@
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.dark-mode {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+.dark-mode .compliance-card,
+.dark-mode .p-4 {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid #333 !important;
+}
+.dark-mode .navbar {
+    background-color: #0d0d0d !important;
+}
+
+.dark-mode .navbar-dark .navbar-nav .nav-link {
+    color: #ffffff !important;
+}
+
+.dark-mode .compliance-bar {
+    background: #333 !important;
+}
+
+.dark-mode .compliance-fill {
+    background: #007bff !important;
+}
+.dark-mode canvas {
+    background-color: #1e1e1e !important;
+    border-radius: 10px;
+}
+.dark-mode footer {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+/* Smooth fade-in effect */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.compliance-fill {
+    height: 100%;
+    background: #0d6efd;
+    border-radius: 10px;
+    transition: width 1s ease-in-out;
+}
+
+.compliance-card, .card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.compliance-card:hover, .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Smooth transition sa dark mode */
+body, .compliance-card, .p-4, .card {
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-mode .compliance-card,
+.dark-mode .p-4,
+.dark-mode .card {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .compliance-bar {
+    background: #333;
+}
+.dark-mode .compliance-fill {
+    background: #bb86fc;
+}
+
+/* Tables */
+.dark-mode table {
+    background-color: #1c1c1c;
+    color: #ffffff;
+    border-collapse: collapse;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.dark-mode th {
+    background-color: #292929;
+    color: #ffffff;
+    padding: 10px;
+    border-bottom: 2px solid #444;
+}
+
+.dark-mode td {
+    background-color: #222;
+    color: #e0e0e0;
+    padding: 10px;
+    border-bottom: 1px solid #444;
+}
+
+/* Hover effect sa rows */
+.dark-mode tbody tr:hover {
+    background-color: #333;
+}
+
+/* Buttons */
+.dark-mode .btn-success {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+}
+
+.dark-mode .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+}
+
+.dark-mode .btn:hover {
+    filter: brightness(1.2);
+}
+
+/* Dark Mode Styles */
+.dark-mode .modal-content {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+.dark-mode .modal-header {
+    border-bottom: 1px solid #555;
+}
+
+.dark-mode .modal-footer {
+    border-top: 1px solid #555;
+}
+
+.dark-mode .form-control {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #555;
+}
+
+.dark-mode .form-control::placeholder {
+    color: #bbbbbb;
+}
+
+.dark-mode .btn-close {
+    filter: invert(1);
+}
+

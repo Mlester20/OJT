@@ -14,13 +14,15 @@ include '../controllers/fetch_data.php';
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="stylesheet" href="../styles/darkLight.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
     <?php include '../components/header_admin.php'; ?>
 
     <div class="container my-5">
-        <h3 class="card-title text-center text-muted text-md" style="margin-top: 1rem;">Your Archives this <?= date('Y'); ?></h3>
+        <h3 class="card-title text-center" style="margin-top: 1rem;">Your Archives this <?= date('Y'); ?></h3>
         
         <!-- Search Input -->
         <div class="row justify-content-end" style="margin-top: 2rem;">
@@ -29,7 +31,7 @@ include '../controllers/fetch_data.php';
             </div>
         </div>
 
-        <div class="row" style="margin-top: 2rem;" id="cardContainer">
+        <div class="row fade-in" style="margin-top: 2rem;" id="cardContainer">
             <!-- Awards Section -->
             <div class="col-md-4 mb-3 card-item">
                 <div class="card h-100">
@@ -88,6 +90,8 @@ include '../controllers/fetch_data.php';
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="../js/notif.js"></script>
+    <script src="../js/darkLight.js"></script>
     <script>
         document.getElementById('searchInput').addEventListener('keyup', function() {
             let filter = this.value.toLowerCase();
@@ -103,6 +107,5 @@ include '../controllers/fetch_data.php';
             });
         });
     </script>
-    <script src="../js/notif.js"></script>
 </body>
 </html>

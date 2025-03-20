@@ -44,6 +44,8 @@ if(isset($_POST['delete'])){
     <link rel="stylesheet" href="../styles/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="stylesheet" href="../styles/darkLight.css">
+    <script src="../js/darkLight.js"></script>
     <link rel="stylesheet" href="../styles/header_style.css">
 </head>
 <body>

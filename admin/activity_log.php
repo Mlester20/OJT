@@ -40,12 +40,14 @@ $result = mysqli_query($con, $query);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="stylesheet" href="../styles/darkLight.css">
+    <script src="../js/darkLight.js"></script>
 </head>
 <body>
 
     <?php include '../components/header_admin.php'; ?>
 
-    <div class="container mt-5">
+    <div class="container fade-in mt-5">
         <h3 class="card-title card-muted text-center">Recent Member Activity Log</h3>
         <table class="table table-bordered" style="margin-top: 10px;">
             <thead>

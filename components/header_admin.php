@@ -4,7 +4,7 @@
         <a class="navbar-brand text-sm d-flex align-items-center" href="./dashboard.php">
             <!-- Image placed before the text -->
             <img src="../images/logo.png" alt="User Image" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
-            <span class="full-title">Planning, Management of Information and Services, Gender and Development</span>
+            <span class="full-title">PMISGAD</span>
             <span class="short-title">PMISGAD</span>
         </a>
         
@@ -122,7 +122,11 @@
                             <i class="fas fa-user me-2"></i> Profile
                         </a></li>
                         <li><a class="dropdown-item" href="activity_log.php"><i class="fas fa-cog me-2"></i>Activity Log</a></li>
+                        <button id="darkModeToggle" class="btn me-3">
+                            🌙 <span id="darkModeText">Dark Mode</span>
+                        </button>
                         <li><a class="dropdown-item" href="logout.php" onclick="return confirm('Are you sure you want to logout?')">Logout</a></li>
+                        
                     </ul>
                 </li>
             </ul>
@@ -131,6 +135,14 @@
 </nav>
 
 <style>
+    .dark-mode {
+        background-color: #121212;
+        color: white;
+    }
+
+    .navbar-dark .navbar-nav .nav-link {
+        color: white;
+    }
     .short-title {
         display: none;
     }
@@ -154,4 +166,3 @@
         color: #000;
     }
 </style>
-

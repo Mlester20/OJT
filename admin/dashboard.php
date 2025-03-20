@@ -59,6 +59,7 @@ if (isset($_POST['delete'])) {
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/hover.css">
     <link rel="stylesheet" href="../styles/tableDesign.css">
+    <link rel="stylesheet" href="../styles/darkLight.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .compliance-card {
@@ -89,74 +90,74 @@ if (isset($_POST['delete'])) {
 <body>
     <?php include('../components/header_admin.php'); ?>
 
-    <div class="container-fluid py-3">
-        <h3 class="text-center text-muted my-3">Dashboard</h3>
+        <div class="container-fluid py-3">
+            <h3 class="text-center my-3">Dashboard</h3>
 
-        <div class="row">
-            <!-- Left Column for Top Performing Offices -->
-            <div class="col-lg-6 col-md-12">
-                <div class="p-4 rounded shadow" style="background-color: #f8f9fa;">
-                    <h3 class="text-center text-muted mb-4">Top Performing Offices</h3>
-                    <div class="row">
-                        <?php 
-                        // Get the highest compliance count for percentage calculation
-                        $max_compliance = 0;
-                        $office_data = array();
-                        while($office_row = mysqli_fetch_assoc($office_compliance_result)) {
-                            $office_data[] = $office_row;
-                            if($office_row['compliance_count'] > $max_compliance) {
-                                $max_compliance = $office_row['compliance_count'];
+            <div class="row">
+                <!-- Left Column for Top Performing Offices -->
+                <div class="col-lg-6 col-md-12">
+                    <div class="p-4 rounded shadow fade-in" style="background-color: #f8f9fa;">
+                        <h3 class="text-center mb-4">Top Performing Offices</h3>
+                        <div class="row">
+                            <?php 
+                            // Get the highest compliance count for percentage calculation
+                            $max_compliance = 0;
+                            $office_data = array();
+                            while($office_row = mysqli_fetch_assoc($office_compliance_result)) {
+                                $office_data[] = $office_row;
+                                if($office_row['compliance_count'] > $max_compliance) {
+                                    $max_compliance = $office_row['compliance_count'];
+                                }
                             }
-                        }
-                        
-                        // Display office compliance data
-                        foreach($office_data as $office): 
-                            $percentage = ($max_compliance > 0) ? ($office['compliance_count'] / $max_compliance) * 100 : 0;
-                        ?>
-                        <div class="col-md-6 mb-3">
-                            <div class="compliance-card">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0"><?php echo htmlspecialchars($office['office_name']); ?></h5>
-                                    <span class="badge bg-primary"><?php echo $office['compliance_count']; ?> compliances</span>
-                                </div>
-                                <div class="compliance-bar">
-                                    <div class="compliance-fill" style="width: <?php echo $percentage; ?>%"></div>
+                            
+                            // Display office compliance data
+                            foreach($office_data as $office): 
+                                $percentage = ($max_compliance > 0) ? ($office['compliance_count'] / $max_compliance) * 100 : 0;
+                            ?>
+                            <div class="col-md-6 mb-3">
+                                <div class="compliance-card fade-in">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0"><?php echo htmlspecialchars($office['office_name']); ?></h5>
+                                        <span class="badge bg-primary"><?php echo $office['compliance_count']; ?> compliances</span>
+                                    </div>
+                                    <div class="compliance-bar">
+                                        <div class="compliance-fill" style="width: <?php echo $percentage; ?>%"></div>
+                                    </div>
                                 </div>
                             </div>
+                            <?php endforeach; ?>
                         </div>
-                        <?php endforeach; ?>
                     </div>
                 </div>
-            </div>
 
-            <!-- Right Column for Pie Chart and Stats -->
-            <div class="col-lg-6 col-md-12">
-                <div class="d-flex flex-column align-items-center">
-                    <!-- Pie Chart -->
-                    <div class="chart-container mt-4">
-                        <canvas id="pieChart"></canvas>
-                    </div>
-                    <!-- Stats below the pie chart -->
-                    <div class="d-flex flex-wrap gap-3 mt-4 justify-content-center">
-                        <div class="card text-white bg-primary shadow-sm" style="width: 10rem;">
-                            <div class="card-body text-center">
-                                <i class="fas fa-users fa-3x mb-2"></i>
-                                <h5>Total Members</h5>
-                                <h2><?php echo $total_members; ?></h2>
-                            </div>
+                <!-- Right Column for Pie Chart and Stats -->
+                <div class="col-lg-6 col-md-12">
+                    <div class="d-flex flex-column align-items-center">
+                        <!-- Pie Chart -->
+                        <div class="chart-container mt-4">
+                            <canvas id="pieChart"></canvas>
                         </div>
-                        <div class="card text-white bg-success shadow-sm" style="width: 10rem;">
-                            <div class="card-body text-center">
-                                <i class="fas fa-building fa-3x mb-2"></i>
-                                <h5>Total Offices</h5>
-                                <h2><?php echo $total_office; ?></h2>
+                        <!-- Stats below the pie chart -->
+                        <div class="d-flex flex-wrap gap-3 mt-4 justify-content-center">
+                            <div class="card text-white fade-in bg-primary shadow-sm" style="width: 10rem;">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-users fa-3x mb-2"></i>
+                                    <h5>Total Members</h5>
+                                    <h2><?php echo $total_members; ?></h2>
+                                </div>
+                            </div>
+                            <div class="card text-white fade-in bg-success shadow-sm" style="width: 10rem;">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-building fa-3x mb-2"></i>
+                                    <h5>Total Offices</h5>
+                                    <h2><?php echo $total_office; ?></h2>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <?php include '../components/footer.php'; ?>
 
@@ -199,6 +200,7 @@ if (isset($_POST['delete'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script src="../js/datas.js"></script>
     <script src="../js/notif.js"></script>
+    <script src="../js/darkLight.js"></script>
 
 </body>
 </html>

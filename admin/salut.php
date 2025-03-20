@@ -38,18 +38,20 @@ if(isset($_POST['delete'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salut - <?php include '../components/title.php'; ?></title>
+    <title>Salutation - <?php include '../components/title.php'; ?></title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/header_style.css">
+    <link rel="stylesheet" href="../styles/darkLight.css">
+    <script src="../js/darkLight.js"></script>
 </head>
 
 <body>
     <?php include '../components/header_admin.php'; ?>
 
-    <div class="container" style="margin-top: 30px">
+    <div class="container fade-in" style="margin-top: 30px">
         <div class="header-section">
             <h3 class="card-title text-center">Salutation</h3>
             <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addSalutationModal">

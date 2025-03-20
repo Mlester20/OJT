@@ -104,6 +104,8 @@ if(isset($_POST['reactivate'])){
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/header_style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../styles/darkLight.css">
+    <script src="../js/darkLight.js"></script>
 </head>
 <body>
     <?php include('../components/header_admin.php'); ?>

@@ -32,6 +32,8 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <link rel="stylesheet" href="../styles/hover.css">
+    <link rel="stylesheet" href="../styles/darkLight.css">
+    <script src="../js/darkLight.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .section-title {
@@ -57,21 +59,21 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
     <?php include '../components/header_admin.php'; ?>
 
     <div class="container my-5">
-        <h1 class="h2 mb-4 text-center text-primary">List of Complied Data</h1>
+        <h1 class="h2 mb-4 text-center">List of Complied Data</h1>
 
         <h2 class="section-title">Awards</h2>
-        <div class="text-end mb-3 d-flex flex-column flex-md-row align-items-md-center gap-2">
-            <select id="categorySelect" class="form-select w-100 w-md-auto">
+        <div class="text-end mb-3 fade-in d-flex flex-column flex-md-row align-items-md-center gap-2">
+            <select id="categorySelect" class="form-select w-50 w-md-auto">
                 <option value="">Select Category</option>
                 <option value="International">International</option>
                 <option value="National">National</option>
                 <option value="Regional">Regional</option>
                 <option value="Local">Local</option>
             </select>
-            <button id="printButton" class="btn btn-primary w-100 w-md-auto" onclick="printAwards()">Print Awards</button>
+            <button id="printButton" class="btn btn-primary w-50 w-md-auto" onclick="printAwards()">Print Awards</button>
         </div>
 
-        <div class="table-responsive">
+        <div class="table-responsive fade-in">
             <table class="table table-bordered">
                 <thead>
                     <tr>

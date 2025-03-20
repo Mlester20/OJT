@@ -20,12 +20,14 @@ if (!isset($_SESSION['member_id'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../styles/user_header.css">
     <link rel="stylesheet" href="../styles/hover.css">
+    <link rel="stylesheet" href="../styles/darkLight.css">
+    <script src="../js/darkLight.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <?php include '../components/header_admin.php'; ?>
     
-    <div class="container mt-4">
+    <div class="container fade-in mt-4">
         <h3 class="text-center bg-primary text-white p-2">ADMINISTRATIVE SERVICE INNOVATIONS</h3>
         <table class="table table-bordered text-center">
             <thead class="table-success">

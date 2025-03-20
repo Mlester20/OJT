@@ -99,6 +99,9 @@
                             <i class="fas fa-user me-2"></i> Profile
                         </a></li>
                         <li><a class="dropdown-item" href="logout.php" onclick="return confirm('Are you sure you want to logout?')">Logout</a></li>
+                        <button id="darkModeToggle" class="btn me-3">
+                            🌙 <span id="darkModeText">Dark Mode</span>
+                        </button>
                     </ul>
                 </li>
             </ul>
