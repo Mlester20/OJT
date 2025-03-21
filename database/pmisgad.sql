@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2025 at 08:38 AM
+-- Generation Time: Mar 21, 2025 at 09:20 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -355,10 +355,10 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`member_id`, `member_first`, `member_last`, `member_gender`, `username`, `password`, `office_id`, `salut_id`, `rank_id`, `designation_id`, `failed_attempts`, `last_failed_attempt`, `is_suspended`, `role`) VALUES
-(9, 'Carlito', 'Antolin', 'Male', 'Carlito', '123', 20, 2, 1, 1, 0, NULL, 0, 'user'),
-(12, 'Lester', 'Raguindin', 'Male', 'admin', 'admin', 36, 2, 4, 1, 0, NULL, 0, 'admin'),
-(14, 'Ryan', 'Suguitan', 'Male', 'ryan', '123', 21, 2, 1, 1, 0, NULL, 0, 'user'),
-(15, 'John ', 'Doe', 'Male', 'john', '123', 24, 2, 6, 1, 0, NULL, 0, 'user');
+(9, 'Carlito', 'Antolin', 'Male', 'Carlito', '202cb962ac59075b964b07152d234b70', 20, 2, 1, 1, 0, NULL, 0, 'user'),
+(12, 'Lester', 'Raguindin', 'Male', 'admin', '21232f297a57a5a743894a0e4a801fc3', 36, 2, 4, 1, 0, NULL, 0, 'admin'),
+(14, 'Ryan', 'Suguitan', 'Male', 'ryan', '202cb962ac59075b964b07152d234b70', 21, 2, 1, 1, 0, NULL, 0, 'user'),
+(15, 'John ', 'Doe', 'Male', 'john', '202cb962ac59075b964b07152d234b70', 24, 2, 6, 1, 0, NULL, 0, 'user');
 
 -- --------------------------------------------------------
 
@@ -380,7 +380,12 @@ CREATE TABLE `member_activitylog` (
 
 INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `office_id`, `office_address`) VALUES
 (180, 9, '2025-03-18 15:29:39', 20, 'Oldsite'),
-(181, 9, '2025-03-18 15:36:06', 20, 'Oldsite');
+(181, 9, '2025-03-18 15:36:06', 20, 'Oldsite'),
+(182, 12, '2025-03-19 22:35:16', 36, 'Newsite'),
+(183, 12, '2025-03-21 00:49:33', 36, 'Newsite'),
+(184, 17, '2025-03-21 00:54:32', 20, 'Oldsite'),
+(185, 14, '2025-03-21 01:03:12', 21, 'Newsite'),
+(186, 9, '2025-03-21 01:11:17', 20, 'Oldsite');
 
 -- --------------------------------------------------------
 
@@ -1038,13 +1043,13 @@ ALTER TABLE `instruction_student_disability`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `member_activitylog`
 --
 ALTER TABLE `member_activitylog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
 -- AUTO_INCREMENT for table `national_certification_performance`
@@ -1199,94 +1204,6 @@ ALTER TABLE `infrastructure_projects`
 --
 ALTER TABLE `innovations`
   ADD CONSTRAINT `innovations_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `instruction_student_disability`
---
-ALTER TABLE `instruction_student_disability`
-  ADD CONSTRAINT `instruction_student_disability_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
-
---
--- Constraints for table `member`
---
-ALTER TABLE `member`
-  ADD CONSTRAINT `member_ibfk_1` FOREIGN KEY (`office_id`) REFERENCES `office_name` (`office_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `member_ibfk_2` FOREIGN KEY (`salut_id`) REFERENCES `salut` (`salut_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `member_ibfk_3` FOREIGN KEY (`rank_id`) REFERENCES `rank` (`rank_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `member_ibfk_4` FOREIGN KEY (`designation_id`) REFERENCES `designation` (`designation_id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Constraints for table `member_activitylog`
---
-ALTER TABLE `member_activitylog`
-  ADD CONSTRAINT `member_activitylog_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `member_activitylog_ibfk_2` FOREIGN KEY (`office_id`) REFERENCES `office_name` (`office_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `national_certification_performance`
---
-ALTER TABLE `national_certification_performance`
-  ADD CONSTRAINT `national_certification_performance_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
-
---
--- Constraints for table `non_academic_staff`
---
-ALTER TABLE `non_academic_staff`
-  ADD CONSTRAINT `non_academic_staff_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
-
---
--- Constraints for table `notifications`
---
-ALTER TABLE `notifications`
-  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `officials`
---
-ALTER TABLE `officials`
-  ADD CONSTRAINT `officials_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
-
---
--- Constraints for table `purchases`
---
-ALTER TABLE `purchases`
-  ADD CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
-
---
--- Constraints for table `research_centers`
---
-ALTER TABLE `research_centers`
-  ADD CONSTRAINT `research_centers_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `research_funding`
---
-ALTER TABLE `research_funding`
-  ADD CONSTRAINT `research_funding_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
-
---
--- Constraints for table `research_linkages`
---
-ALTER TABLE `research_linkages`
-  ADD CONSTRAINT `research_linkages_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
-
---
--- Constraints for table `scholarship_grants`
---
-ALTER TABLE `scholarship_grants`
-  ADD CONSTRAINT `scholarship_grants_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `trainings_conferences`
---
-ALTER TABLE `trainings_conferences`
-  ADD CONSTRAINT `trainings_conferences_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
-
---
--- Constraints for table `uploads`
---
-ALTER TABLE `uploads`
-  ADD CONSTRAINT `uploads_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

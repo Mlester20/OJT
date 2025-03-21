@@ -13,20 +13,25 @@ if(isset($_POST['submit'])) {
     $gender = mysqli_real_escape_string($con, $_POST['gender']);
     $role = mysqli_real_escape_string($con, $_POST['role']);
     $username = mysqli_real_escape_string($con, $_POST['username']);
-    $password = mysqli_real_escape_string($con, $_POST['password']);
+    $password = mysqli_real_escape_string($con, $_POST['password']); // Raw password input
     $office_id = mysqli_real_escape_string($con, $_POST['office_id']);
     $salut_id = mysqli_real_escape_string($con, $_POST['salut_id']);
     $rank_id = mysqli_real_escape_string($con, $_POST['rank_id']);
     $designation_id = mysqli_real_escape_string($con, $_POST['designation_id']);
 
+    // Hash password using MD5 before storing
+    $hashed_password = md5($password);
+
     $query = mysqli_query($con, "INSERT INTO member (member_first, member_last, member_gender, role, username, password, 
               office_id, salut_id, rank_id, designation_id) 
-              VALUES ('$first_name', '$last_name', '$gender', '$role', '$username', '$password', 
-              '$office_id', '$salut_id', '$rank_id', '$designation_id')") or die (mysqli_connect($con));
+              VALUES ('$first_name', '$last_name', '$gender', '$role', '$username', '$hashed_password', 
+              '$office_id', '$salut_id', '$rank_id', '$designation_id')") or die (mysqli_error($con));
+
     if($query){
-        echo "<script>alert('Member Added Successfully!');document.location='manage_users.php'</script>";
+        echo "<script>alert('Member Added Successfully!'); document.location='manage_users.php'</script>";
     }
 }
+
 
 //edit function
 if(isset($_POST['update'])) {

@@ -87,7 +87,7 @@ while ($row = $rankingResult->fetch_assoc()) {
     <?php include '../components/header.php'; ?>
 
     <div class="container mt-5">
-        <h3 class="card-title text-center text-muted mb-4">My Accomplishment this Year <?= date('Y'); ?></h3>
+        <h3 class="card-title text-center mb-4">My Accomplishment this Year <?= date('Y'); ?></h3>
         
         <!-- Overall Progress Card -->
         <div class="row justify-content-center mb-4">

@@ -12,9 +12,12 @@ if(isset($_POST['submit'])) {
     $rank_id = mysqli_real_escape_string($con, $_POST['rank_id']);
     $designation_id = mysqli_real_escape_string($con, $_POST['designation_id']);
 
+    /// Hash password using MD5 before storing
+    $hashed_password = md5($password);
+
     $query = mysqli_query($con, "INSERT INTO member (member_first, member_last, member_gender, username, password, 
               office_id, salut_id, rank_id, designation_id, role) 
-              VALUES ('$first_name', '$last_name', '$gender', '$username', '$password', 
+              VALUES ('$first_name', '$last_name', '$gender', '$username', '$hashed_password', 
               '$office_id', '$salut_id', '$rank_id', '$designation_id', 'user')") or die (mysqli_connect($con));
     if($query){
         echo "<script>alert('Registered Successfully!');document.location='index.php'</script>";

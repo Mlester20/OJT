@@ -123,7 +123,7 @@
                         </a></li>
                         <li><a class="dropdown-item" href="activity_log.php"><i class="fas fa-cog me-2"></i>Activity Log</a></li>
                         <button id="darkModeToggle" class="btn me-3">
-                            🌙 <span id="darkModeText">Dark Mode</span>
+                            🌙 <span id="darkModeText">Dark Theme</span>
                         </button>
                         <li><a class="dropdown-item" href="logout.php" onclick="return confirm('Are you sure you want to logout?')">Logout</a></li>
                         

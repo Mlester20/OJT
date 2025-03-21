@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
             localStorage.setItem("darkMode", "enabled");
         } else {
             darkModeText.textContent = "Dark Mode";
-            darkModeToggle.innerHTML = "🌙 <span id='darkModeText'>Dark Mode</span>";
+            darkModeToggle.innerHTML = "🌙 <span id='darkModeText'>Dark Theme</span>";
             localStorage.setItem("darkMode", "disabled");
         }
     });
