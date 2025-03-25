@@ -116,7 +116,7 @@ if(isset($_POST['reactivate'])){
     <?php include('../components/header_admin.php'); ?>
     <div class="container" style="margin-top: 30px">
         <div class="header-section">
-            <h3 class="card-title text-center text-muted">Members</h3>
+            <h3 class="card-title text-center">Members</h3>
             <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addMemberModal">
                 <i class="fas fa-plus"></i> Add Member
             </button>

@@ -18,12 +18,14 @@ include '../controllers/purchaseController.php';
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../styles/user_header.css">
     <link rel="stylesheet" href="../styles/hover.css">
+    <link rel="stylesheet" href="../styles/darkLight.css">
+    <script src="../js/darkLight.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .section-title {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #0056b3;
+            color: #fff;
             margin-top: 2rem;
             margin-bottom: 1rem;
             text-align: center;

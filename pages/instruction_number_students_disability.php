@@ -20,6 +20,8 @@ include '../components/config.php';
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../styles/hover.css">
+    <link rel="stylesheet" href="../styles/darkLight.css">
+    <script src="../js/darkLight.js"></script>
 </head>
 <style>
     table {

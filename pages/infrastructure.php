@@ -20,6 +20,8 @@ if (!isset($_SESSION['member_id'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../styles/user_header.css">
     <link rel="stylesheet" href="../styles/hover.css">
+    <link rel="stylesheet" href="../styles/darkLight.css">
+    <script src="../js/darkLight.js"></script>
 </head>
 <body>
     <?php include '../components/header.php'; ?>

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2025 at 09:20 AM
+-- Generation Time: Mar 25, 2025 at 08:48 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -313,6 +313,32 @@ INSERT INTO `innovations` (`innovation_id`, `member_id`, `name_of_innovation`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `instruction_academic_status`
+--
+
+CREATE TABLE `instruction_academic_status` (
+  `id` int(11) NOT NULL,
+  `program` varchar(255) NOT NULL,
+  `level` varchar(100) NOT NULL,
+  `validity_date` date DEFAULT NULL,
+  `latest_survey_visit_date` date DEFAULT NULL,
+  `latest_survey_visit_board_action` varchar(255) DEFAULT NULL,
+  `remarks` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `member_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `instruction_academic_status`
+--
+
+INSERT INTO `instruction_academic_status` (`id`, `program`, `level`, `validity_date`, `latest_survey_visit_date`, `latest_survey_visit_board_action`, `remarks`, `created_at`, `updated_at`, `member_id`) VALUES
+(4, 'dsa', 'dsa', '2025-03-25', '2025-03-25', 'dsa', 'dsa', '2025-03-25 07:40:47', '2025-03-25 07:40:47', 9);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `instruction_student_disability`
 --
 
@@ -385,7 +411,17 @@ INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `offi
 (183, 12, '2025-03-21 00:49:33', 36, 'Newsite'),
 (184, 17, '2025-03-21 00:54:32', 20, 'Oldsite'),
 (185, 14, '2025-03-21 01:03:12', 21, 'Newsite'),
-(186, 9, '2025-03-21 01:11:17', 20, 'Oldsite');
+(186, 9, '2025-03-21 01:11:17', 20, 'Oldsite'),
+(187, 12, '2025-03-25 09:03:40', 36, 'Newsite'),
+(188, 12, '2025-03-25 10:45:26', 36, 'Newsite'),
+(189, 9, '2025-03-25 10:46:41', 20, 'Oldsite'),
+(190, 12, '2025-03-25 10:53:01', 36, 'Newsite'),
+(191, 12, '2025-03-25 10:54:22', 36, 'Newsite'),
+(192, 9, '2025-03-25 10:54:31', 20, 'Oldsite'),
+(193, 12, '2025-03-25 12:45:41', 36, 'Newsite'),
+(194, 12, '2025-03-25 15:23:29', 36, 'Newsite'),
+(195, 9, '2025-03-25 15:38:31', 20, 'Oldsite'),
+(196, 12, '2025-03-25 15:47:11', 36, 'Newsite');
 
 -- --------------------------------------------------------
 
@@ -446,7 +482,8 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `member_id`, `message`, `is_read`, `created_at`) VALUES
-(5, 9, 'User 9 uploaded a new file: IRREGULAR.docx', 1, '2025-03-18 07:36:17');
+(5, 9, 'User 9 uploaded a new file: IRREGULAR.docx', 1, '2025-03-18 07:36:17'),
+(6, 9, 'User 9 uploaded a new file: Evaluation of Host Agency.pdf', 1, '2025-03-25 02:47:02');
 
 -- --------------------------------------------------------
 
@@ -720,13 +757,6 @@ CREATE TABLE `uploads` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `uploads`
---
-
-INSERT INTO `uploads` (`id`, `member_id`, `file_name`, `file_path`, `upload_date`, `folder_id`) VALUES
-(9, 9, 'IRREGULAR.docx', '../uploads/IRREGULAR.docx', '2025-03-18 07:36:17', NULL);
-
---
 -- Indexes for dumped tables
 --
 
@@ -823,6 +853,13 @@ ALTER TABLE `infrastructure_projects`
 --
 ALTER TABLE `innovations`
   ADD PRIMARY KEY (`innovation_id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `instruction_academic_status`
+--
+ALTER TABLE `instruction_academic_status`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `member_id` (`member_id`);
 
 --
@@ -1034,6 +1071,12 @@ ALTER TABLE `innovations`
   MODIFY `innovation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `instruction_academic_status`
+--
+ALTER TABLE `instruction_academic_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `instruction_student_disability`
 --
 ALTER TABLE `instruction_student_disability`
@@ -1049,7 +1092,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `member_activitylog`
 --
 ALTER TABLE `member_activitylog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
 --
 -- AUTO_INCREMENT for table `national_certification_performance`
@@ -1067,7 +1110,7 @@ ALTER TABLE `non_academic_staff`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `office_name`
@@ -1133,7 +1176,7 @@ ALTER TABLE `trainings_conferences`
 -- AUTO_INCREMENT for table `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -1204,6 +1247,12 @@ ALTER TABLE `infrastructure_projects`
 --
 ALTER TABLE `innovations`
   ADD CONSTRAINT `innovations_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `instruction_academic_status`
+--
+ALTER TABLE `instruction_academic_status`
+  ADD CONSTRAINT `instruction_academic_status_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
