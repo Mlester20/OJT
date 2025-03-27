@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2025 at 08:48 AM
+-- Generation Time: Mar 27, 2025 at 07:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -276,6 +276,34 @@ CREATE TABLE `folders` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `graduates_data`
+--
+
+CREATE TABLE `graduates_data` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `category` varchar(255) NOT NULL,
+  `male_count` int(11) DEFAULT 0,
+  `female_count` int(11) DEFAULT 0,
+  `total_count` int(11) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `graduates_data`
+--
+
+INSERT INTO `graduates_data` (`id`, `member_id`, `category`, `male_count`, `female_count`, `total_count`, `created_at`) VALUES
+(7, 12, 'Number of Graduates in Health Profession', 1, 2, 3, '2025-03-27 06:21:13'),
+(8, 12, 'Number of Graduates from Law and Enforcement Related Courses', 0, 0, 0, '2025-03-27 06:21:13'),
+(9, 12, 'Number of Graduates who Garnered a Qualification that entitled to Teach Primary School Level', 0, 0, 0, '2025-03-27 06:21:13'),
+(10, 12, 'STEM', 0, 0, 0, '2025-03-27 06:21:13'),
+(11, 12, 'Medicine', 0, 0, 0, '2025-03-27 06:21:13'),
+(12, 12, 'Arts & Humanities / Social Sciences', 0, 0, 0, '2025-03-27 06:21:13');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `infrastructure_projects`
 --
 
@@ -335,6 +363,85 @@ CREATE TABLE `instruction_academic_status` (
 
 INSERT INTO `instruction_academic_status` (`id`, `program`, `level`, `validity_date`, `latest_survey_visit_date`, `latest_survey_visit_board_action`, `remarks`, `created_at`, `updated_at`, `member_id`) VALUES
 (4, 'dsa', 'dsa', '2025-03-25', '2025-03-25', 'dsa', 'dsa', '2025-03-25 07:40:47', '2025-03-25 07:40:47', 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `instruction_enrollments`
+--
+
+CREATE TABLE `instruction_enrollments` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `level` enum('Doctorate','Masters','Post-Baccalaureate','Baccalaureate','Non-Degree') NOT NULL,
+  `male_priority` int(11) DEFAULT 0,
+  `female_priority` int(11) DEFAULT 0,
+  `total_priority` int(11) GENERATED ALWAYS AS (`male_priority` + `female_priority`) STORED,
+  `male_all` int(11) DEFAULT 0,
+  `female_all` int(11) DEFAULT 0,
+  `total_all` int(11) GENERATED ALWAYS AS (`male_all` + `female_all`) STORED,
+  `starting_degree_male` int(11) DEFAULT 0,
+  `starting_degree_female` int(11) DEFAULT 0,
+  `starting_degree_total` int(11) GENERATED ALWAYS AS (`starting_degree_male` + `starting_degree_female`) STORED,
+  `first_gen_male` int(11) DEFAULT 0,
+  `first_gen_female` int(11) DEFAULT 0,
+  `first_gen_total` int(11) GENERATED ALWAYS AS (`first_gen_male` + `first_gen_female`) STORED,
+  `overall_male_total` int(11) GENERATED ALWAYS AS (`male_priority` + `male_all` + `starting_degree_male` + `first_gen_male`) STORED,
+  `overall_female_total` int(11) GENERATED ALWAYS AS (`female_priority` + `female_all` + `starting_degree_female` + `first_gen_female`) STORED,
+  `overall_total` int(11) GENERATED ALWAYS AS (`overall_male_total` + `overall_female_total`) STORED,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `instruction_enrollments`
+--
+
+INSERT INTO `instruction_enrollments` (`id`, `member_id`, `level`, `male_priority`, `female_priority`, `male_all`, `female_all`, `starting_degree_male`, `starting_degree_female`, `first_gen_male`, `first_gen_female`, `created_at`) VALUES
+(16, 12, 'Doctorate', 1, 0, 0, 0, 0, 0, 0, 0, '2025-03-27 03:35:36'),
+(17, 12, 'Masters', 1, 0, 0, 0, 0, 0, 0, 0, '2025-03-27 03:35:36'),
+(18, 12, 'Post-Baccalaureate', 1, 0, 0, 0, 0, 0, 0, 0, '2025-03-27 03:35:36'),
+(19, 12, 'Baccalaureate', 0, 0, 0, 0, 0, 0, 0, 0, '2025-03-27 03:35:36'),
+(21, 12, 'Doctorate', 1, 0, 0, 0, 0, 0, 0, 0, '2025-03-27 03:42:33'),
+(22, 12, 'Masters', 1, 0, 0, 0, 0, 0, 0, 0, '2025-03-27 03:42:33'),
+(23, 12, 'Post-Baccalaureate', 1, 0, 0, 0, 0, 0, 0, 0, '2025-03-27 03:42:33'),
+(24, 12, 'Baccalaureate', 0, 0, 0, 0, 0, 0, 0, 0, '2025-03-27 03:42:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `instruction_graduates`
+--
+
+CREATE TABLE `instruction_graduates` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `level` enum('Doctorate','Masters','Post-Baccalaureate','Baccalaureate','Non-Degree','TOTAL') NOT NULL,
+  `priority_male` int(11) DEFAULT 0,
+  `priority_female` int(11) DEFAULT 0,
+  `priority_total` int(11) DEFAULT 0,
+  `all_male` int(11) DEFAULT 0,
+  `all_female` int(11) DEFAULT 0,
+  `all_total` int(11) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `instruction_graduates`
+--
+
+INSERT INTO `instruction_graduates` (`id`, `member_id`, `level`, `priority_male`, `priority_female`, `priority_total`, `all_male`, `all_female`, `all_total`, `created_at`) VALUES
+(3, 12, 'Doctorate', 1, 1, 2, 1, 1, 2, '2025-03-27 06:13:57'),
+(4, 12, 'Masters', 0, 0, 0, 0, 0, 0, '2025-03-27 06:13:57'),
+(5, 12, 'Post-Baccalaureate', 0, 0, 0, 0, 0, 0, '2025-03-27 06:13:58'),
+(6, 12, 'Baccalaureate', 0, 0, 0, 0, 0, 0, '2025-03-27 06:13:58'),
+(7, 12, 'Non-Degree', 0, 0, 0, 0, 0, 0, '2025-03-27 06:13:58'),
+(8, 12, 'TOTAL', 0, 0, 0, 0, 0, 0, '2025-03-27 06:13:58'),
+(9, 12, 'Doctorate', 0, 0, 0, 0, 0, 0, '2025-03-27 06:21:13'),
+(10, 12, 'Masters', 0, 0, 0, 0, 0, 0, '2025-03-27 06:21:13'),
+(11, 12, 'Post-Baccalaureate', 0, 0, 0, 0, 0, 0, '2025-03-27 06:21:13'),
+(12, 12, 'Baccalaureate', 0, 0, 0, 0, 0, 0, '2025-03-27 06:21:13'),
+(13, 12, 'Non-Degree', 0, 0, 0, 0, 0, 0, '2025-03-27 06:21:13'),
+(14, 12, 'TOTAL', 0, 0, 0, 0, 0, 0, '2025-03-27 06:21:13');
 
 -- --------------------------------------------------------
 
@@ -421,7 +528,12 @@ INSERT INTO `member_activitylog` (`log_id`, `member_id`, `login_datetime`, `offi
 (193, 12, '2025-03-25 12:45:41', 36, 'Newsite'),
 (194, 12, '2025-03-25 15:23:29', 36, 'Newsite'),
 (195, 9, '2025-03-25 15:38:31', 20, 'Oldsite'),
-(196, 12, '2025-03-25 15:47:11', 36, 'Newsite');
+(196, 12, '2025-03-25 15:47:11', 36, 'Newsite'),
+(197, 12, '2025-03-26 10:14:15', 36, 'Newsite'),
+(198, 12, '2025-03-26 11:46:13', 36, 'Newsite'),
+(199, 12, '2025-03-27 09:47:35', 36, 'Newsite'),
+(200, 9, '2025-03-27 12:19:38', 20, 'Oldsite'),
+(201, 12, '2025-03-27 12:23:57', 36, 'Newsite');
 
 -- --------------------------------------------------------
 
@@ -842,6 +954,13 @@ ALTER TABLE `folders`
   ADD KEY `member_id` (`member_id`);
 
 --
+-- Indexes for table `graduates_data`
+--
+ALTER TABLE `graduates_data`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
 -- Indexes for table `infrastructure_projects`
 --
 ALTER TABLE `infrastructure_projects`
@@ -859,6 +978,20 @@ ALTER TABLE `innovations`
 -- Indexes for table `instruction_academic_status`
 --
 ALTER TABLE `instruction_academic_status`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `instruction_enrollments`
+--
+ALTER TABLE `instruction_enrollments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `instruction_graduates`
+--
+ALTER TABLE `instruction_graduates`
   ADD PRIMARY KEY (`id`),
   ADD KEY `member_id` (`member_id`);
 
@@ -1059,6 +1192,12 @@ ALTER TABLE `folders`
   MODIFY `folder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `graduates_data`
+--
+ALTER TABLE `graduates_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `infrastructure_projects`
 --
 ALTER TABLE `infrastructure_projects`
@@ -1077,6 +1216,18 @@ ALTER TABLE `instruction_academic_status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `instruction_enrollments`
+--
+ALTER TABLE `instruction_enrollments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `instruction_graduates`
+--
+ALTER TABLE `instruction_graduates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `instruction_student_disability`
 --
 ALTER TABLE `instruction_student_disability`
@@ -1092,7 +1243,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `member_activitylog`
 --
 ALTER TABLE `member_activitylog`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
 
 --
 -- AUTO_INCREMENT for table `national_certification_performance`
@@ -1237,6 +1388,12 @@ ALTER TABLE `folders`
   ADD CONSTRAINT `folders_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 
 --
+-- Constraints for table `graduates_data`
+--
+ALTER TABLE `graduates_data`
+  ADD CONSTRAINT `graduates_data_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
 -- Constraints for table `infrastructure_projects`
 --
 ALTER TABLE `infrastructure_projects`
@@ -1253,6 +1410,12 @@ ALTER TABLE `innovations`
 --
 ALTER TABLE `instruction_academic_status`
   ADD CONSTRAINT `instruction_academic_status_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
+
+--
+-- Constraints for table `instruction_graduates`
+--
+ALTER TABLE `instruction_graduates`
+  ADD CONSTRAINT `instruction_graduates_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

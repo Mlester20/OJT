@@ -4,7 +4,7 @@
         <a class="navbar-brand text-sm d-flex align-items-center" href="./dashboard.php">
             <!-- Image placed before the text -->
             <img src="../images/logo.png" alt="User Image" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
-            <span class="full-title">PMISGAD</span>
+            <span class="full-title">Planning, Management of Information Services</span>
             <span class="short-title">PMISGAD</span>
         </a>
         
@@ -99,6 +99,8 @@
                                         <li><a href="academic_services_innovation.php"><i class="fas fa-book"></i>Academic and Related Services Innovations</a></li>
                                         <li><a href="instruction_number_students_disability.php"><i class="fas fa-wheelchair"></i>Number of Students with Disability</a></li>
                                         <li><a href="instruction_academic_status.php"><i class="fas fa-scroll"></i>Academic Status</a></li>
+                                        <li><a href="instruction_enrollment.php"><i class="fas fa-school"></i>Enrollment</a></li>
+                                        <li><a href="instruction_graduates.php"><i class="fas fa-graduation-cap"></i>Graduates</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-item-hover">
@@ -123,11 +125,11 @@
                             <i class="fas fa-user me-2"></i> Profile
                         </a></li>
                         <li><a class="dropdown-item" href="activity_log.php"><i class="fas fa-cog me-2"></i>Activity Log</a></li>
-                        <button id="darkModeToggle" class="btn me-3">
-                            🌙 <span id="darkModeText">Dark Theme</span>
+                        <button id="darkModeToggle" class="btn dark-mode-toggle">
+                            <span class="toggle-icon">🌙</span>
+                            <span id="darkModeText">Dark Theme</span>
                         </button>
                         <li><a class="dropdown-item" href="logout.php" onclick="return confirm('Are you sure you want to logout?')">Logout</a></li>
-                        
                     </ul>
                 </li>
             </ul>

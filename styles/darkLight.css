@@ -170,3 +170,42 @@ body, .compliance-card, .p-4, .card {
     filter: invert(1);
 }
 
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode-toggle:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.dark-mode-toggle:active {
+    transform: scale(0.95);
+}
+
+.dark-mode-toggle .toggle-icon {
+    margin-right: 10px;
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+body.dark-mode .dark-mode-toggle {
+    background-color: #333;
+    color: #ffffff;
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+    background-color: #555;
+}

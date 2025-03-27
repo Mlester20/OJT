@@ -73,6 +73,8 @@
                                         <li><a href="academic_services_innovation.php"><i class="fas fa-book"></i>Academic and Related Services Innovations</a></li>
                                         <li><a href="instruction_number_students_disability.php"><i class="fas fa-wheelchair"></i>Number of Students with Disability</a></li>
                                         <li><a href="instruction_academic_status.php"><i class="fas fa-scroll"></i>Academic Status</a></li>
+                                        <li><a href="instruction_enrollment.php"><i class="fas fa-scroll"></i>Enrollment</a></li>
+                                        <li><a href="instruction_graduates.php"><i class="fas fa-graduation-cap"></i>Graduates</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-item-hover">
