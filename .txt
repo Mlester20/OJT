@@ -1,0 +1,251 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $data = $_POST;
+} else {
+    $data = [];
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Action and Budget Plan</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">Isabela State University<br>Roxas Campus</h2>
+    <h3 style="text-align:center;">FY 2025 Action and Budget Plan</h3>
+    <h4><strong>EXTERNAL LINKAGES AND INTERNATIONAL AFFAIRS</strong></h4>
+    <h4><em>Reinforce University External Affairs and Linkages</em></h4>
+    
+    <form method="post">
+        <table>
+            <tr>
+                <th>Objectively Verifiable Indicators</th>
+                <th>FY 2025 Targets</th>
+                <th>Budgetary Requirements</th>
+                <th>Source of Funds</th>
+                <th>Responsible Office</th>
+            </tr>
+            
+            <tr><td colspan="5"><strong>PERFORMANCE INDICATORS</strong></td></tr>
+            <tr>
+                <td>Number of established EIA office</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of staff designated to the established EIA office</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'A' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of EIA office fully equipped with facilities</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of data base set-up</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of EIA activities updated in the database</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Percentage of fund utilized from the allocated budget</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of constructed international guest house/dormitories for foreign students</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of BOR approved policies for EIA services</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of collaborative projects implemented with foreign academic partners</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of international network activities participated</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of capacity building conducted for international activities</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of students participated in outbound academic mobility program</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of students participated in inbound academic mobility program</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of faculty participated for outbound academic mobility program</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of faculty participated for inbound academic mobility program</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of programs offering foreign languages</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of conducted benchmarking with HEIs on internationalization</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of proposed EIA programs and projects</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of communications dispatched to other international academic institutions</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of forged MOU for international internship</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of students participated in international intership program</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of partnership created for possible TNE program</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of meeting and planning activities conducted in the development of TNE program</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of Overseas Community Project implemented</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of information drive conducted on Cultural Exchange Program</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of modalities developed to trace alumni</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of forged MOU with LGUs for EIA activities</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of forged MOU with industry for EIA activities</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <td>Number of collaborative activities with industry partner</td>
+                <td><input type="text" name="eia_office" value="<?= $data['eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="budget_eia_office" value="<?= $data['budget_eia_office'] ?? '' ?>"></td>
+                <td><input type="text" name="fund_eia_office" value="<?= $data['fund_eia_office'] ?? '164' ?>"></td>
+                <td><input type="text" name="office_eia_office" value="<?= $data['office_eia_office'] ?? 'EIAO' ?>"></td>
+            </tr>
+            <tr>
+                <th>TOTAL</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+
+        </table>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

@@ -113,8 +113,29 @@
                                 </li>
                             </ul>
                         </li>
+                        <!-- dropdown for Planning -->
+                        <li class="dropdown-item-hover">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-tasks me-2"></i>Planning
+                            </a>
+                            <ul class="dropdown-submenu">
+                                <li class="dropdown-item-hover">
+                                    <a href="#"><i class="fas fa-cogs"></i> Action & Budget Plan</a>
+                                    <ul class="dropdown-submenu sub-left">
+                                        <li><a href="#"><i class="fas fa-trophy"></i>Instruction</a></li>
+                                        <li><a href="#"><i class="fas fa-wheelchair"></i>R&D</a></li>
+                                        <li><a href="#"><i class="fas fa-graduation-cap"></i>Extension and Training</a></li>
+                                        <li><a href="management_resource.php"><i class="fas fa-users"></i>MANAGEMENT OF RESOURCES</a></li>
+                                        <li><a href="rgm.php"><i class="fas fa-building"></i>RGM</a></li>
+                                        <li><a href="internalization.php"><i class="fas fa-shopping-cart"></i>Internalization</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
                     </ul> 
                 </li>
+
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user-circle me-1"></i>

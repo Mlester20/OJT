@@ -65,6 +65,7 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
         <div class="text-end mb-3 fade-in d-flex flex-column flex-md-row align-items-md-center gap-2">
             <select id="categorySelect" class="form-select w-50 w-md-auto">
                 <option value="">Select Category</option>
+                <option value="All">All Category</option>
                 <option value="International">International</option>
                 <option value="National">National</option>
                 <option value="Regional">Regional</option>
@@ -259,43 +260,43 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
         function printAwards() {
             const category = document.getElementById('categorySelect').value;
             if (category) {
-                const filteredData = awardsData.filter(row => row.category === category);
+                const filteredData = category === 'All' ? awardsData : awardsData.filter(row => row.category === category);
                 const printWindow = window.open('', '_blank');
 
                 printWindow.document.write(`
-                                <html>
-                                <head>
-                                    <title>Print Awards - ${category}</title>
-                                    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-                                    <style>
-                                        .header { text-align: center; margin-bottom: 2rem; }
-                                        .header img { height: 80px; margin-bottom: 10px; }
-                                        .table { width: 100%; margin-bottom: 1rem; color: #212529; }
-                                        .table th, .table td { padding: 0.75rem; text-align: center; border: 1px solid #dee2e6; }
-                                        .container { max-width: 900px; margin: auto; }
-                                    </style>
-                                </head>
-                                <body>
-                                    <div class="container">
-                                        <div class="header">
-                                            <img src="../images/isu-logo.png" alt="ISU Logo">
-                                            <h5>Isabela State University <br>Roxas, Isabela</h5>
-                                            <h6 style="margin-top: 25px;">${category} Awards</h6>
-                                        </div>
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Award</th>
-                                                    <th>Conferred To</th>
-                                                    <th>Conferred By</th>
-                                                    <th>Date</th>
-                                                    <th>Date Ended</th>
-                                                    <th>Venue</th>
-                                                    <th>Category</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                            `);
+                    <html>
+                    <head>
+                        <title>Print Awards - ${category}</title>
+                        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+                        <style>
+                            .header { text-align: center; margin-bottom: 2rem; }
+                            .header img { height: 80px; margin-bottom: 10px; }
+                            .table { width: 100%; margin-bottom: 1rem; color: #212529; }
+                            .table th, .table td { padding: 0.75rem; text-align: center; border: 1px solid #dee2e6; }
+                            .container { max-width: 900px; margin: auto; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <div class="header">
+                                <img src="../images/isu-logo.png" alt="ISU Logo">
+                                <h5>Isabela State University <br>Roxas, Isabela</h5>
+                                <h6 style="margin-top: 25px;">${category} Awards</h6>
+                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Award</th>
+                                        <th>Conferred To</th>
+                                        <th>Conferred By</th>
+                                        <th>Date</th>
+                                        <th>Date Ended</th>
+                                        <th>Venue</th>
+                                        <th>Category</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                `);
 
                 if (filteredData.length > 0) {
                     filteredData.forEach(row => {
@@ -335,8 +336,8 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
             const tableBody = document.getElementById('awardsTableBody');
             tableBody.innerHTML = '';
             
-            if (category === '') {
-                // Show all data when no category is selected
+            if (category === '' || category === 'All') {
+                // Show all data when "All" or no category is selected
                 awardsData.forEach(row => {
                     addRowToTable(row, tableBody);
                 });
@@ -371,7 +372,7 @@ if ($awards_result && mysqli_num_rows($awards_result) > 0) {
             `;
             tableBody.appendChild(tr);
         }
-    </script>
+        </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
