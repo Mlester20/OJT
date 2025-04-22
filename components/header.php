@@ -49,7 +49,7 @@
                                         <li><a href="purchase.php"><i class="fas fa-shopping-cart"></i> Major Purchases</a></li>
                                         <li><a href="list_officials.php"><i class="fas fa-user-tie"></i> List of Officials</a></li>
                                         <li><a href="#"><i class="fas fa-coins"></i> Income Generating Enterprises</a></li>
-                                        <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Faculty Profile</a></li>
+                                        <li><a href="administrative_faculty.php"><i class="fas fa-chalkboard-teacher"></i> Faculty Profile</a></li>
                                         <li><a href="trainings.php"><i class="fas fa-users-cog"></i> Trainings and Conferences</a></li>
                                         <li><a href="administrative_linkages.php"><i class="fas fa-handshake"></i> Administrative Linkages</a></li>
                                         <li><a href="innovations.php"><i class="fas fa-lightbulb"></i> Administrative Service Innovations</a></li>

@@ -75,7 +75,7 @@
                                         <li><a href="purchase.php"><i class="fas fa-shopping-cart"></i> Major Purchases</a></li>
                                         <li><a href="list_officials.php"><i class="fas fa-user-tie"></i> List of Officials</a></li>
                                         <li><a href="#"><i class="fas fa-coins"></i> Income Generating Enterprises</a></li>
-                                        <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Faculty Profile</a></li>
+                                        <li><a href="administrative_faculty.php"><i class="fas fa-chalkboard-teacher"></i> Faculty Profile</a></li>
                                         <li><a href="trainings.php"><i class="fas fa-users-cog"></i> Trainings and Conferences</a></li>
                                         <li><a href="administrative_linkages.php"><i class="fas fa-handshake"></i> Administrative Services Linkages</a></li>
                                         <li><a href="administrative_innovations.php"><i class="fas fa-lightbulb"></i> Administrative Service Innovations</a></li>
@@ -122,12 +122,12 @@
                                 <li class="dropdown-item-hover">
                                     <a href="#"><i class="fas fa-cogs"></i> Action & Budget Plan</a>
                                     <ul class="dropdown-submenu sub-left">
-                                        <li><a href="#"><i class="fas fa-trophy"></i>Instruction</a></li>
-                                        <li><a href="#"><i class="fas fa-wheelchair"></i>R&D</a></li>
-                                        <li><a href="#"><i class="fas fa-graduation-cap"></i>Extension and Training</a></li>
-                                        <li><a href="management_resource.php"><i class="fas fa-users"></i>MANAGEMENT OF RESOURCES</a></li>
-                                        <li><a href="rgm.php"><i class="fas fa-building"></i>RGM</a></li>
-                                        <li><a href="internalization.php"><i class="fas fa-shopping-cart"></i>Internalization</a></li>
+                                        <li><a href="planning_instructions.php"><i class="fas fa-trophy me-2"></i>Instruction</a></li>
+                                        <li><a href="#"><i class="fas fa-wheelchair me-2"></i>R&D</a></li>
+                                        <li><a href="#"><i class="fas fa-graduation-cap me-2"></i>Extension and Training</a></li>
+                                        <li><a href="management_resource.php"><i class="fas fa-users me-2"></i>MANAGEMENT OF RESOURCES</a></li>
+                                        <li><a href="rgm.php"><i class="fas fa-building me-2"></i>RGM</a></li>
+                                        <li><a href="internalization.php"><i class="fas fa-shopping-cart me-2"></i>Internalization</a></li>
                                     </ul>
                                 </li>
                             </ul>
